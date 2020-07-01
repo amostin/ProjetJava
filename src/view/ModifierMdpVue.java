@@ -72,13 +72,13 @@ public class ModifierMdpVue implements ActionListener {
 
 		case "Enregistrer":
 			if (userType.getSelectedItem().equals("gérant")) {
-				modifMdpGerant();
+				modifMdp("g");
 			} 
 			else if (userType.getSelectedItem().equals("employé")) {
-				modifMdpEmploye();
+				modifMdp("e");
 			}
 			else {
-				modifMdpMecanicien();
+				modifMdp("m");
 			}
 			break;
 			
@@ -92,31 +92,28 @@ public class ModifierMdpVue implements ActionListener {
 	 * Cette méthode modifie le mot de passe du gérant mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
 	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
 	 */
-	public boolean modifMdpGerant() {
-		Gerant g = new Gerant();
-		g.setMdp(mdp.getText());
-		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
-		return true;
-	}
-	/**
-	 * Cette méthode modifie le mot de passe de l'employé mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
-	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
-	 */
-	public boolean modifMdpEmploye() {
-		Employe e = new Employe();
-		e.setMdp(mdp.getText());
-		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
-		return true;
-	}
-	/**
-	 * Cette méthode modifie le mot de passe du mécanicien mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
-	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
-	 */
-	public boolean modifMdpMecanicien() {
-		Mecanicien m = new Mecanicien();
-		m.setMdp(mdp.getText());
-		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
-		return true;
-	}
+	public boolean modifMdp(String type) {
+		switch (type) {
+		case "g":
+			Gerant g = new Gerant();
+			g.setMdp(mdp.getText());
+			mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
+			return true;
 
+		case "e":
+			Employe e = new Employe();
+			e.setMdp(mdp.getText());
+			mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
+			return true;
+			
+		case "m":
+			Mecanicien m = new Mecanicien();
+			m.setMdp(mdp.getText());
+			mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
+			return true;
+			
+		default:
+			return false;
+		}
+	}
 }
