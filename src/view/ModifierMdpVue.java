@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,7 +19,7 @@ import javax.swing.JTextField;
  * @author Moi
  *
  */
-public class ModifierMdpVue {
+public class ModifierMdpVue implements ActionListener {
 	private JFrame modifMdpFrame;
 	private JPanel modifMdpTextContent = new JPanel();
 	private JTextField mdp = new JTextField();
@@ -51,6 +53,13 @@ public class ModifierMdpVue {
 		modifMdpFrame.setSize(500, 400);
 		modifMdpFrame.setLocation(300, 400);
 		modifMdpFrame.setVisible(true);
+		
+		enregistrer.addActionListener(this);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
