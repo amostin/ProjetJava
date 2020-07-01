@@ -21,13 +21,13 @@ public class Gerant {
 		this.nom = "Rentacar";
 		this.mdp = "mdp";
 	}
-	/*
+	/**
 	 * Cette méthode est utile à récupérer le mdp pour le comparer à celui rentré
 	 */
 	public String getMdp() {
 		return mdp;
 	}
-	/*
+	/**
 	 * Cette méthode est utile à modifier le mot de passe
 	 */
 	public void setMdp(String mdp) {
