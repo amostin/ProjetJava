@@ -6,6 +6,7 @@ package view;
 import java.awt.BorderLayout;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ public class RentacarVue {
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	private JTextField pseudo = new JTextField();
 	private JTextField mdp = new JTextField();
+	private JButton connexion = new JButton("Connexion");
 
 	//private JTable table;
 	/**
@@ -44,6 +46,10 @@ public class RentacarVue {
 		fieldZone.add(mdp);
 		rentacarJFrame.add(fieldZone, BorderLayout.CENTER);
 		
+		JPanel panelbuttons = new JPanel();
+		panelbuttons.add(connexion);
+		rentacarJFrame.add(panelbuttons, BorderLayout.SOUTH);
+
 		rentacarJFrame.pack();
 		rentacarJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		rentacarJFrame.setSize(500, 400);
