@@ -25,7 +25,7 @@ public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
 	private JPanel gerantTextContent = new JPanel();
 	private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
-	private JButton nouvelEmploye = new JButton("Ajouter un employé");
+	private JButton modifMdp = new JButton("Modifier mot de passe");
 
 
 	/**
@@ -41,7 +41,7 @@ public class GerantVue implements ActionListener {
 		gerantFrame.add(gerantTextContent, BorderLayout.NORTH);
 		
 		JPanel panelbuttons = new JPanel();
-		panelbuttons.add(nouvelEmploye);
+		panelbuttons.add(modifMdp);
 		gerantFrame.add(panelbuttons, BorderLayout.SOUTH);
 		
 		gerantFrame.pack();
@@ -50,7 +50,7 @@ public class GerantVue implements ActionListener {
 		gerantFrame.setLocation(300, 400);
 		gerantFrame.setVisible(true);
 		
-		nouvelEmploye.addActionListener(this);
+		modifMdp.addActionListener(this);
 		//gerantFrame.pack();
 	}
 
@@ -58,7 +58,7 @@ public class GerantVue implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		gerantFrame.setVisible(false);
-		AjoutEmployeVue g = new AjoutEmployeVue();		
+		ModifierMdpVue g = new ModifierMdpVue();		
 	}
 
 }
