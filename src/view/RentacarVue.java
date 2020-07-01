@@ -68,7 +68,7 @@ public class RentacarVue implements ActionListener {
 		rentacarJFrame.setVisible(true);
 		
 		connexion.addActionListener(this);
-		rentacarJFrame.pack();
+		//rentacarJFrame.pack();
 
 	}
 

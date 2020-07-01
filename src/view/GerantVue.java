@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,11 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Gerant;
+
 /**
  * @author Moi
  *
  */
-public class GerantVue {
+public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
 	private JPanel gerantTextContent = new JPanel();
 	private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
@@ -45,6 +49,16 @@ public class GerantVue {
 		gerantFrame.setSize(500, 400);
 		gerantFrame.setLocation(300, 400);
 		gerantFrame.setVisible(true);
+		
+		nouvelEmploye.addActionListener(this);
+		//gerantFrame.pack();
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		gerantFrame.setVisible(false);
+		AjoutEmployeVue g = new AjoutEmployeVue();		
 	}
 
 }
