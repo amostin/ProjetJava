@@ -26,11 +26,11 @@ public class RentacarVue implements ActionListener {
 	private JFrame rentacarJFrame;
 	private JPanel textContent = new JPanel();
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
-	private JTextField pseudo = new JTextField();
+	//private JTextField pseudo = new JTextField();
 	private JTextField mdp = new JTextField();
 	private JButton connexion = new JButton("Connexion");
 	private JComboBox<String> userType;
-	private String mdpShouldBe;
+	//private String mdpShouldBe;
 
 	//private JTable table;
 	/**
@@ -77,7 +77,7 @@ public class RentacarVue implements ActionListener {
 		//System.out.println(source);
 		rentacarJFrame.setVisible(false);
 		Gerant g = new Gerant();
-		if(g.getMdp().equals(mdpShouldBe)) {
+		if(g.getMdp().equals(mdp.getText())) {
 			new GerantVue();
 		}
 		else {
