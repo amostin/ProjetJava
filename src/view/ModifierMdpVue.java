@@ -63,17 +63,32 @@ public class ModifierMdpVue implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (userType.getSelectedItem().equals("gérant")) {
-			Gerant g = new Gerant();
-			g.setMdp(mdp.getText());
+			modifMdpGerant();
 		} 
 		else if (userType.getSelectedItem().equals("employé")) {
-			Employe e = new Employe();
-			e.setMdp(mdp.getText());
+			modifMdpEmploye();
 		}
 		else {
-			Mecanicien m = new Mecanicien();
-			m.setMdp(mdp.getText());
+			modifMdpMecanicien();
 		}
+	}
+	
+	public boolean modifMdpGerant() {
+		Gerant g = new Gerant();
+		g.setMdp(mdp.getText());
+		return true;
+	}
+	
+	public boolean modifMdpEmploye() {
+		Employe e = new Employe();
+		e.setMdp(mdp.getText());
+		return true;
+	}
+	
+	public boolean modifMdpMecanicien() {
+		Mecanicien m = new Mecanicien();
+		m.setMdp(mdp.getText());
+		return true;
 	}
 
 }
