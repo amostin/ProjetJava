@@ -18,7 +18,8 @@ import javax.swing.JTextField;
 import model.Gerant;
 
 /**
- * @author Moi
+ * Classe d'affichage de la page de connexion
+ * @author Ambroise Mostin
  *
  */
 public class RentacarVue implements ActionListener {
@@ -34,7 +35,7 @@ public class RentacarVue implements ActionListener {
 
 	//private JTable table;
 	/**
-	 * 
+	 * Ce constructeur permet d'afficher la page de connexion avec le titre de la page, un message, une liste déroulante, un label, un champs de texte et un bouton.
 	 */
 	public RentacarVue() {
 		rentacarJFrame = new JFrame("Rentacar");
@@ -77,7 +78,16 @@ public class RentacarVue implements ActionListener {
 		//System.out.println(source);
 		rentacarJFrame.setVisible(false);
 		Gerant g = new Gerant();
-		if(g.getMdp().equals(mdp.getText())) {
+		isMdpCorrect(g.getMdp(), mdp.getText());
+	}
+	
+	/*
+	 * Cette méthode vérifie si le mot de passe entré correspond bien au mot de passe enregistré. Si oui, elle affiche la page du gérant; Si non elle affiche denouveau la page de connexion.
+	 * @param mdpShouldBe : le mot de passe enregistré
+	 * @param mdpIs : le mot de passe entré
+	 */
+	public void isMdpCorrect(String mdpShouldBe, String mdpIs) {
+		if(mdpShouldBe.equals(mdpIs)) {
 			new GerantVue();
 		}
 		else {

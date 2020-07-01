@@ -4,34 +4,32 @@
 package model;
 
 /**
- * @author Moi
+ * Cette classe sert à contenir les infos relative au gérant
+ * @author Ambroise Mostin
  *
  */
 public class Gerant {
 
-	private String prenom = "Gerant";
-	private String nom = "Rentacar";
-	private String mdp = "mdp";
+	private String prenom;
+	private String nom;
+	private String mdp;
 	/**
-	 * 
+	 * Ce contructeur permet d'attribuer des valeurs aux variables d'instance
 	 */
 	public Gerant() {
-		// TODO Auto-generated constructor stub
+		this.prenom = "Gerant";
+		this.nom = "Rentacar";
+		this.mdp = "mdp";
 	}
-	
-	
-	
-	public Gerant(String prenom, String nom, String mdp) {
-		this.prenom = prenom;
-		this.nom = nom;
-		this.mdp = mdp;
-	}
-
-
-
+	/*
+	 * Cette méthode est utile à récupérer le mdp pour le comparer à celui rentré
+	 */
 	public String getMdp() {
 		return mdp;
 	}
+	/*
+	 * Cette méthode est utile à modifier le mot de passe
+	 */
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
