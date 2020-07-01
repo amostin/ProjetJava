@@ -15,7 +15,7 @@ public class RentacarMVC {
 	 * 
 	 */
 	public RentacarMVC() {
-		RentacarVue gui = new RentacarVue();
+		new RentacarVue();
 	}
 	
 	public static void main(String[] args) {
