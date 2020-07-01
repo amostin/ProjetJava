@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,7 +18,7 @@ import javax.swing.JTextField;
  * @author Moi
  *
  */
-public class RentacarVue {
+public class RentacarVue implements ActionListener {
 
 	private JFrame rentacarJFrame;
 	private JPanel textContent = new JPanel();
@@ -55,6 +57,16 @@ public class RentacarVue {
 		rentacarJFrame.setSize(500, 400);
 		rentacarJFrame.setLocation(300, 400);
 		rentacarJFrame.setVisible(true);
+		
+		connexion.addActionListener(this);
+		rentacarJFrame.pack();
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
+		System.out.println(source);
 	}
 
 }
