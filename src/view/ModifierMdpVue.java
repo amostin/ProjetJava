@@ -28,6 +28,7 @@ public class ModifierMdpVue implements ActionListener {
 	private JPanel modifMdpTextContent = new JPanel();
 	private JTextField mdp = new JTextField();
 	private JButton enregistrer = new JButton("Enregistrer");
+	private JButton retourCo = new JButton("Retour à la connexion");
 	private JComboBox<String> userType;
 	/**
 	 * 
@@ -50,6 +51,7 @@ public class ModifierMdpVue implements ActionListener {
 		
 		JPanel panelbuttons = new JPanel();
 		panelbuttons.add(enregistrer);
+		panelbuttons.add(retourCo);
 		modifMdpFrame.add(panelbuttons, BorderLayout.SOUTH);
 		
 		modifMdpFrame.pack();
@@ -59,35 +61,49 @@ public class ModifierMdpVue implements ActionListener {
 		modifMdpFrame.setVisible(true);
 		
 		enregistrer.addActionListener(this);
+		retourCo.addActionListener(this);
 	}
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if (userType.getSelectedItem().equals("gérant")) {
-			modifMdpGerant();
-		} 
-		else if (userType.getSelectedItem().equals("employé")) {
-			modifMdpEmploye();
-		}
-		else {
-			modifMdpMecanicien();
+		switch(ae.getActionCommand()) {
+
+		case "Enregistrer":
+			if (userType.getSelectedItem().equals("gérant")) {
+				modifMdpGerant();
+			} 
+			else if (userType.getSelectedItem().equals("employé")) {
+				modifMdpEmploye();
+			}
+			else {
+				modifMdpMecanicien();
+			}
+			break;
+			
+		case "Retour à la connexion":
+			modifMdpFrame.setVisible(false);
+			new RentacarVue();
+			break;
 		}
 	}
 	
 	public boolean modifMdpGerant() {
 		Gerant g = new Gerant();
 		g.setMdp(mdp.getText());
+		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
 		return true;
 	}
 	
 	public boolean modifMdpEmploye() {
 		Employe e = new Employe();
 		e.setMdp(mdp.getText());
+		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
 		return true;
 	}
 	
 	public boolean modifMdpMecanicien() {
 		Mecanicien m = new Mecanicien();
 		m.setMdp(mdp.getText());
+		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
 		return true;
 	}
 

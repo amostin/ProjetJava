@@ -58,7 +58,7 @@ public class GerantVue implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		gerantFrame.setVisible(false);
-		ModifierMdpVue g = new ModifierMdpVue();		
+		ModifierMdpVue m = new ModifierMdpVue();		
 	}
 
 }

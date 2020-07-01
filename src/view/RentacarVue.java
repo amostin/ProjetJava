@@ -49,9 +49,6 @@ public class RentacarVue implements ActionListener {
 		String[] roles = {"gérant", "employé", "mécanicien"};
 		userType = new JComboBox<>(roles);
 		fieldZone.add(userType);
-		//JLabel pseudoLabel = new JLabel("pseudo : ");
-		//fieldZone.add(pseudoLabel);
-		//fieldZone.add(pseudo);
 		JLabel mdpLabel = new JLabel("mdp : ");
 		fieldZone.add(mdpLabel);
 		fieldZone.add(mdp);
@@ -74,11 +71,21 @@ public class RentacarVue implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Object source = e.getSource();
-		//System.out.println(source);
 		rentacarJFrame.setVisible(false);
+		
 		Gerant g = new Gerant();
-		isMdpCorrect(g.getMdp(), mdp.getText());
+		
+		if (userType.getSelectedItem().equals("gérant") && isMdpCorrect(g.getMdp(), mdp.getText())) {
+			new GerantVue();
+		} 
+		/*
+		else if (userType.getSelectedItem().equals("employé")) {
+			modifMdpEmploye();
+		}
+		else {
+			modifMdpMecanicien();
+		}
+		*/
 	}
 	
 	/**
@@ -88,7 +95,6 @@ public class RentacarVue implements ActionListener {
 	 */
 	public boolean isMdpCorrect(String mdpShouldBe, String mdpIs) {
 		if(mdpShouldBe.equals(mdpIs)) {
-			new GerantVue();
 			return true;
 		}
 		else {
