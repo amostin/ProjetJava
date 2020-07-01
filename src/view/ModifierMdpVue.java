@@ -15,6 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Employe;
+import model.Gerant;
+import model.Mecanicien;
+
 /**
  * @author Moi
  *
@@ -57,9 +61,19 @@ public class ModifierMdpVue implements ActionListener {
 		enregistrer.addActionListener(this);
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent ae) {
+		if (userType.getSelectedItem().equals("gérant")) {
+			Gerant g = new Gerant();
+			g.setMdp(mdp.getText());
+		} 
+		else if (userType.getSelectedItem().equals("employé")) {
+			Employe e = new Employe();
+			e.setMdp(mdp.getText());
+		}
+		else {
+			Mecanicien m = new Mecanicien();
+			m.setMdp(mdp.getText());
+		}
 	}
 
 }

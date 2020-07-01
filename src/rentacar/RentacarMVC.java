@@ -17,8 +17,8 @@ public class RentacarMVC {
 	 * Ce constructeur appel la vue pour afficher une premiere fenetre
 	 */
 	public RentacarMVC() {
-		new RentacarVue();
-		//new AjoutEmployeVue();
+		//new RentacarVue();
+		new ModifierMdpVue();
 	}
 	
 	public static void main(String[] args) {
