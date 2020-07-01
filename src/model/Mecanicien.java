@@ -4,8 +4,8 @@
 package model;
 
 /**
- * @author Moi
- *
+ * Cette classe sert surtout a accorder l'accès via le mdp
+ * @author Ambroise Mostin
  */
 public class Mecanicien {
 

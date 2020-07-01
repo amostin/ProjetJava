@@ -14,47 +14,47 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * @author Moi
- *
+ * Cette classe sert à afficher la version qui n'a accès qu'au fonctionnalités utiles à un mécanicien
+ * @author Ambroise Mostin
  */
-public class MecanicienVue implements ActionListener {
-	private JFrame gerantFrame;
-	private JPanel gerantTextContent = new JPanel();
-	private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
-	private JButton modifMdp = new JButton("Modifier mot de passe");
+public class MecanicienVue {
+	private JFrame mecanicienFrame;
+	private JPanel mecanicienTextContent = new JPanel();
+	private JLabel mecanicienMessage = new JLabel("Bienvenue Gérant");
+	//private JButton modifMdp = new JButton("Modifier mot de passe");
 
 
 	/**
-	 * 
+	 * Ce constructeur affiche la page pour un mécanicien
 	 */
 	public MecanicienVue() {
 
 		
-		gerantFrame = new JFrame("Rentacar");
-		gerantTextContent.setLayout(new BoxLayout(gerantTextContent, BoxLayout.Y_AXIS));
-		gerantTextContent.add(gerantMessage);
+		mecanicienFrame = new JFrame("Rentacar");
+		mecanicienTextContent.setLayout(new BoxLayout(mecanicienTextContent, BoxLayout.Y_AXIS));
+		mecanicienTextContent.add(mecanicienMessage);
 		
-		gerantFrame.add(gerantTextContent, BorderLayout.NORTH);
-		
+		mecanicienFrame.add(mecanicienTextContent, BorderLayout.NORTH);
+		/*
 		JPanel panelbuttons = new JPanel();
 		panelbuttons.add(modifMdp);
-		gerantFrame.add(panelbuttons, BorderLayout.SOUTH);
+		mecanicienFrame.add(panelbuttons, BorderLayout.SOUTH);
+		*/
+		mecanicienFrame.pack();
+		mecanicienFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mecanicienFrame.setSize(500, 400);
+		mecanicienFrame.setLocation(300, 400);
+		mecanicienFrame.setVisible(true);
 		
-		gerantFrame.pack();
-		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gerantFrame.setSize(500, 400);
-		gerantFrame.setLocation(300, 400);
-		gerantFrame.setVisible(true);
-		
-		modifMdp.addActionListener(this);
-		//gerantFrame.pack();
+		//modifMdp.addActionListener(this);
+		//mecanicienFrame.pack();
 	}
 
-
+	/*
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		gerantFrame.setVisible(false);
+		mecanicienFrame.setVisible(false);
 		ModifierMdpVue m = new ModifierMdpVue();		
 	}
-
+	*/
 }

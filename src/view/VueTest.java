@@ -8,8 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import model.Gerant;
 
-class RentacarVueTest {
+class VueTest {
 
+	/**
+	 * Cette méthode vérifie que le retour est faux si le mdp ne correspond pas et vrai sinon
+	 */
 	@Test
 	void isMdpCorrectTest() {
 		RentacarVue r = new RentacarVue();

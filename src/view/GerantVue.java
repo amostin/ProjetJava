@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 import model.Gerant;
 
 /**
- * @author Moi
- *
+ * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
+ * @author Ambroise Mostin
  */
 public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
@@ -29,7 +29,7 @@ public class GerantVue implements ActionListener {
 
 
 	/**
-	 * 
+	 * Ce constructeur affiche la page pour un gérant
 	 */
 	public GerantVue() {
 
@@ -54,7 +54,9 @@ public class GerantVue implements ActionListener {
 		//gerantFrame.pack();
 	}
 
-
+	/**
+	 * Cette méthode permet de changer de vue
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		gerantFrame.setVisible(false);

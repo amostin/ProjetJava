@@ -20,8 +20,8 @@ import model.Gerant;
 import model.Mecanicien;
 
 /**
- * @author Moi
- *
+ * Cette classe sert à afficher une vue accessible seulement par le gérant et lui permettre de changer un mot de passe
+ * @author Ambroise Mostin
  */
 public class ModifierMdpVue implements ActionListener {
 	private JFrame modifMdpFrame;
@@ -31,7 +31,7 @@ public class ModifierMdpVue implements ActionListener {
 	private JButton retourCo = new JButton("Retour à la connexion");
 	private JComboBox<String> userType;
 	/**
-	 * 
+	 * Ce constructeur affiche une liste qui permet de choisir un role et definir un mot de passe ou retourner à l'écran de connexion
 	 */
 	public ModifierMdpVue() {
 		modifMdpFrame = new JFrame("Rentacar");
@@ -63,6 +63,9 @@ public class ModifierMdpVue implements ActionListener {
 		enregistrer.addActionListener(this);
 		retourCo.addActionListener(this);
 	}
+	/**
+	 * Cette méthode permet de modifier le mot de passe selon le role choisi et de retourner à la page de connexion
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		switch(ae.getActionCommand()) {
@@ -85,21 +88,30 @@ public class ModifierMdpVue implements ActionListener {
 			break;
 		}
 	}
-	
+	/**
+	 * Cette méthode modifie le mot de passe du gérant mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
+	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
+	 */
 	public boolean modifMdpGerant() {
 		Gerant g = new Gerant();
 		g.setMdp(mdp.getText());
 		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
 		return true;
 	}
-	
+	/**
+	 * Cette méthode modifie le mot de passe de l'employé mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
+	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
+	 */
 	public boolean modifMdpEmploye() {
 		Employe e = new Employe();
 		e.setMdp(mdp.getText());
 		mdp.setText("pas de base de donnée donc ça va pas changer grand chose pour le moment...");
 		return true;
 	}
-	
+	/**
+	 * Cette méthode modifie le mot de passe du mécanicien mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
+	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
+	 */
 	public boolean modifMdpMecanicien() {
 		Mecanicien m = new Mecanicien();
 		m.setMdp(mdp.getText());

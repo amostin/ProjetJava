@@ -70,7 +70,9 @@ public class RentacarVue implements ActionListener {
 		//rentacarJFrame.pack();
 
 	}
-
+	/**
+	 * Cette méthode permet d'afficher la vue correspondante au gérant, l'employé ou le mécanicien si le mdp correspond
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		rentacarJFrame.setVisible(false);

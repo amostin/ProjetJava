@@ -14,47 +14,47 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * @author Moi
- *
+ * Cette classe sert à afficher la version qui n'a accès qu'au fonctionnalités utiles à un employé
+ * @author Ambroise Mostin
  */
-public class EmployeVue implements ActionListener {
-	private JFrame gerantFrame;
-	private JPanel gerantTextContent = new JPanel();
-	private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
-	private JButton modifMdp = new JButton("Modifier mot de passe");
+public class EmployeVue {
+	private JFrame employeFrame;
+	private JPanel employeTextContent = new JPanel();
+	private JLabel employeMessage = new JLabel("Bienvenue Employé");
+	//private JButton modifMdp = new JButton("Modifier mot de passe");
 
 
 	/**
-	 * 
+	 * Ce constructeur affiche la page pour un employé
 	 */
 	public EmployeVue() {
 
 		
-		gerantFrame = new JFrame("Rentacar");
-		gerantTextContent.setLayout(new BoxLayout(gerantTextContent, BoxLayout.Y_AXIS));
-		gerantTextContent.add(gerantMessage);
+		employeFrame = new JFrame("Rentacar");
+		employeTextContent.setLayout(new BoxLayout(employeTextContent, BoxLayout.Y_AXIS));
+		employeTextContent.add(employeMessage);
 		
-		gerantFrame.add(gerantTextContent, BorderLayout.NORTH);
-		
+		employeFrame.add(employeTextContent, BorderLayout.NORTH);
+		/*
 		JPanel panelbuttons = new JPanel();
 		panelbuttons.add(modifMdp);
-		gerantFrame.add(panelbuttons, BorderLayout.SOUTH);
+		employeFrame.add(panelbuttons, BorderLayout.SOUTH);
+		*/
+		employeFrame.pack();
+		employeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		employeFrame.setSize(500, 400);
+		employeFrame.setLocation(300, 400);
+		employeFrame.setVisible(true);
 		
-		gerantFrame.pack();
-		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gerantFrame.setSize(500, 400);
-		gerantFrame.setLocation(300, 400);
-		gerantFrame.setVisible(true);
-		
-		modifMdp.addActionListener(this);
-		//gerantFrame.pack();
+		//modifMdp.addActionListener(this);
+		//employeFrame.pack();
 	}
 
-
+/*
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		gerantFrame.setVisible(false);
+		employeFrame.setVisible(false);
 		ModifierMdpVue m = new ModifierMdpVue();		
 	}
-
+*/
 }
