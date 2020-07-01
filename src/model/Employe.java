@@ -4,22 +4,21 @@
 package model;
 
 /**
- * Cette classe sert à contenir les infos relative au gérant (surtout le mdp)
+ * Cette classe sert surtout a accorder l'accès via le mdp
  * @author Ambroise Mostin
  *
  */
-public class Gerant {
-
+public class Employe {
 	private String prenom;
 	private String nom;
 	private String mdp;
 	/**
 	 * Ce contructeur permet d'attribuer des valeurs aux variables d'instance
 	 */
-	public Gerant() {
-		this.prenom = "Gerant";
-		this.nom = "Rentacar";
-		this.mdp = "mdp";
+	public Employe() {
+		this.prenom = "emp";
+		this.nom = "loyé";
+		this.mdp = "emp";
 	}
 	/**
 	 * Cette méthode est utile à récupérer le mdp pour le comparer à celui rentré
@@ -33,5 +32,4 @@ public class Gerant {
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-
 }

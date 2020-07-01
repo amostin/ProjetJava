@@ -3,6 +3,7 @@
  */
 package rentacar;
 
+import view.ModifierMdpVue;
 import view.RentacarVue;
 
 /**
@@ -17,6 +18,7 @@ public class RentacarMVC {
 	 */
 	public RentacarMVC() {
 		new RentacarVue();
+		//new ModifierMdpVue();
 	}
 	
 	public static void main(String[] args) {

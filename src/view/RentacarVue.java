@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Employe;
 import model.Gerant;
+import model.Mecanicien;
 
 /**
  * Classe d'affichage de la page de connexion
@@ -49,9 +51,6 @@ public class RentacarVue implements ActionListener {
 		String[] roles = {"gérant", "employé", "mécanicien"};
 		userType = new JComboBox<>(roles);
 		fieldZone.add(userType);
-		//JLabel pseudoLabel = new JLabel("pseudo : ");
-		//fieldZone.add(pseudoLabel);
-		//fieldZone.add(pseudo);
 		JLabel mdpLabel = new JLabel("mdp : ");
 		fieldZone.add(mdpLabel);
 		fieldZone.add(mdp);
@@ -68,17 +67,30 @@ public class RentacarVue implements ActionListener {
 		rentacarJFrame.setVisible(true);
 		
 		connexion.addActionListener(this);
-		rentacarJFrame.pack();
+		//rentacarJFrame.pack();
 
 	}
-
+	/**
+	 * Cette méthode permet d'afficher la vue correspondante au gérant, l'employé ou le mécanicien si le mdp correspond
+	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		//Object source = e.getSource();
-		//System.out.println(source);
+	public void actionPerformed(ActionEvent ae) {
 		rentacarJFrame.setVisible(false);
+		
 		Gerant g = new Gerant();
-		isMdpCorrect(g.getMdp(), mdp.getText());
+		Employe e = new Employe();
+		Mecanicien m =new Mecanicien();
+		
+		if (userType.getSelectedItem().equals("gérant") && isMdpCorrect(g.getMdp(), mdp.getText())) {
+			new GerantVue();
+		} 
+		else if (userType.getSelectedItem().equals("employé") && isMdpCorrect(e.getMdp(), mdp.getText())) {
+			new EmployeVue();
+		}
+		else if (userType.getSelectedItem().equals("mécanicien") && isMdpCorrect(m.getMdp(), mdp.getText())) {
+			new MecanicienVue();
+		}
+		
 	}
 	
 	/**
@@ -88,7 +100,6 @@ public class RentacarVue implements ActionListener {
 	 */
 	public boolean isMdpCorrect(String mdpShouldBe, String mdpIs) {
 		if(mdpShouldBe.equals(mdpIs)) {
-			new GerantVue();
 			return true;
 		}
 		else {
