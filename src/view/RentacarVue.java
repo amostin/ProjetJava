@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * @author Moi
@@ -17,8 +18,11 @@ import javax.swing.JPanel;
 public class RentacarVue {
 
 	private JFrame rentacarJFrame;
-	JPanel textContent = new JPanel();
+	private JPanel textContent = new JPanel();
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
+	private JTextField pseudo = new JTextField();
+	private JTextField mdp = new JTextField();
+
 	//private JTable table;
 	/**
 	 * 
@@ -29,6 +33,16 @@ public class RentacarVue {
 		textContent.add(message);
 		
 		rentacarJFrame.add(textContent, BorderLayout.NORTH);
+		
+		JPanel fieldZone = new JPanel();
+		fieldZone.setLayout(new BoxLayout(fieldZone, BoxLayout.X_AXIS));
+		JLabel pseudoLabel = new JLabel("pseudo : ");
+		fieldZone.add(pseudoLabel);
+		fieldZone.add(pseudo);
+		JLabel mdpLabel = new JLabel("mdp : ");
+		fieldZone.add(mdpLabel);
+		fieldZone.add(mdp);
+		rentacarJFrame.add(fieldZone, BorderLayout.CENTER);
 		
 		rentacarJFrame.pack();
 		rentacarJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

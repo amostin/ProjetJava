@@ -5,7 +5,6 @@ package model;
 
 /**
  * @author Moi
- *
  */
 public class Rentacar {
 
