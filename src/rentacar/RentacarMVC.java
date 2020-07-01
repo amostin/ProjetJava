@@ -3,6 +3,7 @@
  */
 package rentacar;
 
+import view.AjoutEmployeVue;
 import view.RentacarVue;
 
 /**
@@ -16,7 +17,8 @@ public class RentacarMVC {
 	 * Ce constructeur appel la vue pour afficher une premiere fenetre
 	 */
 	public RentacarMVC() {
-		new RentacarVue();
+		//new RentacarVue();
+		new AjoutEmployeVue();
 	}
 	
 	public static void main(String[] args) {
