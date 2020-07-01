@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Employe;
 import model.Gerant;
+import model.Mecanicien;
 
 /**
  * Classe d'affichage de la page de connexion
@@ -70,22 +72,23 @@ public class RentacarVue implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent ae) {
 		rentacarJFrame.setVisible(false);
 		
 		Gerant g = new Gerant();
+		Employe e = new Employe();
+		Mecanicien m =new Mecanicien();
 		
 		if (userType.getSelectedItem().equals("gérant") && isMdpCorrect(g.getMdp(), mdp.getText())) {
 			new GerantVue();
 		} 
-		/*
-		else if (userType.getSelectedItem().equals("employé")) {
-			modifMdpEmploye();
+		else if (userType.getSelectedItem().equals("employé") && isMdpCorrect(e.getMdp(), mdp.getText())) {
+			new EmployeVue();
 		}
-		else {
-			modifMdpMecanicien();
+		else if (userType.getSelectedItem().equals("mécanicien") && isMdpCorrect(m.getMdp(), mdp.getText())) {
+			new MecanicienVue();
 		}
-		*/
+		
 	}
 	
 	/**
