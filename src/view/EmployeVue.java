@@ -18,6 +18,7 @@ import javax.swing.JTable;
 
 import controller.RentacarController;
 import model.Rentacar;
+import model.Voiture;
 
 /**
  * Cette classe sert à afficher la version qui n'a accès qu'au fonctionnalités utiles à un employé
@@ -33,6 +34,7 @@ public class EmployeVue extends RentacarVue {
 	 */
 	public EmployeVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
+		
 		employeFrame = new JFrame("Rentacar");
 		
 		updateTable();
@@ -46,7 +48,21 @@ public class EmployeVue extends RentacarVue {
 	}
 	
 	private void updateTable() {
-		//HashMap<String, Voiture> catalogue = model.get
+		HashMap<String, Voiture> catalogue = model.getCatalogue();
+		Object [][] data = new Object[catalogue.size()][7];
+
+		for(int i=0; i<catalogue.size(); i++){
+			data[i][0] = i;
+			data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
+			data[i][2] = catalogue.get("nomVoiture_"+i).getPuissance();
+			data[i][3] = catalogue.get("nomVoiture_"+i).getBva();
+			data[i][4] = catalogue.get("nomVoiture_"+i).getGps();
+			data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
+			data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
+		}
+		
+		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim"};
+		table = new JTable(data, head);
 	}
 
 	public void affiche(String msg){
