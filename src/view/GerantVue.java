@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,10 +24,25 @@ import model.Gerant;
  */
 public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
-	private JPanel gerantTextContent = new JPanel();
-	private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
+	//private JPanel gerantTextContent = new JPanel();
+	//private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	
+	private JLabel marqueAjoutLabel = new JLabel("marque");
+	private JLabel typeAjoutLabel = new JLabel("type");
+	private JLabel puissanceAjoutLabel = new JLabel("puissance");
+	private JLabel bvaAjoutLabel = new JLabel("bva");
+	private JLabel gpsAjoutLabel = new JLabel("gps");
+	private JLabel porteAjoutLabel = new JLabel("porte");
+	private JLabel climAjoutLabel = new JLabel("clim");
 
+	private JTextField marqueAjoutTextField = new JTextField("marque");
+	private JTextField typeAjoutTextField = new JTextField("type");
+	private JTextField puissanceAjoutTextField = new JTextField("puissance");
+	private JTextField bvaAjoutTextField = new JTextField("bva");
+	private JTextField gpsAjoutTextField = new JTextField("gps");
+	private JTextField porteAjoutTextField = new JTextField("porte");
+	private JTextField climAjoutTextField = new JTextField("clim");
 
 	/**
 	 * Ce constructeur affiche la page pour un gérant
@@ -35,15 +51,53 @@ public class GerantVue implements ActionListener {
 
 		
 		gerantFrame = new JFrame("Rentacar");
-		gerantTextContent.setLayout(new BoxLayout(gerantTextContent, BoxLayout.Y_AXIS));
-		gerantTextContent.add(gerantMessage);
 		
-		gerantFrame.add(gerantTextContent, BorderLayout.NORTH);
+		Box marqueBox = Box.createHorizontalBox();
+		marqueBox.add(marqueAjoutLabel);
+		marqueBox.add(marqueAjoutTextField);
 		
+		Box typeBox = Box.createHorizontalBox();
+		typeBox.add(typeAjoutLabel);
+		typeBox.add(typeAjoutTextField);
+		
+		Box puissanceBox = Box.createHorizontalBox();
+		puissanceBox.add(puissanceAjoutLabel);
+		puissanceBox.add(puissanceAjoutTextField);
+		
+		Box bvaBox = Box.createHorizontalBox();
+		bvaBox.add(bvaAjoutLabel);
+		bvaBox.add(bvaAjoutTextField);
+		
+		Box gpsBox = Box.createHorizontalBox();
+		gpsBox.add(gpsAjoutLabel);
+		gpsBox.add(gpsAjoutTextField);
+		
+		Box porteBox = Box.createHorizontalBox();
+		porteBox.add(porteAjoutLabel);
+		porteBox.add(porteAjoutTextField);
+		
+		Box climBox = Box.createHorizontalBox();
+		climBox.add(climAjoutLabel);
+		climBox.add(climAjoutTextField);
+		
+		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(modifMdp);
+		
+		Box panelBox = Box.createVerticalBox();
+		panelBox.add(marqueBox);
+		panelBox.add(typeBox);
+		panelBox.add(puissanceBox);
+		panelBox.add(bvaBox);
+		panelBox.add(gpsBox);
+		panelBox.add(porteBox);
+		panelBox.add(climBox);
+		panelBox.add(buttonBox);
+		gerantFrame.setContentPane(panelBox);
+		/*
 		JPanel panelbuttons = new JPanel();
 		panelbuttons.add(modifMdp);
 		gerantFrame.add(panelbuttons, BorderLayout.SOUTH);
-		
+		*/
 		gerantFrame.pack();
 		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gerantFrame.setSize(500, 400);
