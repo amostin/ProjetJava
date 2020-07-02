@@ -14,7 +14,7 @@ import view.RentacarVue;
 public class RentacarMVC {
 
 	/**
-	 * Ce constructeur appel la vue pour afficher une premiere fenetre
+	 * Ce constructeur appel la vue pour afficher une premiere fenetre (connexion)
 	 */
 	public RentacarMVC() {
 		new RentacarVue();

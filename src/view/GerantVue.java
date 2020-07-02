@@ -9,14 +9,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import model.Catalogue;
 import model.Gerant;
+import model.Voiture;
 
 /**
  * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
@@ -26,7 +30,6 @@ public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
 	//private JPanel gerantTextContent = new JPanel();
 	//private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
-	private JButton modifMdp = new JButton("Modifier mot de passe");
 	
 	private JLabel marqueAjoutLabel = new JLabel("marque");
 	private JLabel typeAjoutLabel = new JLabel("type");
@@ -38,14 +41,25 @@ public class GerantVue implements ActionListener {
 
 	private JTextField marqueAjoutTextField = new JTextField("marque");
 	private JTextField typeAjoutTextField = new JTextField("type");
-	private JTextField puissanceAjoutTextField = new JTextField("puissance");
-	private JTextField bvaAjoutTextField = new JTextField("bva");
-	private JTextField gpsAjoutTextField = new JTextField("gps");
-	private JTextField porteAjoutTextField = new JTextField("porte");
-	private JTextField climAjoutTextField = new JTextField("clim");
+	private Integer[] puissances = {500, 600, 700, 800, 900, 1000};
+	private JComboBox<Integer> puissanceAjoutTextField = new JComboBox<>(puissances);
+	private JRadioButton bvaOui = new JRadioButton("oui");
+	private JRadioButton bvaNon = new JRadioButton("non");
+	private JRadioButton gpsOui = new JRadioButton("oui");
+	private JRadioButton gpsNon = new JRadioButton("non");
+	private JRadioButton climOui = new JRadioButton("oui");
+	private JRadioButton climNon = new JRadioButton("non");
+	private ButtonGroup bvaBg = new ButtonGroup();
+	private ButtonGroup gpsBg = new ButtonGroup();
+	private ButtonGroup climBg = new ButtonGroup();
+	private Integer[] portes = {3, 5};
+	private JComboBox<Integer> porteAjoutTextField = new JComboBox<>(portes);
+	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
+	private JButton modifMdp = new JButton("Modifier mot de passe");
+
 
 	/**
-	 * Ce constructeur affiche la page pour un gérant
+	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
 	public GerantVue() {
 
@@ -66,11 +80,21 @@ public class GerantVue implements ActionListener {
 		
 		Box bvaBox = Box.createHorizontalBox();
 		bvaBox.add(bvaAjoutLabel);
-		bvaBox.add(bvaAjoutTextField);
+		bvaOui.setActionCommand(bvaOui.getText());
+		bvaNon.setActionCommand(bvaNon.getText());
+		bvaBg.add(bvaOui);
+		bvaBg.add(bvaNon);
+		bvaBox.add(bvaOui);
+		bvaBox.add(bvaNon);
 		
 		Box gpsBox = Box.createHorizontalBox();
 		gpsBox.add(gpsAjoutLabel);
-		gpsBox.add(gpsAjoutTextField);
+		gpsOui.setActionCommand(bvaOui.getText());
+		gpsNon.setActionCommand(bvaNon.getText());
+		gpsBg.add(gpsOui);
+		gpsBg.add(gpsNon);
+		gpsBox.add(gpsOui);
+		gpsBox.add(gpsNon);
 		
 		Box porteBox = Box.createHorizontalBox();
 		porteBox.add(porteAjoutLabel);
@@ -78,9 +102,15 @@ public class GerantVue implements ActionListener {
 		
 		Box climBox = Box.createHorizontalBox();
 		climBox.add(climAjoutLabel);
-		climBox.add(climAjoutTextField);
+		climOui.setActionCommand(bvaOui.getText());
+		climNon.setActionCommand(bvaNon.getText());
+		climBg.add(climOui);
+		climBg.add(climNon);
+		climBox.add(climOui);
+		climBox.add(climNon);
 		
 		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
 		
 		Box panelBox = Box.createVerticalBox();
@@ -93,11 +123,7 @@ public class GerantVue implements ActionListener {
 		panelBox.add(climBox);
 		panelBox.add(buttonBox);
 		gerantFrame.setContentPane(panelBox);
-		/*
-		JPanel panelbuttons = new JPanel();
-		panelbuttons.add(modifMdp);
-		gerantFrame.add(panelbuttons, BorderLayout.SOUTH);
-		*/
+
 		gerantFrame.pack();
 		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gerantFrame.setSize(500, 400);
@@ -105,16 +131,38 @@ public class GerantVue implements ActionListener {
 		gerantFrame.setVisible(true);
 		
 		modifMdp.addActionListener(this);
+		ajoutVehicule.addActionListener(this);
 		//gerantFrame.pack();
 	}
 
 	/**
-	 * Cette méthode permet de changer de vue
+	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
 	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		gerantFrame.setVisible(false);
-		ModifierMdpVue m = new ModifierMdpVue();		
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		
+		case "Modifier mot de passe":
+			gerantFrame.setVisible(false);
+			new ModifierMdpVue();	
+			break;
+		
+		case "Ajouter un véhicule":
+			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
+			Catalogue c = new Catalogue(false);
+			
+			c.getCatalogue().put("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
+
+			for (String i : c.getCatalogue().keySet()) {
+				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
+			}
+
+		default:
+			break;
+		}
+		
+		
+	
 	}
 
 }
