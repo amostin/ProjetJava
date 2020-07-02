@@ -110,6 +110,9 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		climBox.add(climOui);
 		climBox.add(climNon);
 		
+		Box messageBox = Box.createHorizontalBox();
+		messageBox.add(message);
+		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(ajoutVehicule);
 		//buttonBox.add(modifMdp);
@@ -122,6 +125,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		panelBox.add(gpsBox);
 		panelBox.add(porteBox);
 		panelBox.add(climBox);
+		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		gerantFrame.setContentPane(panelBox);
 
@@ -152,6 +156,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 			for (String i : c.getCatalogue().keySet()) {
 				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
 			}
+			affiche("véhicule ajouté");
 
 		default:
 			break;
