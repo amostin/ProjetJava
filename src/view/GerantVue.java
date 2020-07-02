@@ -26,7 +26,6 @@ public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
 	//private JPanel gerantTextContent = new JPanel();
 	//private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
-	private JButton modifMdp = new JButton("Modifier mot de passe");
 	
 	private JLabel marqueAjoutLabel = new JLabel("marque");
 	private JLabel typeAjoutLabel = new JLabel("type");
@@ -43,6 +42,10 @@ public class GerantVue implements ActionListener {
 	private JTextField gpsAjoutTextField = new JTextField("gps");
 	private JTextField porteAjoutTextField = new JTextField("porte");
 	private JTextField climAjoutTextField = new JTextField("clim");
+	
+	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
+	private JButton modifMdp = new JButton("Modifier mot de passe");
+
 
 	/**
 	 * Ce constructeur affiche la page pour un gérant
@@ -81,6 +84,7 @@ public class GerantVue implements ActionListener {
 		climBox.add(climAjoutTextField);
 		
 		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
 		
 		Box panelBox = Box.createVerticalBox();
