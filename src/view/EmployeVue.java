@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Observable;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,10 +40,17 @@ public class EmployeVue extends RentacarVue {
 		
 		updateTable();
 		
+		Box tableBox = Box.createHorizontalBox();
+		tableBox.add(table.getTableHeader());
+		
+		Box panelBox = Box.createVerticalBox();
+		panelBox.add(tableBox);
+		employeFrame.setContentPane(panelBox);
+		
 		employeFrame.pack();
 		employeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		employeFrame.setSize(500, 400);
-		employeFrame.setLocation(300, 400);
+		employeFrame.setSize(900, 600);
+		employeFrame.setLocation(1000, 50);
 		employeFrame.setVisible(true);
 
 	}

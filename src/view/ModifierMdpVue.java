@@ -62,8 +62,8 @@ public class ModifierMdpVue extends RentacarVue implements ActionListener {
 		
 		modifMdpFrame.pack();
 		modifMdpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		modifMdpFrame.setSize(500, 400);
-		modifMdpFrame.setLocation(300, 400);
+		modifMdpFrame.setSize(900, 600);
+		modifMdpFrame.setLocation(1000, 50);
 		modifMdpFrame.setVisible(true);
 		
 		enregistrer.addActionListener(this);

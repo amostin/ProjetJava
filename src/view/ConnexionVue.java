@@ -66,8 +66,8 @@ public class ConnexionVue extends RentacarVue implements ActionListener {
 
 		connexionJFrame.pack();
 		connexionJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		connexionJFrame.setSize(500, 400);
-		connexionJFrame.setLocation(300, 400);
+		connexionJFrame.setSize(900, 600);
+		connexionJFrame.setLocation(1000, 50);
 		connexionJFrame.setVisible(true);
 		
 		connexion.addActionListener(this);

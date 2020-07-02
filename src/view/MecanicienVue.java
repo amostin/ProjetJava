@@ -49,8 +49,8 @@ public class MecanicienVue extends RentacarVue {
 		*/
 		mecanicienFrame.pack();
 		mecanicienFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mecanicienFrame.setSize(500, 400);
-		mecanicienFrame.setLocation(300, 400);
+		mecanicienFrame.setSize(900, 600);
+		mecanicienFrame.setLocation(1000, 50);
 		mecanicienFrame.setVisible(true);
 		
 		//modifMdp.addActionListener(this);

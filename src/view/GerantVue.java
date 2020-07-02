@@ -127,8 +127,8 @@ public class GerantVue extends RentacarVue implements ActionListener {
 
 		gerantFrame.pack();
 		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gerantFrame.setSize(500, 400);
-		gerantFrame.setLocation(300, 400);
+		gerantFrame.setSize(900, 600);
+		gerantFrame.setLocation(1000, 50);
 		gerantFrame.setVisible(true);
 		
 		modifMdp.addActionListener(this);
