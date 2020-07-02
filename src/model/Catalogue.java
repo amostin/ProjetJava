@@ -40,26 +40,29 @@ public class Catalogue {
 	/**
 	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
 	 */
-	public void createNomVoitures(int nbVoitures) {
+	public String[] createNomVoitures(int nbVoitures) {
 		for(int i = 0; i<nbVoitures; i++) {
 			nomVoitures[i] = new String("nomVoiture_"+i);
 		}
+		return nomVoitures;
 	}
 	/**
 	 * Cette méthode permet de créer des valeurs pour hashmap (rempli tableau voitures)
 	 */
-	public void createVoitures(int nbVoitures) {
+	public Voiture[] createVoitures(int nbVoitures) {
 		for(int i = 0; i<nbVoitures; i++) {
 			voitures[i] = new Voiture();
 		}
+		return voitures;
 	}
 	/**
 	 * Cette méthode permet de créer un catalogue a partir des nomvoiture et des voitures
 	 */
-	public void addVoitures(String[] nomVoitures, Voiture[] voitures) {
+	public HashMap<String, Voiture> addVoitures(String[] nomVoitures, Voiture[] voitures) {
 		for(int i = 0; i<10; i++) {
 			catalogue.put(nomVoitures[i], voitures[i]);
 		}
+		return catalogue;
 	}
 	
 	/*
