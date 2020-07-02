@@ -9,11 +9,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import model.Gerant;
@@ -37,12 +39,19 @@ public class GerantVue implements ActionListener {
 
 	private JTextField marqueAjoutTextField = new JTextField("marque");
 	private JTextField typeAjoutTextField = new JTextField("type");
-	private JTextField puissanceAjoutTextField = new JTextField("puissance");
-	private JTextField bvaAjoutTextField = new JTextField("bva");
-	private JTextField gpsAjoutTextField = new JTextField("gps");
-	private JTextField porteAjoutTextField = new JTextField("porte");
-	private JTextField climAjoutTextField = new JTextField("clim");
-	
+	private Integer[] puissances = {500, 600, 700, 800, 900, 1000};
+	private JComboBox<Integer> puissanceAjoutTextField = new JComboBox<>(puissances);
+	private JRadioButton bvaOui = new JRadioButton("oui");
+	private JRadioButton bvaNon = new JRadioButton("non");
+	private JRadioButton gpsOui = new JRadioButton("oui");
+	private JRadioButton gpsNon = new JRadioButton("non");
+	private JRadioButton climOui = new JRadioButton("oui");
+	private JRadioButton climNon = new JRadioButton("non");
+	private ButtonGroup bvaBg = new ButtonGroup();
+	private ButtonGroup gpsBg = new ButtonGroup();
+	private ButtonGroup climBg = new ButtonGroup();
+	private Integer[] portes = {3, 5};
+	private JComboBox<Integer> porteAjoutTextField = new JComboBox<>(portes);
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
 
@@ -69,11 +78,17 @@ public class GerantVue implements ActionListener {
 		
 		Box bvaBox = Box.createHorizontalBox();
 		bvaBox.add(bvaAjoutLabel);
-		bvaBox.add(bvaAjoutTextField);
+		bvaBg.add(bvaOui);
+		bvaBg.add(bvaNon);
+		bvaBox.add(bvaOui);
+		bvaBox.add(bvaNon);
 		
 		Box gpsBox = Box.createHorizontalBox();
 		gpsBox.add(gpsAjoutLabel);
-		gpsBox.add(gpsAjoutTextField);
+		gpsBg.add(gpsOui);
+		gpsBg.add(gpsNon);
+		gpsBox.add(gpsOui);
+		gpsBox.add(gpsNon);
 		
 		Box porteBox = Box.createHorizontalBox();
 		porteBox.add(porteAjoutLabel);
@@ -81,7 +96,10 @@ public class GerantVue implements ActionListener {
 		
 		Box climBox = Box.createHorizontalBox();
 		climBox.add(climAjoutLabel);
-		climBox.add(climAjoutTextField);
+		climBg.add(climOui);
+		climBg.add(climNon);
+		climBox.add(climOui);
+		climBox.add(climNon);
 		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(ajoutVehicule);
