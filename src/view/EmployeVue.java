@@ -40,11 +40,19 @@ public class EmployeVue extends RentacarVue {
 		
 		updateTable();
 		
+		Box headBox = Box.createHorizontalBox();
+		headBox.add(table.getTableHeader());
+		
 		Box tableBox = Box.createHorizontalBox();
-		tableBox.add(table.getTableHeader());
+		tableBox.add(table);
+		
+		Box messageBox = Box.createHorizontalBox();
+		messageBox.add(message);
 		
 		Box panelBox = Box.createVerticalBox();
+		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(messageBox);
 		employeFrame.setContentPane(panelBox);
 		
 		employeFrame.pack();
