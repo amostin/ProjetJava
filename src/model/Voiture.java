@@ -4,7 +4,8 @@
 package model;
 
 /**
- * @author Moi
+ * Cette classe est utile à créer des voitures
+ * @author Ambroise Mostin
  *
  */
 public class Voiture {
@@ -18,7 +19,7 @@ public class Voiture {
 	private String clim;
 	private static int i = 0;
 	/**
-	 * 
+	 * Ce constructeur permet de créer une voiture automatiquement
 	 */
 	public Voiture() {
 		this.marque = "marque_"+i;
@@ -30,6 +31,9 @@ public class Voiture {
 		this.clim = "oui";
 		i++;
 	}
+	/**
+	 * Ce constructeur permet de créer une voiture selon les caractéristiques choisies
+	 */
 	public Voiture(String marque, String type, String puissance, String bva, String gps, String porte, String clim) {
 		this.marque = marque + '_' + i;
 		this.type = type + '_' + i;

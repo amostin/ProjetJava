@@ -6,7 +6,8 @@ package model;
 import java.util.HashMap;
 
 /**
- * @author Moi
+ * Cette classe est utile à créer automatiquement un catalogue au lancement de l'application
+ * @author Ambroise Mostin
  *
  */
 public class Catalogue {
@@ -14,26 +15,20 @@ public class Catalogue {
 	private HashMap<String, Voiture> catalogue = new HashMap<>();
 	private String[] nomVoitures = new String[10];
 	private Voiture[] voitures = new Voiture[10];
+	private int nbVoitures = 10;
 	/**
-	 * 
+	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
 	public Catalogue() {
-		//création des clés pour hashmap (rempli tableau nomVoiture)
-		for(int i = 0; i<10; i++) {
-			nomVoitures[i] = new String("nomVoiture_"+i);
-		}
-		
-		//création des valeurs pour hashmap (rempli tableau voitures)
-		for(int i = 0; i<10; i++) {
-			voitures[i] = new Voiture();
-		}
-		
+		createNomVoitures(nbVoitures);
+		createVoitures(nbVoitures);
 		addVoitures(nomVoitures, voitures);
-		
 	}
-	
+	/**
+	 * Ce constructeur permet d'accéder aux methodes (surtout addVoitures) pour gerer les catalogue
+	 */
 	public Catalogue(boolean faux) {
-		
+		//accès au catalogue sans en créer un
 	}
 	
 	public HashMap<String, Voiture> getCatalogue() {
@@ -42,10 +37,26 @@ public class Catalogue {
 	public void setCatalogue(HashMap<String, Voiture> catalogue) {
 		this.catalogue = catalogue;
 	}
-	
-	
+	/**
+	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
+	 */
+	public void createNomVoitures(int nbVoitures) {
+		for(int i = 0; i<nbVoitures; i++) {
+			nomVoitures[i] = new String("nomVoiture_"+i);
+		}
+	}
+	/**
+	 * Cette méthode permet de créer des valeurs pour hashmap (rempli tableau voitures)
+	 */
+	public void createVoitures(int nbVoitures) {
+		for(int i = 0; i<nbVoitures; i++) {
+			voitures[i] = new Voiture();
+		}
+	}
+	/**
+	 * Cette méthode permet de créer un catalogue a partir des nomvoiture et des voitures
+	 */
 	public void addVoitures(String[] nomVoitures, Voiture[] voitures) {
-		//création du catalogue a partir des nomvoiture et des voitures
 		for(int i = 0; i<10; i++) {
 			catalogue.put(nomVoitures[i], voitures[i]);
 		}

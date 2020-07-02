@@ -59,7 +59,7 @@ public class GerantVue implements ActionListener {
 
 
 	/**
-	 * Ce constructeur affiche la page pour un gérant
+	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
 	public GerantVue() {
 
@@ -136,7 +136,7 @@ public class GerantVue implements ActionListener {
 	}
 
 	/**
-	 * Cette méthode permet de changer de vue
+	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
