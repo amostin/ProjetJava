@@ -29,7 +29,7 @@ import model.Voiture;
  * @author Ambroise Mostin
  */
 public class AjoutVoitureVue extends RentacarVue implements ActionListener {
-	private JFrame gerantFrame;
+	private JFrame frame;
 	
 	private JLabel marqueAjoutLabel = new JLabel("marque");
 	private JLabel typeAjoutLabel = new JLabel("type");
@@ -55,7 +55,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	private Integer[] portes = {3, 5};
 	private JComboBox<Integer> porteAjoutTextField = new JComboBox<>(portes);
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
-	//private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JButton retour = new JButton("retour");
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 
 
@@ -65,7 +65,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	 */
 	public AjoutVoitureVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
-		gerantFrame = new JFrame("Rentacar");
+		frame = new JFrame("Rentacar");
 		
 		Box marqueBox = Box.createHorizontalBox();
 		marqueBox.add(marqueAjoutLabel);
@@ -115,7 +115,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(ajoutVehicule);
-		//buttonBox.add(modifMdp);
+		buttonBox.add(retour);
 		
 		Box panelBox = Box.createVerticalBox();
 		panelBox.add(marqueBox);
@@ -127,17 +127,18 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		panelBox.add(climBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
-		gerantFrame.setContentPane(panelBox);
+		frame.setContentPane(panelBox);
 
-		gerantFrame.pack();
-		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gerantFrame.setSize(900, 600);
-		gerantFrame.setLocation(1000, 50);
-		gerantFrame.setVisible(true);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(900, 600);
+		frame.setLocation(1000, 50);
+		frame.setVisible(true);
 		
 		//modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
-		//gerantFrame.pack();
+		retour.addActionListener(this);
+		//frame.pack();
 	}
 
 	/**
@@ -157,7 +158,13 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
 			}
 			affiche("véhicule ajouté");
+			break;
 
+		case "retour":
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			break;
+			
 		default:
 			break;
 		}	
