@@ -6,6 +6,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,25 +16,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.RentacarController;
 import model.Employe;
 import model.Gerant;
 import model.Mecanicien;
+import model.Rentacar;
 
 /**
  * Cette classe sert à afficher une vue accessible seulement par le gérant et lui permettre de changer un mot de passe
  * @author Ambroise Mostin
  */
-public class ModifierMdpVue implements ActionListener {
+public class ModifierMdpVue extends RentacarVue implements ActionListener {
 	private JFrame modifMdpFrame;
 	private JPanel modifMdpTextContent = new JPanel();
 	private JTextField mdp = new JTextField();
 	private JButton enregistrer = new JButton("Enregistrer");
 	private JButton retourCo = new JButton("Retour à la connexion");
 	private JComboBox<String> userType;
+	private JLabel message = new JLabel("Bienvenue chez Rentacar");
+
 	/**
 	 * Ce constructeur affiche une liste qui permet de choisir un role et definir un mot de passe ou retourner à l'écran de connexion
 	 */
-	public ModifierMdpVue() {
+	public ModifierMdpVue(Rentacar model, RentacarController controller) {
+		super(model, controller);
 		modifMdpFrame = new JFrame("Rentacar");
 		modifMdpTextContent.setLayout(new BoxLayout(modifMdpTextContent, BoxLayout.Y_AXIS));
 		
@@ -56,8 +62,8 @@ public class ModifierMdpVue implements ActionListener {
 		
 		modifMdpFrame.pack();
 		modifMdpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		modifMdpFrame.setSize(500, 400);
-		modifMdpFrame.setLocation(300, 400);
+		modifMdpFrame.setSize(900, 600);
+		modifMdpFrame.setLocation(1000, 50);
 		modifMdpFrame.setVisible(true);
 		
 		enregistrer.addActionListener(this);
@@ -84,7 +90,7 @@ public class ModifierMdpVue implements ActionListener {
 			
 		case "Retour à la connexion":
 			modifMdpFrame.setVisible(false);
-			new RentacarVue();
+			new ConnexionVue(model, controller);
 			break;
 		}
 	}
@@ -116,4 +122,16 @@ public class ModifierMdpVue implements ActionListener {
 			return false;
 		}
 	}
+	/**
+	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
+	 */
+	public void affiche(String msg){
+		message.setText(msg);
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

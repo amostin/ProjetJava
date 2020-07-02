@@ -6,6 +6,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,7 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import model.Catalogue;
+import controller.RentacarController;
+import model.Rentacar;
 import model.Gerant;
 import model.Voiture;
 
@@ -26,10 +28,8 @@ import model.Voiture;
  * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
  * @author Ambroise Mostin
  */
-public class GerantVue implements ActionListener {
+public class GerantVue extends RentacarVue implements ActionListener {
 	private JFrame gerantFrame;
-	//private JPanel gerantTextContent = new JPanel();
-	//private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
 	
 	private JLabel marqueAjoutLabel = new JLabel("marque");
 	private JLabel typeAjoutLabel = new JLabel("type");
@@ -56,14 +56,15 @@ public class GerantVue implements ActionListener {
 	private JComboBox<Integer> porteAjoutTextField = new JComboBox<>(portes);
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JLabel message = new JLabel("Bienvenue chez Rentacar");
+
 
 
 	/**
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
-	public GerantVue() {
-
-		
+	public GerantVue(Rentacar model, RentacarController controller) {
+		super(model, controller);
 		gerantFrame = new JFrame("Rentacar");
 		
 		Box marqueBox = Box.createHorizontalBox();
@@ -126,8 +127,8 @@ public class GerantVue implements ActionListener {
 
 		gerantFrame.pack();
 		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gerantFrame.setSize(500, 400);
-		gerantFrame.setLocation(300, 400);
+		gerantFrame.setSize(900, 600);
+		gerantFrame.setLocation(1000, 50);
 		gerantFrame.setVisible(true);
 		
 		modifMdp.addActionListener(this);
@@ -144,14 +145,14 @@ public class GerantVue implements ActionListener {
 		
 		case "Modifier mot de passe":
 			gerantFrame.setVisible(false);
-			new ModifierMdpVue();	
+			new ModifierMdpVue(model, controller);	
 			break;
 		
 		case "Ajouter un véhicule":
 			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
-			Catalogue c = new Catalogue(false);
+			Rentacar c = new Rentacar(false);
 			
-			c.getCatalogue().put("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
+			c.addVoiture("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
 
 			for (String i : c.getCatalogue().keySet()) {
 				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
@@ -159,10 +160,19 @@ public class GerantVue implements ActionListener {
 
 		default:
 			break;
-		}
-		
-		
-	
+		}	
+	}
+	/**
+	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
+	 */
+	public void affiche(String msg){
+		message.setText(msg);
 	}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

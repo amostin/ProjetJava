@@ -6,9 +6,11 @@ import javax.swing.JTextField;
 
 import org.junit.jupiter.api.Test;
 
+import controller.RentacarController;
 import model.Employe;
 import model.Gerant;
 import model.Mecanicien;
+import model.Rentacar;
 
 class VueTest {
 
@@ -17,7 +19,9 @@ class VueTest {
 	 */
 	@Test
 	void isMdpCorrectTest() {
-		RentacarVue r = new RentacarVue();
+		Rentacar model = new Rentacar();
+		RentacarController controller = new RentacarController(model);
+		ConnexionVue r = new ConnexionVue(model, controller);
 		JTextField mdpJuste = new JTextField("mdp");
 		JTextField mdpFaux = new JTextField("fauxMdp");
 		
