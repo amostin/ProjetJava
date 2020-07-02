@@ -28,8 +28,6 @@ import model.Voiture;
  */
 public class GerantVue implements ActionListener {
 	private JFrame gerantFrame;
-	//private JPanel gerantTextContent = new JPanel();
-	//private JLabel gerantMessage = new JLabel("Bienvenue Gérant");
 	
 	private JLabel marqueAjoutLabel = new JLabel("marque");
 	private JLabel typeAjoutLabel = new JLabel("type");
@@ -62,8 +60,6 @@ public class GerantVue implements ActionListener {
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
 	public GerantVue() {
-
-		
 		gerantFrame = new JFrame("Rentacar");
 		
 		Box marqueBox = Box.createHorizontalBox();

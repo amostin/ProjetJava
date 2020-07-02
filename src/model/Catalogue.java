@@ -65,6 +65,9 @@ public class Catalogue {
 		return catalogue;
 	}
 	
+	
+	//public void removeVoiture()
+	
 	/*
 	public static void main(String[] args) {
 		Catalogue c = new Catalogue();
