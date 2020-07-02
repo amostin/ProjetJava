@@ -56,7 +56,9 @@ public class MecanicienVue extends RentacarVue {
 		//modifMdp.addActionListener(this);
 		//mecanicienFrame.pack();
 	}
-
+	/**
+	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
+	 */
 	public void affiche(String msg){
 		message.setText(msg);
 	}

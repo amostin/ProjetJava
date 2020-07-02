@@ -31,7 +31,7 @@ public class EmployeVue extends RentacarVue {
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 
 	/**
-	 * Ce constructeur affiche la page pour un employé
+	 * Ce constructeur affiche la page pour un employé (catalogue)
 	 */
 	public EmployeVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
@@ -62,7 +62,9 @@ public class EmployeVue extends RentacarVue {
 		employeFrame.setVisible(true);
 
 	}
-	
+	/**
+	 * Cette méthode est utile à construire le tableau affichant le catalogue
+	 */
 	private void updateTable() {
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
 		Object [][] data = new Object[catalogue.size()][7];
@@ -80,10 +82,15 @@ public class EmployeVue extends RentacarVue {
 		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim"};
 		table = new JTable(data, head);
 	}
-
+	/**
+	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
+	 */
 	public void affiche(String msg){
 		message.setText(msg);
 	}
+	/**
+	 * Cette méthode est utile à mettre à jour le tableau ?
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

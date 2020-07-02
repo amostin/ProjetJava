@@ -10,6 +10,7 @@ import view.ConnexionVue;
 import view.RentacarVue;
 
 /**
+ * Cette classe est utile à lier les composants model, view et controller
  * @author Moi
  *
  */

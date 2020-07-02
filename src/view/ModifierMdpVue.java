@@ -122,7 +122,9 @@ public class ModifierMdpVue extends RentacarVue implements ActionListener {
 			return false;
 		}
 	}
-	
+	/**
+	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
+	 */
 	public void affiche(String msg){
 		message.setText(msg);
 	}
