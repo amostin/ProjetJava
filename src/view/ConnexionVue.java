@@ -6,6 +6,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,16 +16,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.RentacarController;
 import model.Employe;
 import model.Gerant;
 import model.Mecanicien;
+import model.Rentacar;
 
 /**
  * Classe d'affichage de la page de connexion
  * @author Ambroise Mostin
  *
  */
-public class ConnexionVue implements ActionListener {
+public class ConnexionVue extends RentacarVue implements ActionListener {
 
 	private JFrame connexionJFrame;
 	private JPanel textContent = new JPanel();
@@ -39,7 +42,8 @@ public class ConnexionVue implements ActionListener {
 	/**
 	 * Ce constructeur permet d'afficher la page de connexion avec le titre de la page, un message, une liste déroulante, un label, un champs de texte et un bouton.
 	 */
-	public ConnexionVue() {
+	public ConnexionVue(Rentacar model, RentacarController controller) {
+		super(model, controller);
 		connexionJFrame = new JFrame("Rentacar");
 		textContent.setLayout(new BoxLayout(textContent, BoxLayout.Y_AXIS));
 		textContent.add(message);
@@ -82,13 +86,13 @@ public class ConnexionVue implements ActionListener {
 		Mecanicien m =new Mecanicien();
 		
 		if (userType.getSelectedItem().equals("gérant") && isMdpCorrect(g.getMdp(), mdp.getText())) {
-			new GerantVue();
+			new GerantVue(model, controller);
 		} 
 		else if (userType.getSelectedItem().equals("employé") && isMdpCorrect(e.getMdp(), mdp.getText())) {
-			new EmployeVue();
+			new EmployeVue(model, controller);
 		}
 		else if (userType.getSelectedItem().equals("mécanicien") && isMdpCorrect(m.getMdp(), mdp.getText())) {
-			new MecanicienVue();
+			new MecanicienVue(model, controller);
 		}
 		
 	}
@@ -103,13 +107,18 @@ public class ConnexionVue implements ActionListener {
 			return true;
 		}
 		else {
-			new ConnexionVue();
+			new ConnexionVue(model, controller);
 			return false;
 		}
 	}
 	
 	public void affiche(String msg){
 		message.setText(msg);
+	}
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

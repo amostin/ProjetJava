@@ -3,26 +3,30 @@
  */
 package controller;
 
-import model.Catalogue;
+import model.Rentacar;
+import model.Rentacar;
 import model.Voiture;
 import view.ConnexionVue;
+import view.RentacarVue;
 
 /**
  * @author Moi
  *
  */
 public class RentacarController {
-	Catalogue model; 
-	ConnexionVue vue;
+	//Catalogue model; 
+	Rentacar model;
+	RentacarVue vue;
+	
 	
 	// utilisé par RentacarMVC
-	public RentacarController(Catalogue model) {
+	public RentacarController(Rentacar model) {
 		this.model = model;
 	}
 
 	// utilisé par RentacarMVC
-	public void addView(ConnexionVue vue) {
-		this.vue = vue;
+	public void addView(RentacarVue gui) {
+		this.vue = gui;
 	}
 	
 	// utilisé par la vue quand un bouton est appuyé

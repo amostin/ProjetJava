@@ -4,6 +4,9 @@
 package rentacar;
 
 import view.ModifierMdpVue;
+import view.RentacarVue;
+import controller.RentacarController;
+import model.Rentacar;
 import view.ConnexionVue;
 
 /**
@@ -17,8 +20,14 @@ public class RentacarMVC {
 	 * Ce constructeur appel la vue pour afficher une premiere fenetre (connexion)
 	 */
 	public RentacarMVC() {
-		new ConnexionVue();
-		//new ModifierMdpVue();
+		//new ConnexionVue();
+		Rentacar model = new Rentacar();
+		
+		RentacarController ctrlGui = new RentacarController(model);
+		
+		RentacarVue gui = new ConnexionVue(model, ctrlGui);
+		
+		ctrlGui.addView(gui);
 	}
 	
 	public static void main(String[] args) {

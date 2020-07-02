@@ -6,6 +6,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,7 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import model.Catalogue;
+import controller.RentacarController;
+import model.Rentacar;
 import model.Gerant;
 import model.Voiture;
 
@@ -26,7 +28,7 @@ import model.Voiture;
  * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
  * @author Ambroise Mostin
  */
-public class GerantVue implements ActionListener {
+public class GerantVue extends RentacarVue implements ActionListener {
 	private JFrame gerantFrame;
 	
 	private JLabel marqueAjoutLabel = new JLabel("marque");
@@ -54,12 +56,15 @@ public class GerantVue implements ActionListener {
 	private JComboBox<Integer> porteAjoutTextField = new JComboBox<>(portes);
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JLabel message = new JLabel("Bienvenue chez Rentacar");
+
 
 
 	/**
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
-	public GerantVue() {
+	public GerantVue(Rentacar model, RentacarController controller) {
+		super(model, controller);
 		gerantFrame = new JFrame("Rentacar");
 		
 		Box marqueBox = Box.createHorizontalBox();
@@ -140,12 +145,12 @@ public class GerantVue implements ActionListener {
 		
 		case "Modifier mot de passe":
 			gerantFrame.setVisible(false);
-			new ModifierMdpVue();	
+			new ModifierMdpVue(model, controller);	
 			break;
 		
 		case "Ajouter un véhicule":
 			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
-			Catalogue c = new Catalogue(false);
+			Rentacar c = new Rentacar(false);
 			
 			c.addVoiture("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
 
@@ -155,10 +160,17 @@ public class GerantVue implements ActionListener {
 
 		default:
 			break;
-		}
-		
-		
-	
+		}	
 	}
 
+	public void affiche(String msg){
+		message.setText(msg);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
