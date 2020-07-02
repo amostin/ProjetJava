@@ -18,7 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import model.Catalogue;
 import model.Gerant;
+import model.Voiture;
 
 /**
  * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
@@ -78,6 +80,8 @@ public class GerantVue implements ActionListener {
 		
 		Box bvaBox = Box.createHorizontalBox();
 		bvaBox.add(bvaAjoutLabel);
+		bvaOui.setActionCommand(bvaOui.getText());
+		bvaNon.setActionCommand(bvaNon.getText());
 		bvaBg.add(bvaOui);
 		bvaBg.add(bvaNon);
 		bvaBox.add(bvaOui);
@@ -85,6 +89,8 @@ public class GerantVue implements ActionListener {
 		
 		Box gpsBox = Box.createHorizontalBox();
 		gpsBox.add(gpsAjoutLabel);
+		gpsOui.setActionCommand(bvaOui.getText());
+		gpsNon.setActionCommand(bvaNon.getText());
 		gpsBg.add(gpsOui);
 		gpsBg.add(gpsNon);
 		gpsBox.add(gpsOui);
@@ -96,6 +102,8 @@ public class GerantVue implements ActionListener {
 		
 		Box climBox = Box.createHorizontalBox();
 		climBox.add(climAjoutLabel);
+		climOui.setActionCommand(bvaOui.getText());
+		climNon.setActionCommand(bvaNon.getText());
 		climBg.add(climOui);
 		climBg.add(climNon);
 		climBox.add(climOui);
@@ -115,11 +123,7 @@ public class GerantVue implements ActionListener {
 		panelBox.add(climBox);
 		panelBox.add(buttonBox);
 		gerantFrame.setContentPane(panelBox);
-		/*
-		JPanel panelbuttons = new JPanel();
-		panelbuttons.add(modifMdp);
-		gerantFrame.add(panelbuttons, BorderLayout.SOUTH);
-		*/
+
 		gerantFrame.pack();
 		gerantFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gerantFrame.setSize(500, 400);
@@ -127,6 +131,7 @@ public class GerantVue implements ActionListener {
 		gerantFrame.setVisible(true);
 		
 		modifMdp.addActionListener(this);
+		ajoutVehicule.addActionListener(this);
 		//gerantFrame.pack();
 	}
 
@@ -134,9 +139,30 @@ public class GerantVue implements ActionListener {
 	 * Cette méthode permet de changer de vue
 	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		gerantFrame.setVisible(false);
-		ModifierMdpVue m = new ModifierMdpVue();		
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		
+		case "Modifier mot de passe":
+			gerantFrame.setVisible(false);
+			new ModifierMdpVue();	
+			break;
+		
+		case "Ajouter un véhicule":
+			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
+			Catalogue c = new Catalogue(false);
+			
+			c.getCatalogue().put("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
+
+			for (String i : c.getCatalogue().keySet()) {
+				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
+			}
+
+		default:
+			break;
+		}
+		
+		
+	
 	}
 
 }
