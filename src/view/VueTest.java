@@ -17,7 +17,7 @@ class VueTest {
 	 */
 	@Test
 	void isMdpCorrectTest() {
-		RentacarVue r = new RentacarVue();
+		ConnexionVue r = new ConnexionVue();
 		JTextField mdpJuste = new JTextField("mdp");
 		JTextField mdpFaux = new JTextField("fauxMdp");
 		

@@ -4,7 +4,7 @@
 package rentacar;
 
 import view.ModifierMdpVue;
-import view.RentacarVue;
+import view.ConnexionVue;
 
 /**
  * Cette classe permet de lancer l'application en liant les trois parties MVC.
@@ -17,7 +17,7 @@ public class RentacarMVC {
 	 * Ce constructeur appel la vue pour afficher une premiere fenetre (connexion)
 	 */
 	public RentacarMVC() {
-		new RentacarVue();
+		new ConnexionVue();
 		//new ModifierMdpVue();
 	}
 	

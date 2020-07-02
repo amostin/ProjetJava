@@ -68,9 +68,11 @@ public class Catalogue extends Observable{
 	/**
 	 * Cette méthode permet d'ajouter une voiture au catalogue
 	 */
-	public HashMap<String, Voiture> addVoiture(String nomVoitures, Voiture voitures) {
-		catalogue.put(nomVoitures, voitures);
-		return catalogue;
+	public boolean addVoiture(String nomVoiture, Voiture voiture) {
+		catalogue.put(nomVoiture, voiture);
+		setChanged();
+		notifyObservers();
+		return true;
 	}
 	
 	//public void removeVoiture()

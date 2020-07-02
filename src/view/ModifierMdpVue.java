@@ -84,7 +84,7 @@ public class ModifierMdpVue implements ActionListener {
 			
 		case "Retour à la connexion":
 			modifMdpFrame.setVisible(false);
-			new RentacarVue();
+			new ConnexionVue();
 			break;
 		}
 	}

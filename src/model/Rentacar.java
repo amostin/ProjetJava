@@ -3,10 +3,12 @@
  */
 package model;
 
+import java.util.Observable;
+
 /**
  * @author Moi
  */
-public class Rentacar {
+public class Rentacar extends Observable{
 
 	/**
 	 * 
