@@ -147,7 +147,7 @@ public class GerantVue implements ActionListener {
 			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
 			Catalogue c = new Catalogue(false);
 			
-			c.getCatalogue().put("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
+			c.addVoiture("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
 
 			for (String i : c.getCatalogue().keySet()) {
 				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
