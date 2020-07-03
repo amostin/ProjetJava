@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import controller.RentacarController;
 import model.Rentacar;
@@ -28,7 +29,13 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JButton supprimerVehicule = new JButton("supprimer");
 	private Box panelBox = Box.createVerticalBox();
+	private JTextField idVehicule = new JTextField();
+	private JLabel choixVehicule = new JLabel("Entrer le numero du véhicule ");
+	Box tableBox = Box.createHorizontalBox();
+
+
 
 	/**
 	 * Ce constructeur affiche la page pour un employé (catalogue)
@@ -43,11 +50,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		Box headBox = Box.createHorizontalBox();
 		headBox.add(table.getTableHeader());
 		
-		Box tableBox = Box.createHorizontalBox();
 		tableBox.add(table);
 		
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
+		
+		Box suppBox = Box.createHorizontalBox();
+		suppBox.add(choixVehicule);
+		suppBox.add(idVehicule);
+		suppBox.add(supprimerVehicule);
 		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(ajoutVehicule);
@@ -56,6 +67,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(suppBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -68,13 +80,14 @@ public class GerantVue extends RentacarVue implements ActionListener{
 
 		modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
+		supprimerVehicule.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
 	 */
 	private void updateTable() {
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
-		Object [][] data = new Object[catalogue.size()][7];
+		Object [][] data = new Object[catalogue.size()][8];
 
 		for(int i=0; i<catalogue.size(); i++){
 			data[i][0] = i;
@@ -84,9 +97,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			data[i][4] = catalogue.get("nomVoiture_"+i).getGps();
 			data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
 			data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
+			data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
 		}
 		
-		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim"};
+		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état"};
 		table = new JTable(data, head);
 	}
 	/**
@@ -101,8 +115,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		updateTable();
-		panelBox.remove(table);
-		panelBox.add(table);
+		panelBox.remove(tableBox);
+		panelBox.add(tableBox);
 	}
 	
 	/**
@@ -120,12 +134,35 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		case "Ajouter un véhicule":
 			frame.setVisible(false);
 			new AjoutVoitureVue(model, controller);
+			break;
+			
+		case "supprimer":
+			int numVehicule = getNumeroVehicule();   
+			if(numVehicule < 0 || numVehicule > model.getCatalogue().size()){
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.supprimeVehicule(numVehicule);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			//affiche("véhicule supprimé");
+			break;
 
 		default:
 			break;
 		}	
 	}
 	
+	public int getNumeroVehicule() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehicule.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
 /*
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

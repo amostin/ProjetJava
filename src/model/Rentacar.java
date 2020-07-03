@@ -79,7 +79,12 @@ public class Rentacar extends Observable{
 		}
 	}
 	
-	//public void removeVoiture()
+	public void supprimeVehicule(int numVehicule) {
+		Voiture vehiculeSupp = catalogue.get("nomVoiture_"+numVehicule);
+		vehiculeSupp.setEtat("Supprimé");
+		setChanged();
+		notifyObservers();
+	}
 	
 	/*
 	public static void main(String[] args) {

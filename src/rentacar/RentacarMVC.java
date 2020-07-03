@@ -29,7 +29,7 @@ public class RentacarMVC {
 		//lien entre ctrl et connexion
 		ctrlGui.addView(gui);
 	}
-	
+	//recup branche 11
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

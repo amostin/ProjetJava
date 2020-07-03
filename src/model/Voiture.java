@@ -17,6 +17,7 @@ public class Voiture {
 	private String gps;
 	private String porte;
 	private String clim;
+	private String etat;
 	private static int i = 0;
 	/**
 	 * Ce constructeur permet de créer une voiture automatiquement
@@ -29,6 +30,7 @@ public class Voiture {
 		this.gps = "oui";
 		this.porte = "3";
 		this.clim = "oui";
+		this.etat = "disponible";
 		i++;
 	}
 	/**
@@ -42,12 +44,13 @@ public class Voiture {
 		this.gps = gps;
 		this.porte = porte;
 		this.clim = clim;
+		this.etat = "disponible";
 		i++;
 	}
 	@Override
 	public String toString() {
 		return "marque=" + marque + ", type=" + type + ", puissance=" + puissance + ", bva=" + bva + ", gps="
-				+ gps + ", porte=" + porte + ", clim=" + clim;
+				+ gps + ", porte=" + porte + ", clim=" + clim + ", etat=" + etat;
 	}
 	public static int getI() {
 		return i;
@@ -96,6 +99,12 @@ public class Voiture {
 	}
 	public void setClim(String clim) {
 		this.clim = clim;
+	}
+	public String getEtat() {
+		return etat;
+	}
+	public void setEtat(String etat) {
+		this.etat = etat;
 	}
 	
 	
