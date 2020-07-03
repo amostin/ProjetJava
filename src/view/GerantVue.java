@@ -95,28 +95,16 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		}
 		puisMaxFiltre = new JComboBox<>(puisMax);
 		
-		String[] bva = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
-			bva[i] = catalogue.get("nomVoiture_"+i).getBva();
-		}
+		String[] bva = {"oui", "non"};
 		bvaFiltre = new JComboBox<>(bva);
 		
-		String[] gps = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
-			gps[i] = catalogue.get("nomVoiture_"+i).getGps();
-		}
+		String[] gps = {"oui", "non"};
 		gpsFiltre = new JComboBox<>(gps);
 		
-		String[] porte = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
-			porte[i] = catalogue.get("nomVoiture_"+i).getPorte();
-		}
+		String[] porte = {"3", "5"};
 		porteFiltre = new JComboBox<>(porte);
 		
-		String[] clim = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
-			clim[i] = catalogue.get("nomVoiture_"+i).getClim();
-		}
+		String[] clim = {"oui", "non"};
 		climFiltre = new JComboBox<>(clim);
 		
 		filtreBox.add(filtre);
