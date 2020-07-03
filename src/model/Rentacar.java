@@ -116,8 +116,14 @@ public class Rentacar extends Observable{
 			}
 		}
 		else {
-			for(int i = 0; i < catalogue.size(); i++) {
-				pasFiltre[i] = 25;
+			if(marqueFiltre.equals("marque_0") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") 
+					&& puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
+				pasFiltre[0] = 0;
+			}
+			else {
+				for(int i = 0; i < catalogue.size(); i++) {
+					pasFiltre[i] = 25;
+				}
 			}
 		}
 		
