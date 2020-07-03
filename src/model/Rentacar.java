@@ -108,7 +108,8 @@ public class Rentacar extends Observable{
 	
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object puisMaxFiltre, Object bvaFiltre,
 			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
-		
+		int[] resetPasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
+		setPasFiltre(resetPasFiltre);
 		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") 
 				&& puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
 			for(int i = 0; i < catalogue.size(); i++) {
