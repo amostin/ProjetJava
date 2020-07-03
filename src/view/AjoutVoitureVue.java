@@ -57,7 +57,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton retour = new JButton("retour");
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
-	private int i = 10;
+	private static int i = 10;
 
 
 
@@ -155,15 +155,15 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 			Rentacar c = new Rentacar(false);
 			c.addVoiture("nomVoiture_"+Voiture.getI(), voitureAjoutee);
 			*/
-			System.out.println("nomVoiture_"+i);
+			//System.out.println("nomVoiture_"+i);
 			controller.ajoutVoiture("nomVoiture_"+i, voitureAjoutee);
-			System.out.println("nomVoiture_"+i);
+			//System.out.println("nomVoiture_"+i);
 			i++;
-			System.out.println("nomVoiture_"+i);
+			//System.out.println("nomVoiture_"+i);
 			//test voir catalogue
-			Rentacar c = new Rentacar(false);
-			for (String i : c.getCatalogue().keySet()) {
-				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
+			//Rentacar c = new Rentacar(false);
+			for (String i : model.getCatalogue().keySet()) {
+				System.out.println("key: " + i + " value: " + model.getCatalogue().get(i).toString());
 			}
 			
 			affiche("véhicule ajouté");

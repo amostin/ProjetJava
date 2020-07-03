@@ -34,12 +34,14 @@ public class RentacarController {
 	
 	// utilisé par la vue quand un bouton est appuyé
 	public void ajoutVoiture(String nomVoiture, Voiture voiture) {
+		model.addVoiture(nomVoiture, voiture);
+		/*
 		if(model.addVoiture(nomVoiture, voiture)){
-			//ajoutVoitureVue.affiche("Ajout de " + nomVoiture+ " ok");
-			System.out.println("ok ajout");
+			vue.affiche("Ajout de " + nomVoiture+ " ok");
+			//System.out.println("ok ajout");
 		}
-		else ajoutVoitureVue.affiche("Ajout impossible");
-		//TODO 
+		else vue.affiche("Ajout impossible");
+		*/ 
 	}
 	
 
