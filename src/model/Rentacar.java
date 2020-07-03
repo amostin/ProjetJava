@@ -52,7 +52,7 @@ public class Rentacar extends Observable{
 	 */
 	public Voiture[] createVoitures() {
 		for(int i = 0; i<10; i++) {
-			voitures[i] = new Voiture();
+			voitures[i] = new Voiture(i);
 		}
 		return voitures;
 	}

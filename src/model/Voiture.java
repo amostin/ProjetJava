@@ -22,16 +22,134 @@ public class Voiture {
 	/**
 	 * Ce constructeur permet de créer une voiture automatiquement
 	 */
-	public Voiture() {
-		this.marque = "marque_"+i;
-		this.type = "type_"+i;
-		this.puissance = "600";
-		this.bva = "oui";
-		this.gps = "oui";
-		this.porte = "3";
-		this.clim = "oui";
-		this.etat = "disponible";
-		i++;
+	public Voiture(int variete) {
+		switch (variete) {
+		case 0:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "2000";
+			this.bva = "oui";
+			this.gps = "oui";
+			this.porte = "3";
+			this.clim = "oui";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 1:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1800";
+			this.bva = "non";
+			this.gps = "oui";
+			this.porte = "3";
+			this.clim = "oui";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 2:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1600";
+			this.bva = "oui";
+			this.gps = "non";
+			this.porte = "3";
+			this.clim = "non";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 3:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1500";
+			this.bva = "non";
+			this.gps = "oui";
+			this.porte = "5";
+			this.clim = "oui";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 4:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1400";
+			this.bva = "oui";
+			this.gps = "non";
+			this.porte = "5";
+			this.clim = "non";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 5:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1300";
+			this.bva = "non";
+			this.gps = "non";
+			this.porte = "3";
+			this.clim = "non";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 6:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1200";
+			this.bva = "non";
+			this.gps = "non";
+			this.porte = "5";
+			this.clim = "oui";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 7:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1100";
+			this.bva = "oui";
+			this.gps = "oui";
+			this.porte = "5";
+			this.clim = "non";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 8:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "1000";
+			this.bva = "non";
+			this.gps = "oui";
+			this.porte = "5";
+			this.clim = "non";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		case 9:
+			this.marque = "marque_"+i;
+			this.type = "type_"+i;
+			this.puissance = "800";
+			this.bva = "oui";
+			this.gps = "non";
+			this.porte = "5";
+			this.clim = "oui";
+			this.etat = "disponible";
+			i++;
+			break;
+			
+		
+
+		default:
+			break;
+		}
+
 	}
 	/**
 	 * Ce constructeur permet de créer une voiture selon les caractéristiques choisies
