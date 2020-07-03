@@ -143,6 +143,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 				return;
 			}
 			controller.supprimeVehicule(numVehicule);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
 			//affiche("véhicule supprimé");
 			break;
 
