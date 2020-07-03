@@ -86,7 +86,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	 */
 	private void updateTable() {
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
-		Object [][] data = new Object[catalogue.size()][7];
+		Object [][] data = new Object[catalogue.size()][8];
 
 		for(int i=0; i<catalogue.size(); i++){
 			data[i][0] = i;
@@ -96,9 +96,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			data[i][4] = catalogue.get("nomVoiture_"+i).getGps();
 			data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
 			data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
+			data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
 		}
 		
-		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim"};
+		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état"};
 		table = new JTable(data, head);
 	}
 	/**
