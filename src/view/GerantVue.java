@@ -33,6 +33,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private Box panelBox = Box.createVerticalBox();
 	private JTextField idVehicule = new JTextField();
 	private JLabel choixVehicule = new JLabel("Entrer le numero du véhicule ");
+	Box tableBox = Box.createHorizontalBox();
+
 
 
 	/**
@@ -48,7 +50,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		Box headBox = Box.createHorizontalBox();
 		headBox.add(table.getTableHeader());
 		
-		Box tableBox = Box.createHorizontalBox();
 		tableBox.add(table);
 		
 		Box messageBox = Box.createHorizontalBox();
@@ -114,8 +115,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		updateTable();
-		panelBox.remove(table);
-		panelBox.add(table);
+		panelBox.remove(tableBox);
+		panelBox.add(tableBox);
 	}
 	
 	/**
