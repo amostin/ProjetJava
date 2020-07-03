@@ -44,11 +44,11 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	private Integer[] puissances = {500, 600, 700, 800, 900, 1000};
 	private JComboBox<Integer> puissanceAjoutTextField = new JComboBox<>(puissances);
 	private JRadioButton bvaOui = new JRadioButton("oui");
-	private JRadioButton bvaNon = new JRadioButton("non");
+	private JRadioButton bvaNon = new JRadioButton("non", true);
 	private JRadioButton gpsOui = new JRadioButton("oui");
-	private JRadioButton gpsNon = new JRadioButton("non");
+	private JRadioButton gpsNon = new JRadioButton("non", true);
 	private JRadioButton climOui = new JRadioButton("oui");
-	private JRadioButton climNon = new JRadioButton("non");
+	private JRadioButton climNon = new JRadioButton("non", true);
 	private ButtonGroup bvaBg = new ButtonGroup();
 	private ButtonGroup gpsBg = new ButtonGroup();
 	private ButtonGroup climBg = new ButtonGroup();
@@ -57,6 +57,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton retour = new JButton("retour");
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
+	private int i = 10;
 
 
 
@@ -150,13 +151,21 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		
 		case "Ajouter un véhicule":
 			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
+			/*
 			Rentacar c = new Rentacar(false);
-			
-			c.addVoiture("nomVoiture_"+voitureAjoutee.getI(), voitureAjoutee);
-
+			c.addVoiture("nomVoiture_"+Voiture.getI(), voitureAjoutee);
+			*/
+			System.out.println("nomVoiture_"+i);
+			controller.ajoutVoiture("nomVoiture_"+i, voitureAjoutee);
+			System.out.println("nomVoiture_"+i);
+			i++;
+			System.out.println("nomVoiture_"+i);
+			//test voir catalogue
+			Rentacar c = new Rentacar(false);
 			for (String i : c.getCatalogue().keySet()) {
 				System.out.println("key: " + i + " value: " + c.getCatalogue().get(i).toString());
 			}
+			
 			affiche("véhicule ajouté");
 			break;
 

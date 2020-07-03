@@ -28,6 +28,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private Box panelBox = Box.createVerticalBox();
 
 	/**
 	 * Ce constructeur affiche la page pour un employé (catalogue)
@@ -52,7 +53,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
 		
-		Box panelBox = Box.createVerticalBox();
+		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
 		panelBox.add(messageBox);
@@ -99,8 +100,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
+		updateTable();
+		panelBox.remove(table);
+		panelBox.add(table);
 	}
 	
 	/**

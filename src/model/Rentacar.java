@@ -69,10 +69,14 @@ public class Rentacar extends Observable{
 	 * Cette méthode permet d'ajouter une voiture au catalogue
 	 */
 	public boolean addVoiture(String nomVoiture, Voiture voiture) {
-		catalogue.put(nomVoiture, voiture);
-		setChanged();
-		notifyObservers();
-		return true;
+		try {
+			catalogue.put(nomVoiture, voiture);
+			setChanged();
+			notifyObservers();
+			return true;
+		} catch (NullPointerException e) {
+			throw new IllegalStateException("nomVoiture ou voiture pointe sur null", e);
+		}
 	}
 	
 	//public void removeVoiture()
