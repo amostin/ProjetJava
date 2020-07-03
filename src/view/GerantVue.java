@@ -151,16 +151,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		
-		case "Modifier mot de passe":
-			frame.setVisible(false);
-			new ModifierMdpVue(model, controller);	
-			break;
-		
-		case "Ajouter un véhicule":
-			frame.setVisible(false);
-			new AjoutVoitureVue(model, controller);
-			break;
 			
 		case "supprimer":
 			int numVehicule = getNumeroVehicule();   
@@ -173,7 +163,41 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			new GerantVue(model, controller);
 			//affiche("véhicule supprimé");
 			break;
+			
+		case "reparation":
+			int numVehiculeRepa = getNumeroVehiculeRepa();   
+			if(numVehiculeRepa < 0 || numVehiculeRepa > model.getCatalogue().size()){
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.repaVehicule(numVehiculeRepa);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			//affiche("véhicule supprimé");
+			break;
+			
+		case "entretien":
+			int numVehiculeEntr = getNumeroVehiculeEntr();   
+			if(numVehiculeEntr < 0 || numVehiculeEntr > model.getCatalogue().size()){
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.entrVehicule(numVehiculeEntr);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			//affiche("véhicule supprimé");
+			break;
 
+		case "Modifier mot de passe":
+			frame.setVisible(false);
+			new ModifierMdpVue(model, controller);	
+			break;
+		
+		case "Ajouter un véhicule":
+			frame.setVisible(false);
+			new AjoutVoitureVue(model, controller);
+			break;
+			
 		default:
 			break;
 		}	
@@ -183,6 +207,28 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		int result = 0;
 		try {
 			result = Integer.valueOf(idVehiculeSupp.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
+	
+	public int getNumeroVehiculeRepa() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehiculeRepa.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
+	
+	public int getNumeroVehiculeEntr() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehiculeEntr.getText()).intValue();
 		}
 		catch (NumberFormatException e){
 			result = -1;
