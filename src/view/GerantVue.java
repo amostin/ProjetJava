@@ -77,34 +77,38 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		Box filtreBox = Box.createHorizontalBox();
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
+		
 		String[] marques = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
+		marques[0] = "tout";
+		for(int i=1; i<catalogue.size(); i++){
 			marques[i] = catalogue.get("nomVoiture_"+i).getMarque();
 		}
 		marqueFiltre = new JComboBox<>(marques);
 		
 		String[] puisMin = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
+		puisMin[0] = "tout";
+		for(int i=1; i<catalogue.size(); i++){
 			puisMin[i] = catalogue.get("nomVoiture_"+i).getPuissance();
 		}
 		puisMinFiltre = new JComboBox<>(puisMin);
 		
 		String[] puisMax = new String[catalogue.size()];
-		for(int i=0; i<catalogue.size(); i++){
+		puisMax[0] = "tout";
+		for(int i=1; i<catalogue.size(); i++){
 			puisMax[i] = catalogue.get("nomVoiture_"+i).getPuissance();
 		}
 		puisMaxFiltre = new JComboBox<>(puisMax);
 		
-		String[] bva = {"oui", "non"};
+		String[] bva = {"tout", "oui", "non"};
 		bvaFiltre = new JComboBox<>(bva);
 		
-		String[] gps = {"oui", "non"};
+		String[] gps = {"tout", "oui", "non"};
 		gpsFiltre = new JComboBox<>(gps);
 		
-		String[] porte = {"3", "5"};
+		String[] porte = {"tout", "3", "5"};
 		porteFiltre = new JComboBox<>(porte);
 		
-		String[] clim = {"oui", "non"};
+		String[] clim = {"tout", "oui", "non"};
 		climFiltre = new JComboBox<>(clim);
 		
 		filtreBox.add(filtre);
