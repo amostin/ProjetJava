@@ -117,15 +117,20 @@ public class Rentacar extends Observable{
 			}
 		}
 		else {
-			if(marqueFiltre.equals("marque_0") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") 
-					&& puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
-				pasFiltre[0] = 0;
-			}
+			for(int i = 0; i<catalogue.size();i++) {
+				if(marqueFiltre.equals("marque_"+i) && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") 
+						&& puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
+					pasFiltre[i] = i;
+				}
+				else {
+					pasFiltre[i] = 25;
+				}
+			}/*
 			else {
 				for(int i = 0; i < catalogue.size(); i++) {
 					pasFiltre[i] = 25;
 				}
-			}
+			}*/
 		}
 		
 		/*

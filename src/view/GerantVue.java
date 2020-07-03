@@ -180,9 +180,13 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			
 			//for(int j = 0; j < catalogue.size(); j++) {
 				if(i != model.getPasFiltre()[i]) {
-					i++;
+					System.out.println(model.getPasFiltre()[i]+"vue if "+i);
+
+					//i++;
 				}
 				else {
+					System.out.println(model.getPasFiltre()[i]+"vue else");
+
 					data[i][0] = i;
 					data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
 					data[i][2] = catalogue.get("nomVoiture_"+i).getPuissance();
@@ -193,7 +197,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
 				}
 			//}
-			System.out.println(model.getPasFiltre()[i]+"vue");
+			System.out.println(model.getPasFiltre()[i]+"vue for "+i);
 
 		}
 		
