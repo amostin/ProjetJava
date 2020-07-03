@@ -5,6 +5,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.GenericArrayType;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -177,7 +178,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 
 		for(int i=0; i<catalogue.size(); i++){
 			
-			for(int j = 0; j < catalogue.size(); j++) {
+			//for(int j = 0; j < catalogue.size(); j++) {
 				if(i != model.getPasFiltre()[i]) {
 					i++;
 				}
@@ -191,7 +192,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
 					data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
 				}
-			}
+			//}
+			System.out.println(model.getPasFiltre()[i]+"vue");
 
 		}
 		

@@ -16,8 +16,8 @@ public class Rentacar extends Observable{
 	private HashMap<String, Voiture> catalogue = new HashMap<>();
 	private String[] nomVoitures = new String[10];
 	private Voiture[] voitures = new Voiture[10];
-	private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
-	//private int nbVoitures = 10;
+	//private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+	private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 	/**
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
@@ -105,19 +105,43 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object puisMaxFiltre, Object bvaFiltre,
 			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
-		//HashMap<String, Voiture> catalogue = getCatalogue();
 		
-		String choixMarque = (String) marqueFiltre;
+		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") 
+				&& puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
+			for(int i = 0; i < catalogue.size(); i++) {
+				pasFiltre[i] = i;
+			}
+		}
+		else {
+			for(int i = 0; i < catalogue.size(); i++) {
+				pasFiltre[i] = 25;
+			}
+		}
+		
+		/*
 		for(int i = 0; i < catalogue.size(); i++) {
-			if(true) {
-			//if(choixMarque.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
+			if(marqueFiltre.equals("tout")) {
+				pasFiltre[i] = i;
+				System.out.println(pasFiltre[i]);
+			}
+			else {
+				pasFiltre[i] = 20;
+				System.out.println(pasFiltre[i]);
+			}
+		}
+		
+		for(int i = 0; i < catalogue.size(); i++) {
+			
+			if(marqueFiltre.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
 				pasFiltre[i] = i;
 				System.out.println(i);
 			}
-			//else pasFiltre[i] = 20;
+			else pasFiltre[i] = 20;
 		}
+		*/
 		
 	}
 	
