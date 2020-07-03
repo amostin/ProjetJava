@@ -44,5 +44,9 @@ public class RentacarController {
 		*/ 
 	}
 	
+	public void supprimeVehicule(int numVehicule) {
+		model.supprimeVehicule(numVehicule);
+	}
+	
 
 }
