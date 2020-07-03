@@ -10,6 +10,7 @@ import java.util.Observable;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -26,6 +27,16 @@ import model.Voiture;
 public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
+	
+	private JLabel filtre = new JLabel("Selectionner les caractéristiques désirées ");
+	private JComboBox<String> marqueFiltre;
+	private JComboBox<String> puisMinFiltre;
+	private JComboBox<String> puisMaxFiltre;
+	private JComboBox<String> bvaFiltre;
+	private JComboBox<String> gpsFiltre;
+	private JComboBox<String> porteFiltre;
+	private JComboBox<String> climFiltre;
+	private JButton filtrer = new JButton("Filtrer");
 	
 	private JLabel choixVehiculeSupp = new JLabel("Entrer le numero du véhicule ");
 	private JTextField idVehiculeSupp = new JTextField();
@@ -64,6 +75,60 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		tableBox.add(table);
 		
+		Box filtreBox = Box.createHorizontalBox();
+		HashMap<String, Voiture> catalogue = model.getCatalogue();
+		String[] marques = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			marques[i] = catalogue.get("nomVoiture_"+i).getMarque();
+		}
+		marqueFiltre = new JComboBox<>(marques);
+		
+		String[] puisMin = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			puisMin[i] = catalogue.get("nomVoiture_"+i).getPuissance();
+		}
+		puisMinFiltre = new JComboBox<>(puisMin);
+		
+		String[] puisMax = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			puisMax[i] = catalogue.get("nomVoiture_"+i).getPuissance();
+		}
+		puisMaxFiltre = new JComboBox<>(puisMax);
+		
+		String[] bva = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			bva[i] = catalogue.get("nomVoiture_"+i).getBva();
+		}
+		bvaFiltre = new JComboBox<>(bva);
+		
+		String[] gps = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			gps[i] = catalogue.get("nomVoiture_"+i).getGps();
+		}
+		gpsFiltre = new JComboBox<>(gps);
+		
+		String[] porte = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			porte[i] = catalogue.get("nomVoiture_"+i).getPorte();
+		}
+		porteFiltre = new JComboBox<>(porte);
+		
+		String[] clim = new String[catalogue.size()];
+		for(int i=0; i<catalogue.size(); i++){
+			clim[i] = catalogue.get("nomVoiture_"+i).getClim();
+		}
+		climFiltre = new JComboBox<>(clim);
+		
+		filtreBox.add(filtre);
+		filtreBox.add(marqueFiltre);
+		filtreBox.add(puisMinFiltre);
+		filtreBox.add(puisMaxFiltre);
+		filtreBox.add(bvaFiltre);
+		filtreBox.add(gpsFiltre);
+		filtreBox.add(porteFiltre);
+		filtreBox.add(climFiltre);
+		filtreBox.add(filtrer);
+		
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
 		
@@ -89,6 +154,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
 		panelBox.add(entrBox);
