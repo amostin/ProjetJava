@@ -79,7 +79,16 @@ public class Rentacar extends Observable{
 		}
 	}
 	
-	//public void removeVoiture()
+	public void supprimeVehicule(int numVehicule) {
+		try {
+			catalogue.remove("nomVoiture_" + numVehicule);
+			setChanged();
+			notifyObservers();
+			System.out.println("ok supp");
+		} catch (NullPointerException e) {
+			throw new IllegalStateException("numVehicule pas bon", e);
+		}
+	}
 	
 	/*
 	public static void main(String[] args) {

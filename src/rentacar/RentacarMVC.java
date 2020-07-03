@@ -3,11 +3,10 @@
  */
 package rentacar;
 
-import view.ModifierMdpVue;
 import view.RentacarVue;
 import controller.RentacarController;
 import model.Rentacar;
-import view.ConnexionVue;
+import view.GerantVue;
 
 /**
  * Cette classe permet de lancer l'application en liant les trois parties MVC.
@@ -25,7 +24,7 @@ public class RentacarMVC {
 		//acces a add view
 		RentacarController ctrlGui = new RentacarController(model);
 		//acces a la frame
-		RentacarVue gui = new ConnexionVue(model, ctrlGui);
+		RentacarVue gui = new GerantVue(model, ctrlGui);
 		//lien entre ctrl et connexion
 		ctrlGui.addView(gui);
 	}

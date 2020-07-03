@@ -29,7 +29,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
-	private JButton supprimerVehicule = new JButton("supprimerVehicule");
+	private JButton supprimerVehicule = new JButton("supprimer");
 	private Box panelBox = Box.createVerticalBox();
 	private JTextField idVehicule = new JTextField();
 	private JLabel choixVehicule = new JLabel("Entrer le numero du véhicule ");
@@ -112,9 +112,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		updateTable();
 		panelBox.remove(table);
+		updateTable();
 		panelBox.add(table);
+		//ca affiche une table en dessous
+		//frame.pack();
 	}
 	
 	/**
@@ -123,21 +125,31 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		
-		case "Modifier mot de passe":
-			frame.setVisible(false);
-			new ModifierMdpVue(model, controller);	
-			break;
-		
-		case "Ajouter un véhicule":
-			frame.setVisible(false);
-			new AjoutVoitureVue(model, controller);
+
+			
+		case "supprimer":
+			int numVehicule = getIdVehicule();
+			if(numVehicule < 0 || numVehicule > model.getCatalogue().size()) {
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.supprimeVehicule(numVehicule);
 
 		default:
 			break;
 		}	
 	}
 	
+	public int getIdVehicule() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehicule.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
 /*
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
