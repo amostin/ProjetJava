@@ -26,13 +26,25 @@ import model.Voiture;
 public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
+	
+	private JLabel choixVehiculeSupp = new JLabel("Entrer le numero du véhicule ");
+	private JTextField idVehiculeSupp = new JTextField();
+	private JButton supprimerVehicule = new JButton("supprimer");
+	
+	private JLabel choixVehiculeRepa = new JLabel("Entrer le numero du véhicule ");
+	private JTextField idVehiculeRepa = new JTextField();
+	private JButton repaVehicule = new JButton("reparation");
+	
+	private JLabel choixVehiculeEntr = new JLabel("Entrer le numero du véhicule ");
+	private JTextField idVehiculeEntr = new JTextField();
+	private JButton entrVehicule = new JButton("entretien");
+	
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
+	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
-	private JButton supprimerVehicule = new JButton("supprimer");
+	
 	private Box panelBox = Box.createVerticalBox();
-	private JTextField idVehicule = new JTextField();
-	private JLabel choixVehicule = new JLabel("Entrer le numero du véhicule ");
 	Box tableBox = Box.createHorizontalBox();
 
 
@@ -56,9 +68,19 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		messageBox.add(message);
 		
 		Box suppBox = Box.createHorizontalBox();
-		suppBox.add(choixVehicule);
-		suppBox.add(idVehicule);
+		suppBox.add(choixVehiculeSupp);
+		suppBox.add(idVehiculeSupp);
 		suppBox.add(supprimerVehicule);
+		
+		Box repaBox = Box.createHorizontalBox();
+		repaBox.add(choixVehiculeRepa);
+		repaBox.add(idVehiculeRepa);
+		repaBox.add(repaVehicule);
+		
+		Box entrBox = Box.createHorizontalBox();
+		entrBox.add(choixVehiculeEntr);
+		entrBox.add(idVehiculeEntr);
+		entrBox.add(entrVehicule);
 		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(ajoutVehicule);
@@ -68,6 +90,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
 		panelBox.add(suppBox);
+		panelBox.add(repaBox);
+		panelBox.add(entrBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -81,6 +105,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
 		supprimerVehicule.addActionListener(this);
+		repaVehicule.addActionListener(this);
+		entrVehicule.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -125,16 +151,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		
-		case "Modifier mot de passe":
-			frame.setVisible(false);
-			new ModifierMdpVue(model, controller);	
-			break;
-		
-		case "Ajouter un véhicule":
-			frame.setVisible(false);
-			new AjoutVoitureVue(model, controller);
-			break;
 			
 		case "supprimer":
 			int numVehicule = getNumeroVehicule();   
@@ -147,7 +163,41 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			new GerantVue(model, controller);
 			//affiche("véhicule supprimé");
 			break;
+			
+		case "reparation":
+			int numVehiculeRepa = getNumeroVehiculeRepa();   
+			if(numVehiculeRepa < 0 || numVehiculeRepa > model.getCatalogue().size()){
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.repaVehicule(numVehiculeRepa);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			//affiche("véhicule supprimé");
+			break;
+			
+		case "entretien":
+			int numVehiculeEntr = getNumeroVehiculeEntr();   
+			if(numVehiculeEntr < 0 || numVehiculeEntr > model.getCatalogue().size()){
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.entrVehicule(numVehiculeEntr);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			//affiche("véhicule supprimé");
+			break;
 
+		case "Modifier mot de passe":
+			frame.setVisible(false);
+			new ModifierMdpVue(model, controller);	
+			break;
+		
+		case "Ajouter un véhicule":
+			frame.setVisible(false);
+			new AjoutVoitureVue(model, controller);
+			break;
+			
 		default:
 			break;
 		}	
@@ -156,7 +206,29 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public int getNumeroVehicule() {
 		int result = 0;
 		try {
-			result = Integer.valueOf(idVehicule.getText()).intValue();
+			result = Integer.valueOf(idVehiculeSupp.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
+	
+	public int getNumeroVehiculeRepa() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehiculeRepa.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
+	
+	public int getNumeroVehiculeEntr() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehiculeEntr.getText()).intValue();
 		}
 		catch (NumberFormatException e){
 			result = -1;

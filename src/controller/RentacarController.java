@@ -47,6 +47,15 @@ public class RentacarController {
 	public void supprimeVehicule(int numVehicule) {
 		model.supprimeVehicule(numVehicule);
 	}
+
+	public void repaVehicule(int numVehiculeRepa) {
+		model.repaVehicule(numVehiculeRepa);
+	}
+
+	public void entrVehicule(int numVehiculeEntr) {
+		model.entrVehicule(numVehiculeEntr);
+		
+	}
 	
 
 }
