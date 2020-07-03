@@ -16,6 +16,7 @@ public class Rentacar extends Observable{
 	private HashMap<String, Voiture> catalogue = new HashMap<>();
 	private String[] nomVoitures = new String[10];
 	private Voiture[] voitures = new Voiture[10];
+	private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 	//private int nbVoitures = 10;
 	/**
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
@@ -37,6 +38,12 @@ public class Rentacar extends Observable{
 	}
 	public void setCatalogue(HashMap<String, Voiture> catalogue) {
 		this.catalogue = catalogue;
+	}
+	public int[] getPasFiltre() {
+		return pasFiltre;
+	}
+	public void setPasFiltre(int[] pasFiltre) {
+		this.pasFiltre = pasFiltre;
 	}
 	/**
 	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
@@ -97,6 +104,21 @@ public class Rentacar extends Observable{
 		vehiculeEntr.setEtat("En entretien");
 		setChanged();
 		notifyObservers();
+	}
+	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object puisMaxFiltre, Object bvaFiltre,
+			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
+		//HashMap<String, Voiture> catalogue = getCatalogue();
+		
+		String choixMarque = (String) marqueFiltre;
+		for(int i = 0; i < catalogue.size(); i++) {
+			if(true) {
+			//if(choixMarque.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
+				pasFiltre[i] = i;
+				System.out.println(i);
+			}
+			//else pasFiltre[i] = 20;
+		}
+		
 	}
 	
 	/*

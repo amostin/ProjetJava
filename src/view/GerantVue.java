@@ -58,7 +58,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
 
-	private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
+	//private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 
 
 	/**
@@ -166,6 +166,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		supprimerVehicule.addActionListener(this);
 		repaVehicule.addActionListener(this);
 		entrVehicule.addActionListener(this);
+		filtrer.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -177,7 +178,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		for(int i=0; i<catalogue.size(); i++){
 			
 			for(int j = 0; j < catalogue.size(); j++) {
-				if(i != pasFiltre[i]) {
+				if(i != model.getPasFiltre()[i]) {
 					i++;
 				}
 				else {
@@ -221,14 +222,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		switch (e.getActionCommand()) {
 			
 		case "Filtrer":
-			HashMap<String, Voiture> catalogue = model.getCatalogue();
-			String choixMarque = (String) marqueFiltre.getSelectedItem();
-			for(int i = 0; i < catalogue.size(); i++) {
-				if(choixMarque.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
-					pasFiltre[i] = i;
-				}
-				//else pasFiltre[i] = 20;
-			}
+
+			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), puisMaxFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 		
