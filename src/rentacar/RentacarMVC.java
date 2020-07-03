@@ -20,13 +20,13 @@ public class RentacarMVC {
 	 * Ce constructeur appel la vue pour afficher une premiere fenetre (connexion)
 	 */
 	public RentacarMVC() {
-		//new ConnexionVue();
+		//création catalogue 0-9
 		Rentacar model = new Rentacar();
-		
+		//acces a add view
 		RentacarController ctrlGui = new RentacarController(model);
-		
+		//acces a la frame
 		RentacarVue gui = new ConnexionVue(model, ctrlGui);
-		
+		//lien entre ctrl et connexion
 		ctrlGui.addView(gui);
 	}
 	
