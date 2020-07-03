@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import controller.RentacarController;
 import model.Rentacar;
@@ -28,7 +29,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JButton supprimerVehicule = new JButton("supprimerVehicule");
 	private Box panelBox = Box.createVerticalBox();
+	private JTextField idVehicule = new JTextField();
+	private JLabel choixVehicule = new JLabel("Entrer le numero du véhicule ");
+
 
 	/**
 	 * Ce constructeur affiche la page pour un employé (catalogue)
@@ -49,6 +54,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
 		
+		Box suppBox = Box.createHorizontalBox();
+		suppBox.add(choixVehicule);
+		suppBox.add(idVehicule);
+		suppBox.add(supprimerVehicule);
+		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
@@ -56,6 +66,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(suppBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -68,6 +79,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 
 		modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
+		supprimerVehicule.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
