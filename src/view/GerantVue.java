@@ -64,6 +64,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JButton modifFormule = new JButton("Modifier formule");
+
 	
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
@@ -179,6 +181,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		entrBox.add(entrVehicule);
 		
 		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(modifFormule);
 		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
 		
@@ -202,6 +205,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		frame.setLocation(1000, 50);
 		frame.setVisible(true);
 
+		modifFormule.addActionListener(this);
 		modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
 		supprimerVehicule.addActionListener(this);
