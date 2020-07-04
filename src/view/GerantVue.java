@@ -32,7 +32,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JLabel filtre = new JLabel("Selectionner les caractéristiques désirées ");
 	private JComboBox<String> marqueFiltre;
 	private JComboBox<String> puisMinFiltre;
-	private JComboBox<String> puisMaxFiltre;
 	private JComboBox<String> bvaFiltre;
 	private JComboBox<String> gpsFiltre;
 	private JComboBox<String> porteFiltre;
@@ -94,13 +93,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		}
 		puisMinFiltre = new JComboBox<>(puisMin);
 		
-		String[] puisMax = new String[catalogue.size()+1];
-		puisMax[0] = "tout";
-		for(int i=1; i<catalogue.size()+1; i++){
-			puisMax[i] = catalogue.get("nomVoiture_"+(i-1)).getPuissance();
-		}
-		puisMaxFiltre = new JComboBox<>(puisMax);
-		
 		String[] bva = {"tout", "oui", "non"};
 		bvaFiltre = new JComboBox<>(bva);
 		
@@ -116,7 +108,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		filtreBox.add(filtre);
 		filtreBox.add(marqueFiltre);
 		filtreBox.add(puisMinFiltre);
-		filtreBox.add(puisMaxFiltre);
 		filtreBox.add(bvaFiltre);
 		filtreBox.add(gpsFiltre);
 		filtreBox.add(porteFiltre);
@@ -229,7 +220,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			
 		case "Filtrer":
 
-			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), puisMaxFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem());
+			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 		

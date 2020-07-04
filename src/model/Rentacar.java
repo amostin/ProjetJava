@@ -106,11 +106,11 @@ public class Rentacar extends Observable{
 		notifyObservers();
 	}
 	
-	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object puisMaxFiltre, Object bvaFiltre,
+	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
 			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
 		int[] resetPasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 		setPasFiltre(resetPasFiltre);
-		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && puisMaxFiltre.equals("tout") && bvaFiltre.equals("tout") 
+		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
 				&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
 			for(int i = 0; i < catalogue.size(); i++) {
 				pasFiltre[i] = i;
@@ -118,12 +118,12 @@ public class Rentacar extends Observable{
 		}
 		else {
 			for(int i = 0; i<catalogue.size();i++) {
-				if(marqueFiltre.equals("marque_"+i) && puisMinFiltre.equals("tout") && puisMaxFiltre.equals("tout") && bvaFiltre.equals("tout") 
+				if(marqueFiltre.equals("marque_"+i) && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
 						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
 					pasFiltre[i] = i;
 				}
 				else {
-					if(marqueFiltre.equals("tout") && puisMinFiltre.equals(catalogue.get("nomVoiture_"+i).getPuissance()) && puisMaxFiltre.equals("tout") && bvaFiltre.equals("tout") 
+					if(marqueFiltre.equals("tout") && puisMinFiltre.equals(catalogue.get("nomVoiture_"+i).getPuissance()) && bvaFiltre.equals("tout") 
 						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
 						pasFiltre[i] = i;
 						break;
