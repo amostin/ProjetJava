@@ -18,6 +18,9 @@ public class Voiture {
 	private String porte;
 	private String clim;
 	private String etat;
+	private String prix;
+	private String prixKm;
+	private String amende;
 	private static int i = 0;
 	/**
 	 * Ce constructeur permet de créer une voiture automatiquement
@@ -32,6 +35,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "3";
 			this.clim = "oui";
+			this.prix = "100.0";
+			this.prixKm = "5.0";
+			this.amende = "50.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -44,6 +50,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "3";
 			this.clim = "oui";
+			this.prix = "90.0";
+			this.prixKm = "4.5";
+			this.amende = "45.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -56,6 +65,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "3";
 			this.clim = "non";
+			this.prix = "80.0";
+			this.prixKm = "4.0";
+			this.amende = "40.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -68,6 +80,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "oui";
+			this.prix = "70.0";
+			this.prixKm = "3.5";
+			this.amende = "35.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -80,6 +95,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "non";
+			this.prix = "60.0";
+			this.prixKm = "3.0";
+			this.amende = "30.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -92,6 +110,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "3";
 			this.clim = "non";
+			this.prix = "50.0";
+			this.prixKm = "2.5";
+			this.amende = "25.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -104,6 +125,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "oui";
+			this.prix = "40.0";
+			this.prixKm = "2.0";
+			this.amende = "20.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -116,6 +140,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "non";
+			this.prix = "30.0";
+			this.prixKm = "1.5";
+			this.amende = "15.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -128,6 +155,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "non";
+			this.prix = "20.0";
+			this.prixKm = "1.0";
+			this.amende = "10.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -140,6 +170,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "oui";
+			this.prix = "15.0";
+			this.prixKm = "0.75";
+			this.amende = "7.5";
 			this.etat = "disponible";
 			i++;
 			break;
