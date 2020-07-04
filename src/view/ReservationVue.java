@@ -104,16 +104,7 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		
 		case "Imprimer":
 			controller.ajoutReservation(idReservationLabel.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
-			try {
-				File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
-			    FileWriter myWriter = new FileWriter(reservations, true);
-			    myWriter.write("idReservation localdateof(debut) localdateof(fin) formule\n");
-			    myWriter.close();
-			    System.out.println("Successfully wrote to the file.");
-			} catch (IOException ioe) {
-				System.out.println("An error occurred.");
-		        ioe.printStackTrace();
-			}
+			
 			
 			//controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
 			affiche("le fichier à imprimer se trouve dans fichier.getAbsolutePath()");
