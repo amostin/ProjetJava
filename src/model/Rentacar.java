@@ -111,7 +111,7 @@ public class Rentacar extends Observable{
 		int[] resetPasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 		setPasFiltre(resetPasFiltre);
 		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-				&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
+				&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
 			for(int i = 0; i < catalogue.size(); i++) {
 				pasFiltre[i] = i;
 			}
@@ -119,7 +119,7 @@ public class Rentacar extends Observable{
 		else {
 			for(int i = 0; i<catalogue.size();i++) { //le ou ne fonctionne pas bizarrement.. 
 				if((marqueFiltre.equals("marque_"+i) && ((puisMinFiltre.equals("tout")) || (puisMinFiltre.equals(catalogue.get("nomVoiture_"+i).getPuissance())))) && bvaFiltre.equals("tout") 
-						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && puisMinFiltre.equals("tout") ) {
+						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
 					pasFiltre[i] = i;
 					break;
 				}
@@ -148,7 +148,14 @@ public class Rentacar extends Observable{
 									//break;
 								}
 								else {
-									pasFiltre[i] = 25;
+									if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+										&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals(catalogue.get("nomVoiture_"+i).getClim()) ) {
+										pasFiltre[i] = i;
+										//break;
+									}
+									else {
+										pasFiltre[i] = 25;
+									}
 								}
 							}
 						}
