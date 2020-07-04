@@ -123,6 +123,13 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	public void reserveVehicule(int numVehiculeReser) {
+		Voiture vehiculeReser = catalogue.get("nomVoiture_"+numVehiculeReser);
+		vehiculeReser.setEtat("Réservé");
+		setChanged();
+		notifyObservers();
+		
+	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
 		// faudra que le catalogue contienne les formules pour calculer la facture
 		//Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
@@ -266,6 +273,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 	

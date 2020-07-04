@@ -63,6 +63,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JTextField idVehiculeEntr = new JTextField();
 	private JButton entrVehicule = new JButton("Entretien");
 	
+	private JLabel choixVehiculeReser = new JLabel("Entrer le numero du véhicule ");
+	private JTextField idVehiculeReser = new JTextField();
+	private JButton reserVehicule = new JButton("Réserver");
+	
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
@@ -190,6 +194,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		entrBox.add(idVehiculeEntr);
 		entrBox.add(entrVehicule);
 		
+		Box reserBox = Box.createHorizontalBox();
+		reserBox.add(choixVehiculeReser);
+		reserBox.add(idVehiculeReser);
+		reserBox.add(reserVehicule);
+		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(modifFormule);
 		buttonBox.add(ajoutVehicule);
@@ -206,6 +215,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
 		panelBox.add(entrBox);
+		panelBox.add(reserBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -224,6 +234,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		entrVehicule.addActionListener(this);
 		filtrer.addActionListener(this);
 		tri.addActionListener(this);
+		reserVehicule.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -301,6 +312,17 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
+		case "Réserver":
+			int numVehiculeReser = getNumeroVehiculeReser();   
+			if(numVehiculeReser < 0 || numVehiculeReser > model.getCatalogue().size()){
+				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
+				return;
+			}
+			controller.reserveVehicule(numVehiculeReser);
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			break;
+		
 		case "Trier du moins cher au plus cher":
 			//ArrayList<Voiture> voitureTrie = controller.tri();
 			controller.tri();
@@ -374,6 +396,17 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		int result = 0;
 		try {
 			result = Integer.valueOf(idVehiculeSupp.getText()).intValue();
+		}
+		catch (NumberFormatException e){
+			result = -1;
+		}
+		return result;
+	}
+	
+	public int getNumeroVehiculeReser() {
+		int result = 0;
+		try {
+			result = Integer.valueOf(idVehiculeReser.getText()).intValue();
 		}
 		catch (NumberFormatException e){
 			result = -1;

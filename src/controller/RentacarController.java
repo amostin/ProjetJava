@@ -76,5 +76,10 @@ public class RentacarController {
 	    //for(Voiture n : model.tri())
 		   //System.out.println(n);
 	}
+
+	public void reserveVehicule(int numVehiculeReser) {
+		model.reserveVehicule(numVehiculeReser);
+		
+	}
 	
 }
