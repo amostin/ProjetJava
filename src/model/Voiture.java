@@ -18,6 +18,9 @@ public class Voiture {
 	private String porte;
 	private String clim;
 	private String etat;
+	private String prix;
+	private String prixKm;
+	private String amende;
 	private static int i = 0;
 	/**
 	 * Ce constructeur permet de créer une voiture automatiquement
@@ -32,6 +35,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "3";
 			this.clim = "oui";
+			this.prix = "100.0";
+			this.prixKm = "5.0";
+			this.amende = "50.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -44,6 +50,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "3";
 			this.clim = "oui";
+			this.prix = "90.0";
+			this.prixKm = "4.5";
+			this.amende = "45.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -56,6 +65,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "3";
 			this.clim = "non";
+			this.prix = "80.0";
+			this.prixKm = "4.0";
+			this.amende = "40.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -68,6 +80,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "oui";
+			this.prix = "70.0";
+			this.prixKm = "3.5";
+			this.amende = "35.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -80,6 +95,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "non";
+			this.prix = "60.0";
+			this.prixKm = "3.0";
+			this.amende = "30.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -92,6 +110,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "3";
 			this.clim = "non";
+			this.prix = "50.0";
+			this.prixKm = "2.5";
+			this.amende = "25.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -104,6 +125,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "oui";
+			this.prix = "40.0";
+			this.prixKm = "2.0";
+			this.amende = "20.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -116,6 +140,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "non";
+			this.prix = "30.0";
+			this.prixKm = "1.5";
+			this.amende = "15.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -128,6 +155,9 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "non";
+			this.prix = "20.0";
+			this.prixKm = "1.0";
+			this.amende = "10.0";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -140,6 +170,9 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "oui";
+			this.prix = "15.0";
+			this.prixKm = "0.75";
+			this.amende = "7.5";
 			this.etat = "disponible";
 			i++;
 			break;
@@ -154,7 +187,7 @@ public class Voiture {
 	/**
 	 * Ce constructeur permet de créer une voiture selon les caractéristiques choisies
 	 */
-	public Voiture(String marque, String type, String puissance, String bva, String gps, String porte, String clim) {
+	public Voiture(String marque, String type, String puissance, String bva, String gps, String porte, String clim, String prix, String prixKm, String amende) {
 		this.marque = marque + '_' + i;
 		this.type = type + '_' + i;
 		this.puissance = puissance;
@@ -162,13 +195,16 @@ public class Voiture {
 		this.gps = gps;
 		this.porte = porte;
 		this.clim = clim;
+		this.prix = prix;
+		this.prixKm = prixKm;
+		this.amende = amende;
 		this.etat = "disponible";
 		i++;
 	}
 	@Override
 	public String toString() {
 		return "marque=" + marque + ", type=" + type + ", puissance=" + puissance + ", bva=" + bva + ", gps="
-				+ gps + ", porte=" + porte + ", clim=" + clim + ", etat=" + etat;
+				+ gps + ", porte=" + porte + ", clim=" + clim + ", etat=" + etat + ", prix=" + prix + ", prixKm=" + prixKm + ", amende=" + amende;
 	}
 	public static int getI() {
 		return i;
@@ -224,7 +260,24 @@ public class Voiture {
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
-	
+	public String getPrix() {
+		return prix;
+	}
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
+	public String getPrixKm() {
+		return prixKm;
+	}
+	public void setPrixKm(String prixKm) {
+		this.prixKm = prixKm;
+	}
+	public String getAmende() {
+		return amende;
+	}
+	public void setAmende(String amende) {
+		this.amende = amende;
+	}
 	
 
 }

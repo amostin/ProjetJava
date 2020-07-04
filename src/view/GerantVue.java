@@ -36,6 +36,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JComboBox<String> gpsFiltre;
 	private JComboBox<String> porteFiltre;
 	private JComboBox<String> climFiltre;
+	private JComboBox<String> prixFiltre;
+	private JComboBox<String> prixKmFiltre;
+	private JComboBox<String> amendeFiltre;
 	private JButton filtrer = new JButton("Filtrer");
 	
 	private JLabel choixVehiculeSupp = new JLabel("Entrer le numero du véhicule ");
@@ -105,6 +108,27 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		String[] clim = {"tout", "oui", "non"};
 		climFiltre = new JComboBox<>(clim);
 		
+		String[] prix = new String[catalogue.size()+1];
+		prix[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			prix[i] = catalogue.get("nomVoiture_"+(i-1)).getPrix();
+		}
+		prixFiltre = new JComboBox<>(prix);
+		
+		String[] prixKm = new String[catalogue.size()+1];
+		prixKm[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			prixKm[i] = catalogue.get("nomVoiture_"+(i-1)).getPrixKm();
+		}
+		prixKmFiltre = new JComboBox<>(prixKm);
+		
+		String[] amendes = new String[catalogue.size()+1];
+		amendes[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			amendes[i] = catalogue.get("nomVoiture_"+(i-1)).getAmende();
+		}
+		amendeFiltre = new JComboBox<>(amendes);
+		
 		filtreBox.add(filtre);
 		filtreBox.add(marqueFiltre);
 		filtreBox.add(puisMinFiltre);
@@ -112,6 +136,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		filtreBox.add(gpsFiltre);
 		filtreBox.add(porteFiltre);
 		filtreBox.add(climFiltre);
+		filtreBox.add(prixFiltre);
+		filtreBox.add(prixKmFiltre);
+		filtreBox.add(amendeFiltre);
 		filtreBox.add(filtrer);
 		
 		Box messageBox = Box.createHorizontalBox();
@@ -165,7 +192,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	 */
 	private void updateTable() {
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
-		Object [][] data = new Object[catalogue.size()][8];
+		Object [][] data = new Object[catalogue.size()][11];
 
 		for(int i=0; i<catalogue.size(); i++){
 			
@@ -186,13 +213,16 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
 					data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
 					data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
+					data[i][8] = catalogue.get("nomVoiture_"+i).getPrix();
+					data[i][9] = catalogue.get("nomVoiture_"+i).getPrixKm();
+					data[i][10] = catalogue.get("nomVoiture_"+i).getAmende();
 				}
 			//}
 			System.out.println(model.getPasFiltre()[i]+"vue for "+i);
 
 		}
 		
-		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état"};
+		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état", "prix", "prixKm", "amende"};
 		table = new JTable(data, head);
 	}
 	/**
@@ -220,7 +250,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			
 		case "Filtrer":
 
-			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem());
+			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem(), prixFiltre.getSelectedItem(), prixKmFiltre.getSelectedItem(), amendeFiltre.getSelectedItem());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 		
@@ -313,5 +343,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		frame.setVisible(false);
 		ModifierMdpVue m = new ModifierMdpVue();		
 	}
+	
 */
 }
