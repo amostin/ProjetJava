@@ -171,7 +171,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		switch (e.getActionCommand()) {
 		
 		case "Ajouter un véhicule":
-			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand());
+			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand(), prixAjoutTextField.getText(), prixKmAjoutTextField.getText(), amendeAjoutTextField.getText());
 			/*
 			Rentacar c = new Rentacar(false);
 			c.addVoiture("nomVoiture_"+Voiture.getI(), voitureAjoutee);

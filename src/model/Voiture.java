@@ -187,7 +187,7 @@ public class Voiture {
 	/**
 	 * Ce constructeur permet de créer une voiture selon les caractéristiques choisies
 	 */
-	public Voiture(String marque, String type, String puissance, String bva, String gps, String porte, String clim) {
+	public Voiture(String marque, String type, String puissance, String bva, String gps, String porte, String clim, String prix, String prixKm, String amende) {
 		this.marque = marque + '_' + i;
 		this.type = type + '_' + i;
 		this.puissance = puissance;
@@ -195,13 +195,16 @@ public class Voiture {
 		this.gps = gps;
 		this.porte = porte;
 		this.clim = clim;
+		this.prix = prix;
+		this.prixKm = prixKm;
+		this.amende = amende;
 		this.etat = "disponible";
 		i++;
 	}
 	@Override
 	public String toString() {
 		return "marque=" + marque + ", type=" + type + ", puissance=" + puissance + ", bva=" + bva + ", gps="
-				+ gps + ", porte=" + porte + ", clim=" + clim + ", etat=" + etat;
+				+ gps + ", porte=" + porte + ", clim=" + clim + ", etat=" + etat + ", prix=" + prix + ", prixKm=" + prixKm + ", amende=" + amende;
 	}
 	public static int getI() {
 		return i;
