@@ -29,6 +29,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
 	
+	private JButton tri = new JButton("Trier du moins cher au plus cher");
+	
 	private JLabel jourFormuleLabel = new JLabel("Formule par jour: ");
 	private JLabel jourFormule = new JLabel("1 fois le prix");
 	private JLabel weFormuleLabel = new JLabel("Formule par we: ");
@@ -103,6 +105,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		formuleWeekBox.add(weekFormuleLabel);
 		formuleWeekBox.add(weekFormule);
+		
+		Box triBox = Box.createHorizontalBox();
+		triBox.add(tri);
 		
 		Box filtreBox = Box.createHorizontalBox();
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
@@ -195,6 +200,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		panelBox.add(formuleJourBox);
 		panelBox.add(formuleWeBox);
 		panelBox.add(formuleWeekBox);
+		panelBox.add(triBox);
 		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
@@ -216,6 +222,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		repaVehicule.addActionListener(this);
 		entrVehicule.addActionListener(this);
 		filtrer.addActionListener(this);
+		tri.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -293,6 +300,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
+		case "Trier du moins cher au plus cher":
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			break;
+		
 		case "Modifier formule":
 			frame.setVisible(false);
 			new ModifFormule(model, controller);
