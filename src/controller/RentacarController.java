@@ -3,6 +3,8 @@
  */
 package controller;
 
+import java.util.ArrayList;
+
 import model.Rentacar;
 import model.Rentacar;
 import model.Voiture;
@@ -69,9 +71,10 @@ public class RentacarController {
 		
 	}
 
-	public void tri() {
-		model.tri();
-		
+	public ArrayList<Voiture> tri() {
+		return model.tri();
+	    //for(Voiture n : model.tri())
+		   //System.out.println(n);
 	}
 	
 }

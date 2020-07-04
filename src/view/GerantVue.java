@@ -6,6 +6,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -235,12 +236,12 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			
 			//for(int j = 0; j < catalogue.size(); j++) {
 				if(i != model.getPasFiltre()[i]) {
-					System.out.println(model.getPasFiltre()[i]+"vue if "+i);
+					//System.out.println(model.getPasFiltre()[i]+"vue if "+i);
 
 					//i++;
 				}
 				else {
-					System.out.println(model.getPasFiltre()[i]+"vue else");
+					//System.out.println(model.getPasFiltre()[i]+"vue else");
 
 					data[i][0] = i;
 					data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
@@ -255,7 +256,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][10] = catalogue.get("nomVoiture_"+i).getAmende();
 				}
 			//}
-			System.out.println(model.getPasFiltre()[i]+"vue for "+i);
+			//System.out.println(model.getPasFiltre()[i]+"vue for "+i);
 
 		}
 		
@@ -301,6 +302,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		switch (e.getActionCommand()) {
 			
 		case "Trier du moins cher au plus cher":
+			//ArrayList<Voiture> voitureTrie = controller.tri();
 			controller.tri();
 			frame.setVisible(false);
 			new GerantVue(model, controller);
