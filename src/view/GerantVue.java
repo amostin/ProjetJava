@@ -6,6 +6,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -29,6 +30,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
 	
+	private JButton tri = new JButton("Trier du moins cher au plus cher");
+	
+	private JLabel jourFormuleLabel = new JLabel("Formule par jour: ");
+	private JLabel jourFormule = new JLabel("1 fois le prix");
+	private JLabel weFormuleLabel = new JLabel("Formule par we: ");
+	private JLabel weFormule = new JLabel("2 fois le prix");
+	private JLabel weekFormuleLabel = new JLabel("Formule par week: ");
+	private JLabel weekFormule = new JLabel("3 fois le prix");
+	
 	private JLabel filtre = new JLabel("Selectionner les caractéristiques désirées ");
 	private JComboBox<String> marqueFiltre;
 	private JComboBox<String> puisMinFiltre;
@@ -36,6 +46,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JComboBox<String> gpsFiltre;
 	private JComboBox<String> porteFiltre;
 	private JComboBox<String> climFiltre;
+	private JComboBox<String> prixFiltre;
+	private JComboBox<String> prixKmFiltre;
+	private JComboBox<String> amendeFiltre;
 	private JButton filtrer = new JButton("Filtrer");
 	
 	private JLabel choixVehiculeSupp = new JLabel("Entrer le numero du véhicule ");
@@ -54,9 +67,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JButton modifFormule = new JButton("Modifier formule");
+
 	
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
+	Box formuleJourBox = Box.createHorizontalBox();
+	Box formuleWeBox = Box.createHorizontalBox();
+	Box formuleWeekBox = Box.createHorizontalBox();
+
 
 	//private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 
@@ -75,6 +94,21 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		headBox.add(table.getTableHeader());
 		
 		tableBox.add(table);
+		
+		Rentacar rentacar = model;
+		updateFormules(rentacar.getFormules()[0], rentacar.getFormules()[1], rentacar.getFormules()[2]);
+		
+		formuleJourBox.add(jourFormuleLabel);
+		formuleJourBox.add(jourFormule);
+		
+		formuleWeBox.add(weFormuleLabel);
+		formuleWeBox.add(weFormule);
+		
+		formuleWeekBox.add(weekFormuleLabel);
+		formuleWeekBox.add(weekFormule);
+		
+		Box triBox = Box.createHorizontalBox();
+		triBox.add(tri);
 		
 		Box filtreBox = Box.createHorizontalBox();
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
@@ -105,6 +139,27 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		String[] clim = {"tout", "oui", "non"};
 		climFiltre = new JComboBox<>(clim);
 		
+		String[] prix = new String[catalogue.size()+1];
+		prix[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			prix[i] = catalogue.get("nomVoiture_"+(i-1)).getPrix();
+		}
+		prixFiltre = new JComboBox<>(prix);
+		
+		String[] prixKm = new String[catalogue.size()+1];
+		prixKm[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			prixKm[i] = catalogue.get("nomVoiture_"+(i-1)).getPrixKm();
+		}
+		prixKmFiltre = new JComboBox<>(prixKm);
+		
+		String[] amendes = new String[catalogue.size()+1];
+		amendes[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			amendes[i] = catalogue.get("nomVoiture_"+(i-1)).getAmende();
+		}
+		amendeFiltre = new JComboBox<>(amendes);
+		
 		filtreBox.add(filtre);
 		filtreBox.add(marqueFiltre);
 		filtreBox.add(puisMinFiltre);
@@ -112,6 +167,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		filtreBox.add(gpsFiltre);
 		filtreBox.add(porteFiltre);
 		filtreBox.add(climFiltre);
+		filtreBox.add(prixFiltre);
+		filtreBox.add(prixKmFiltre);
+		filtreBox.add(amendeFiltre);
 		filtreBox.add(filtrer);
 		
 		Box messageBox = Box.createHorizontalBox();
@@ -133,12 +191,17 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		entrBox.add(entrVehicule);
 		
 		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(modifFormule);
 		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
 		
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(formuleJourBox);
+		panelBox.add(formuleWeBox);
+		panelBox.add(formuleWeekBox);
+		panelBox.add(triBox);
 		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
@@ -153,30 +216,32 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		frame.setLocation(1000, 50);
 		frame.setVisible(true);
 
+		modifFormule.addActionListener(this);
 		modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
 		supprimerVehicule.addActionListener(this);
 		repaVehicule.addActionListener(this);
 		entrVehicule.addActionListener(this);
 		filtrer.addActionListener(this);
+		tri.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
 	 */
 	private void updateTable() {
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
-		Object [][] data = new Object[catalogue.size()][8];
+		Object [][] data = new Object[catalogue.size()][11];
 
 		for(int i=0; i<catalogue.size(); i++){
 			
 			//for(int j = 0; j < catalogue.size(); j++) {
 				if(i != model.getPasFiltre()[i]) {
-					System.out.println(model.getPasFiltre()[i]+"vue if "+i);
+					//System.out.println(model.getPasFiltre()[i]+"vue if "+i);
 
 					//i++;
 				}
 				else {
-					System.out.println(model.getPasFiltre()[i]+"vue else");
+					//System.out.println(model.getPasFiltre()[i]+"vue else");
 
 					data[i][0] = i;
 					data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
@@ -186,14 +251,23 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
 					data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
 					data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
+					data[i][8] = catalogue.get("nomVoiture_"+i).getPrix();
+					data[i][9] = catalogue.get("nomVoiture_"+i).getPrixKm();
+					data[i][10] = catalogue.get("nomVoiture_"+i).getAmende();
 				}
 			//}
-			System.out.println(model.getPasFiltre()[i]+"vue for "+i);
+			//System.out.println(model.getPasFiltre()[i]+"vue for "+i);
 
 		}
 		
-		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état"};
+		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état", "prix", "prixKm", "amende"};
 		table = new JTable(data, head);
+	}
+	
+	public void updateFormules(String jourFormuleCatalogue, String weFormuleCatalogue, String weekFormuleCatalogue){
+		jourFormule.setText(jourFormuleCatalogue);
+		weFormule.setText(weFormuleCatalogue);
+		weekFormule.setText(weekFormuleCatalogue);
 	}
 	/**
 	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
@@ -209,6 +283,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		updateTable();
 		panelBox.remove(tableBox);
 		panelBox.add(tableBox);
+		
+		Rentacar rentacar = model;
+		updateFormules(rentacar.getFormules()[0], rentacar.getFormules()[1], rentacar.getFormules()[2]);
+		panelBox.remove(formuleJourBox);
+		panelBox.remove(formuleWeBox);
+		panelBox.remove(formuleWeekBox);
+		panelBox.add(formuleJourBox);
+		panelBox.add(formuleWeBox);
+		panelBox.add(formuleWeekBox);
 	}
 	
 	/**
@@ -218,11 +301,23 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
-		case "Filtrer":
-
-			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem());
+		case "Trier du moins cher au plus cher":
+			//ArrayList<Voiture> voitureTrie = controller.tri();
+			controller.tri();
 			frame.setVisible(false);
 			new GerantVue(model, controller);
+			break;
+		
+		case "Modifier formule":
+			frame.setVisible(false);
+			new ModifFormule(model, controller);
+			break;
+			
+		case "Filtrer":
+			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem(), prixFiltre.getSelectedItem(), prixKmFiltre.getSelectedItem(), amendeFiltre.getSelectedItem());
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			break;
 		
 		case "Supprimer":
 			int numVehicule = getNumeroVehicule();   
@@ -313,5 +408,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		frame.setVisible(false);
 		ModifierMdpVue m = new ModifierMdpVue();		
 	}
+	
 */
 }

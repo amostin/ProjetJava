@@ -3,6 +3,8 @@
  */
 package controller;
 
+import java.util.ArrayList;
+
 import model.Rentacar;
 import model.Rentacar;
 import model.Voiture;
@@ -58,11 +60,21 @@ public class RentacarController {
 	}
 
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
-			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
+			Object gpsFiltre, Object porteFiltre, Object climFiltre, Object prixFiltre, Object prixKmFiltre, Object amendeFiltre) {
 		model.filtre(marqueFiltre, puisMinFiltre, bvaFiltre,
-				gpsFiltre, porteFiltre, climFiltre);
+				gpsFiltre, porteFiltre, climFiltre, prixFiltre, prixKmFiltre, amendeFiltre);
 		
 	}
-	
 
+	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
+		model.modifFormule(jourFormuleTextField, weFormuleTextField, weekFormuleTextField);
+		
+	}
+
+	public ArrayList<Voiture> tri() {
+		return model.tri();
+	    //for(Voiture n : model.tri())
+		   //System.out.println(n);
+	}
+	
 }

@@ -3,8 +3,11 @@
  */
 package model;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Stack;
 
 /**
  * Cette classe est utile à créer automatiquement un catalogue au lancement de l'application
@@ -16,8 +19,10 @@ public class Rentacar extends Observable{
 	private HashMap<String, Voiture> catalogue = new HashMap<>();
 	private String[] nomVoitures = new String[10];
 	private Voiture[] voitures = new Voiture[10];
+	private String[] formules = {"1 fois le prix", "2 fois le prix", "3 fois le prix"};
 	//private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 	private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
+	private ArrayList<Voiture> voitureParPrix = new ArrayList<>(catalogue.values());
 	/**
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
@@ -25,6 +30,7 @@ public class Rentacar extends Observable{
 		createNomVoitures();
 		createVoitures();
 		addVoitures(nomVoitures, voitures);
+		this.formules = getFormules();
 	}
 	/**
 	 * Ce constructeur permet d'accéder aux methodes (surtout addVoitures) pour gerer les catalogue
@@ -44,6 +50,18 @@ public class Rentacar extends Observable{
 	}
 	public void setPasFiltre(int[] pasFiltre) {
 		this.pasFiltre = pasFiltre;
+	}
+	public String[] getFormules() {
+		return formules;
+	}
+	public void setFormules(String[] formules) {
+		this.formules = formules;
+	}
+	public ArrayList<Voiture> getVoitureParPrix() {
+		return voitureParPrix;
+	}
+	public void setVoitureParPrix(ArrayList<Voiture> voitureParPrix) {
+		this.voitureParPrix = voitureParPrix;
 	}
 	/**
 	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
@@ -105,13 +123,39 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
+		// faudra que le catalogue contienne les formules pour calculer la facture
+		//Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
+		//vehiculeEntr.setEtat("En entretien");
+		formules[0] = jourFormuleTextField;
+		formules[1] = weFormuleTextField;
+		formules[2] = weekFormuleTextField;
+		setChanged();
+		notifyObservers();		
+	}
+	public ArrayList<Voiture> tri() {
+		ArrayList<Voiture> voitureParPrix = new ArrayList<>(catalogue.values());
+		ArrayList<Voiture> voitureTrie = Voiture.tri(voitureParPrix);
+		HashMap<String, Voiture> catalogueTrie = new HashMap<>();
+	    for(Voiture n : voitureParPrix) {
+	    	System.out.println(n.getMarque().charAt(7) + "ème " + n);
+	    	catalogueTrie.put("nomVoiture_" + n.getMarque().charAt(7), n);
+	    }
+	    setCatalogue(catalogueTrie);
+
+		return voitureTrie;
+
+		//setChanged();
+		//notifyObservers();	
+	}
 	
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
-			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
+			Object gpsFiltre, Object porteFiltre, Object climFiltre, Object prixFiltre, Object prixKmFiltre, Object amendeFiltre) {
 		int[] resetPasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 		setPasFiltre(resetPasFiltre);
 		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-				&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+				&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+				&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 			for(int i = 0; i < catalogue.size(); i++) {
 				pasFiltre[i] = i;
 			}
@@ -119,42 +163,72 @@ public class Rentacar extends Observable{
 		else {
 			for(int i = 0; i<catalogue.size();i++) { //filtre principalement marque
 				if(marqueFiltre.equals("marque_"+i) && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+						&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 					pasFiltre[i] = i;
 					//break;
 				}
 				else {
 					if(marqueFiltre.equals("tout") && puisMinFiltre.equals(catalogue.get("nomVoiture_"+i).getPuissance()) && bvaFiltre.equals("tout") 
-						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+						&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 						pasFiltre[i] = i;
 						//break;
 					}
 					else {
 						if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals(catalogue.get("nomVoiture_"+i).getBva()) 
-							&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+							&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+							&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 							pasFiltre[i] = i;
 							//break;
 						}
 						else {
 							if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-								&& gpsFiltre.equals(catalogue.get("nomVoiture_"+i).getGps()) && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+								&& gpsFiltre.equals(catalogue.get("nomVoiture_"+i).getGps()) && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+								&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 								pasFiltre[i] = i;
 								//break;
 							}
 							else {
 								if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-									&& gpsFiltre.equals("tout") && porteFiltre.equals(catalogue.get("nomVoiture_"+i).getPorte()) && climFiltre.equals("tout") ) {
+									&& gpsFiltre.equals("tout") && porteFiltre.equals(catalogue.get("nomVoiture_"+i).getPorte()) && climFiltre.equals("tout") 
+									&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 									pasFiltre[i] = i;
 									//break;
 								}
 								else {
 									if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-										&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals(catalogue.get("nomVoiture_"+i).getClim()) ) {
+										&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals(catalogue.get("nomVoiture_"+i).getClim()) 
+										&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
 										pasFiltre[i] = i;
 										//break;
 									}
 									else {
-										pasFiltre[i] = 25;
+										if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+											&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+											&& prixFiltre.equals(catalogue.get("nomVoiture_"+i).getPrix()) && prixKmFiltre.equals("tout") && amendeFiltre.equals("tout")) {
+											pasFiltre[i] = i;
+											//break;
+										}
+										else {
+											if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+												&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+												&& prixFiltre.equals("tout") && prixKmFiltre.equals(catalogue.get("nomVoiture_"+i).getPrixKm()) && amendeFiltre.equals("tout")) {
+												pasFiltre[i] = i;
+												//break;
+											}
+											else {
+												if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+														&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+														&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals(catalogue.get("nomVoiture_"+i).getAmende())) {
+														pasFiltre[i] = i;
+														//break;
+													}
+													else {
+														pasFiltre[i] = 25;
+													}
+											}
+										}
 									}
 								}
 							}
@@ -179,7 +253,7 @@ public class Rentacar extends Observable{
 				pasFiltre[i] = 20;
 				System.out.println(pasFiltre[i]);
 			}
-		}
+		} 
 		
 		for(int i = 0; i < catalogue.size(); i++) {
 			
@@ -192,6 +266,8 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
+
 	
 	/*
 	public static void main(String[] args) {
