@@ -29,6 +29,13 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
 	
+	private JLabel jourFormuleLabel = new JLabel("Formule par jour: ");
+	private JLabel jourFormule = new JLabel("1 fois le prix");
+	private JLabel weFormuleLabel = new JLabel("Formule par we: ");
+	private JLabel weFormule = new JLabel("2 fois le prix");
+	private JLabel weekFormuleLabel = new JLabel("Formule par week: ");
+	private JLabel weekFormule = new JLabel("3 fois le prix");
+	
 	private JLabel filtre = new JLabel("Selectionner les caractéristiques désirées ");
 	private JComboBox<String> marqueFiltre;
 	private JComboBox<String> puisMinFiltre;
@@ -57,9 +64,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
+	private JButton modifFormule = new JButton("Modifier formule");
+
 	
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
+	Box formuleJourBox = Box.createHorizontalBox();
+	Box formuleWeBox = Box.createHorizontalBox();
+	Box formuleWeekBox = Box.createHorizontalBox();
+
 
 	//private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 
@@ -78,6 +91,18 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		headBox.add(table.getTableHeader());
 		
 		tableBox.add(table);
+		
+		Rentacar rentacar = model;
+		updateFormules(rentacar.getFormules()[0], rentacar.getFormules()[1], rentacar.getFormules()[2]);
+		
+		formuleJourBox.add(jourFormuleLabel);
+		formuleJourBox.add(jourFormule);
+		
+		formuleWeBox.add(weFormuleLabel);
+		formuleWeBox.add(weFormule);
+		
+		formuleWeekBox.add(weekFormuleLabel);
+		formuleWeekBox.add(weekFormule);
 		
 		Box filtreBox = Box.createHorizontalBox();
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
@@ -160,12 +185,16 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		entrBox.add(entrVehicule);
 		
 		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(modifFormule);
 		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
 		
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(formuleJourBox);
+		panelBox.add(formuleWeBox);
+		panelBox.add(formuleWeekBox);
 		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
@@ -180,6 +209,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		frame.setLocation(1000, 50);
 		frame.setVisible(true);
 
+		modifFormule.addActionListener(this);
 		modifMdp.addActionListener(this);
 		ajoutVehicule.addActionListener(this);
 		supprimerVehicule.addActionListener(this);
@@ -225,6 +255,12 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état", "prix", "prixKm", "amende"};
 		table = new JTable(data, head);
 	}
+	
+	public void updateFormules(String jourFormuleCatalogue, String weFormuleCatalogue, String weekFormuleCatalogue){
+		jourFormule.setText(jourFormuleCatalogue);
+		weFormule.setText(weFormuleCatalogue);
+		weekFormule.setText(weekFormuleCatalogue);
+	}
 	/**
 	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
 	 */
@@ -239,6 +275,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		updateTable();
 		panelBox.remove(tableBox);
 		panelBox.add(tableBox);
+		
+		Rentacar rentacar = model;
+		updateFormules(rentacar.getFormules()[0], rentacar.getFormules()[1], rentacar.getFormules()[2]);
+		panelBox.remove(formuleJourBox);
+		panelBox.remove(formuleWeBox);
+		panelBox.remove(formuleWeekBox);
+		panelBox.add(formuleJourBox);
+		panelBox.add(formuleWeBox);
+		panelBox.add(formuleWeekBox);
 	}
 	
 	/**
@@ -248,11 +293,16 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
+		case "Modifier formule":
+			frame.setVisible(false);
+			new ModifFormule(model, controller);
+			break;
+			
 		case "Filtrer":
-
 			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem(), prixFiltre.getSelectedItem(), prixKmFiltre.getSelectedItem(), amendeFiltre.getSelectedItem());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
+			break;
 		
 		case "Supprimer":
 			int numVehicule = getNumeroVehicule();   

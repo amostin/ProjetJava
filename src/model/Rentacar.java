@@ -5,6 +5,7 @@ package model;
 
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Stack;
 
 /**
  * Cette classe est utile à créer automatiquement un catalogue au lancement de l'application
@@ -16,6 +17,7 @@ public class Rentacar extends Observable{
 	private HashMap<String, Voiture> catalogue = new HashMap<>();
 	private String[] nomVoitures = new String[10];
 	private Voiture[] voitures = new Voiture[10];
+	private String[] formules = {"1 fois le prix", "2 fois le prix", "3 fois le prix"};
 	//private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 	private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 	/**
@@ -25,6 +27,7 @@ public class Rentacar extends Observable{
 		createNomVoitures();
 		createVoitures();
 		addVoitures(nomVoitures, voitures);
+		this.formules = getFormules();
 	}
 	/**
 	 * Ce constructeur permet d'accéder aux methodes (surtout addVoitures) pour gerer les catalogue
@@ -44,6 +47,12 @@ public class Rentacar extends Observable{
 	}
 	public void setPasFiltre(int[] pasFiltre) {
 		this.pasFiltre = pasFiltre;
+	}
+	public String[] getFormules() {
+		return formules;
+	}
+	public void setFormules(String[] formules) {
+		this.formules = formules;
 	}
 	/**
 	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
@@ -104,6 +113,16 @@ public class Rentacar extends Observable{
 		vehiculeEntr.setEtat("En entretien");
 		setChanged();
 		notifyObservers();
+	}
+	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
+		// faudra que le catalogue contienne les formules pour calculer la facture
+		//Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
+		//vehiculeEntr.setEtat("En entretien");
+		formules[0] = jourFormuleTextField;
+		formules[1] = weFormuleTextField;
+		formules[2] = weekFormuleTextField;
+		setChanged();
+		notifyObservers();		
 	}
 	
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
@@ -223,6 +242,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 	
 	/*
 	public static void main(String[] args) {
