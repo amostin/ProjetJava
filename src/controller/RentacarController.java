@@ -76,5 +76,15 @@ public class RentacarController {
 	    //for(Voiture n : model.tri())
 		   //System.out.println(n);
 	}
+
+	public void reserveVehicule(int numVehiculeReser) {
+		model.reserveVehicule(numVehiculeReser);
+		
+	}
+
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String formuleCombo) {
+		model.ajoutReservation(idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
+		
+	}
 	
 }

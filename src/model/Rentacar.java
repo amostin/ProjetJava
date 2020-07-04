@@ -4,9 +4,13 @@
 package model;
 
 import java.awt.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -122,6 +126,49 @@ public class Rentacar extends Observable{
 		vehiculeEntr.setEtat("En entretien");
 		setChanged();
 		notifyObservers();
+	}
+	public void reserveVehicule(int numVehiculeReser) {
+		Voiture vehiculeReser = catalogue.get("nomVoiture_"+numVehiculeReser);
+		vehiculeReser.setEtat("Réservé");
+		setChanged();
+		notifyObservers();
+		
+	}
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
+			String formuleCombo) {
+		String allClients = "";
+		String[] tabAllClients = new String[20];
+		try {
+			File clients = new File("D:\\3ti2deSess\\java\\clients.txt");
+			Scanner myReader = new Scanner(clients);
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	allClients += data + ";";
+		    	//System.out.println(data);
+		    }
+		    tabAllClients = allClients.split("\\;");
+		    for(int i = 0; i < tabAllClients.length; i++) {
+		    	if(tabAllClients[i].equals(nomClientTextField)) {
+		    		System.out.println("client fidèle");
+		    	}
+		    	else {
+		    		FileWriter myWriter = new FileWriter(clients, true);
+				    myWriter.write(nomClientTextField + "\n");
+				    myWriter.close();
+				    System.out.println("Successfully wrote to the client.");
+				}
+		    }
+		    myReader.close();
+			
+			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+		    FileWriter myWriter = new FileWriter(reservations, true);
+		    myWriter.write(nomClientTextField + ";" + idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the reservation.");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
 	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
 		// faudra que le catalogue contienne les formules pour calculer la facture
@@ -266,6 +313,8 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
+
 
 
 	
