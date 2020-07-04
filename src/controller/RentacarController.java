@@ -56,6 +56,13 @@ public class RentacarController {
 		model.entrVehicule(numVehiculeEntr);
 		
 	}
+
+	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
+			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
+		model.filtre(marqueFiltre, puisMinFiltre, bvaFiltre,
+				gpsFiltre, porteFiltre, climFiltre);
+		
+	}
 	
 
 }

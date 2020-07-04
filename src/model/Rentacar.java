@@ -16,7 +16,8 @@ public class Rentacar extends Observable{
 	private HashMap<String, Voiture> catalogue = new HashMap<>();
 	private String[] nomVoitures = new String[10];
 	private Voiture[] voitures = new Voiture[10];
-	//private int nbVoitures = 10;
+	//private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+	private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 	/**
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
@@ -37,6 +38,12 @@ public class Rentacar extends Observable{
 	}
 	public void setCatalogue(HashMap<String, Voiture> catalogue) {
 		this.catalogue = catalogue;
+	}
+	public int[] getPasFiltre() {
+		return pasFiltre;
+	}
+	public void setPasFiltre(int[] pasFiltre) {
+		this.pasFiltre = pasFiltre;
 	}
 	/**
 	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
@@ -97,6 +104,93 @@ public class Rentacar extends Observable{
 		vehiculeEntr.setEtat("En entretien");
 		setChanged();
 		notifyObservers();
+	}
+	
+	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
+			Object gpsFiltre, Object porteFiltre, Object climFiltre) {
+		int[] resetPasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
+		setPasFiltre(resetPasFiltre);
+		if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+				&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+			for(int i = 0; i < catalogue.size(); i++) {
+				pasFiltre[i] = i;
+			}
+		}
+		else {
+			for(int i = 0; i<catalogue.size();i++) { //filtre principalement marque
+				if(marqueFiltre.equals("marque_"+i) && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+					pasFiltre[i] = i;
+					//break;
+				}
+				else {
+					if(marqueFiltre.equals("tout") && puisMinFiltre.equals(catalogue.get("nomVoiture_"+i).getPuissance()) && bvaFiltre.equals("tout") 
+						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+						pasFiltre[i] = i;
+						//break;
+					}
+					else {
+						if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals(catalogue.get("nomVoiture_"+i).getBva()) 
+							&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+							pasFiltre[i] = i;
+							//break;
+						}
+						else {
+							if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+								&& gpsFiltre.equals(catalogue.get("nomVoiture_"+i).getGps()) && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
+								pasFiltre[i] = i;
+								//break;
+							}
+							else {
+								if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+									&& gpsFiltre.equals("tout") && porteFiltre.equals(catalogue.get("nomVoiture_"+i).getPorte()) && climFiltre.equals("tout") ) {
+									pasFiltre[i] = i;
+									//break;
+								}
+								else {
+									if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
+										&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals(catalogue.get("nomVoiture_"+i).getClim()) ) {
+										pasFiltre[i] = i;
+										//break;
+									}
+									else {
+										pasFiltre[i] = 25;
+									}
+								}
+							}
+						}
+					}
+				}
+			}/*
+			else {
+				for(int i = 0; i < catalogue.size(); i++) {
+					pasFiltre[i] = 25;
+				}
+			}*/
+		}
+		
+		/*
+		for(int i = 0; i < catalogue.size(); i++) {
+			if(marqueFiltre.equals("tout")) {
+				pasFiltre[i] = i;
+				System.out.println(pasFiltre[i]);
+			}
+			else {
+				pasFiltre[i] = 20;
+				System.out.println(pasFiltre[i]);
+			}
+		}
+		
+		for(int i = 0; i < catalogue.size(); i++) {
+			
+			if(marqueFiltre.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
+				pasFiltre[i] = i;
+				System.out.println(i);
+			}
+			else pasFiltre[i] = 20;
+		}
+		*/
+		
 	}
 	
 	/*

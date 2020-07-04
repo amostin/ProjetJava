@@ -5,11 +5,13 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.GenericArrayType;
 import java.util.HashMap;
 import java.util.Observable;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -27,17 +29,26 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
 	
+	private JLabel filtre = new JLabel("Selectionner les caractéristiques désirées ");
+	private JComboBox<String> marqueFiltre;
+	private JComboBox<String> puisMinFiltre;
+	private JComboBox<String> bvaFiltre;
+	private JComboBox<String> gpsFiltre;
+	private JComboBox<String> porteFiltre;
+	private JComboBox<String> climFiltre;
+	private JButton filtrer = new JButton("Filtrer");
+	
 	private JLabel choixVehiculeSupp = new JLabel("Entrer le numero du véhicule ");
 	private JTextField idVehiculeSupp = new JTextField();
-	private JButton supprimerVehicule = new JButton("supprimer");
+	private JButton supprimerVehicule = new JButton("Supprimer");
 	
 	private JLabel choixVehiculeRepa = new JLabel("Entrer le numero du véhicule ");
 	private JTextField idVehiculeRepa = new JTextField();
-	private JButton repaVehicule = new JButton("reparation");
+	private JButton repaVehicule = new JButton("Reparation");
 	
 	private JLabel choixVehiculeEntr = new JLabel("Entrer le numero du véhicule ");
 	private JTextField idVehiculeEntr = new JTextField();
-	private JButton entrVehicule = new JButton("entretien");
+	private JButton entrVehicule = new JButton("Entretien");
 	
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
@@ -47,6 +58,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
 
+	//private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 
 
 	/**
@@ -63,6 +75,44 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		headBox.add(table.getTableHeader());
 		
 		tableBox.add(table);
+		
+		Box filtreBox = Box.createHorizontalBox();
+		HashMap<String, Voiture> catalogue = model.getCatalogue();
+		
+		String[] marques = new String[catalogue.size()+1];
+		marques[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			marques[i] = catalogue.get("nomVoiture_"+(i-1)).getMarque();
+		}
+		marqueFiltre = new JComboBox<>(marques);
+		
+		String[] puisMin = new String[catalogue.size()+1];
+		puisMin[0] = "tout";
+		for(int i=1; i<catalogue.size()+1; i++){
+			puisMin[i] = catalogue.get("nomVoiture_"+(i-1)).getPuissance();
+		}
+		puisMinFiltre = new JComboBox<>(puisMin);
+		
+		String[] bva = {"tout", "oui", "non"};
+		bvaFiltre = new JComboBox<>(bva);
+		
+		String[] gps = {"tout", "oui", "non"};
+		gpsFiltre = new JComboBox<>(gps);
+		
+		String[] porte = {"tout", "3", "5"};
+		porteFiltre = new JComboBox<>(porte);
+		
+		String[] clim = {"tout", "oui", "non"};
+		climFiltre = new JComboBox<>(clim);
+		
+		filtreBox.add(filtre);
+		filtreBox.add(marqueFiltre);
+		filtreBox.add(puisMinFiltre);
+		filtreBox.add(bvaFiltre);
+		filtreBox.add(gpsFiltre);
+		filtreBox.add(porteFiltre);
+		filtreBox.add(climFiltre);
+		filtreBox.add(filtrer);
 		
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
@@ -89,6 +139,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
 		panelBox.add(entrBox);
@@ -107,6 +158,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		supprimerVehicule.addActionListener(this);
 		repaVehicule.addActionListener(this);
 		entrVehicule.addActionListener(this);
+		filtrer.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -116,14 +168,28 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		Object [][] data = new Object[catalogue.size()][8];
 
 		for(int i=0; i<catalogue.size(); i++){
-			data[i][0] = i;
-			data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
-			data[i][2] = catalogue.get("nomVoiture_"+i).getPuissance();
-			data[i][3] = catalogue.get("nomVoiture_"+i).getBva();
-			data[i][4] = catalogue.get("nomVoiture_"+i).getGps();
-			data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
-			data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
-			data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
+			
+			//for(int j = 0; j < catalogue.size(); j++) {
+				if(i != model.getPasFiltre()[i]) {
+					System.out.println(model.getPasFiltre()[i]+"vue if "+i);
+
+					//i++;
+				}
+				else {
+					System.out.println(model.getPasFiltre()[i]+"vue else");
+
+					data[i][0] = i;
+					data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
+					data[i][2] = catalogue.get("nomVoiture_"+i).getPuissance();
+					data[i][3] = catalogue.get("nomVoiture_"+i).getBva();
+					data[i][4] = catalogue.get("nomVoiture_"+i).getGps();
+					data[i][5] = catalogue.get("nomVoiture_"+i).getPorte();
+					data[i][6] = catalogue.get("nomVoiture_"+i).getClim();
+					data[i][7] = catalogue.get("nomVoiture_"+i).getEtat();
+				}
+			//}
+			System.out.println(model.getPasFiltre()[i]+"vue for "+i);
+
 		}
 		
 		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état"};
@@ -152,7 +218,13 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
-		case "supprimer":
+		case "Filtrer":
+
+			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem());
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+		
+		case "Supprimer":
 			int numVehicule = getNumeroVehicule();   
 			if(numVehicule < 0 || numVehicule > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
@@ -164,7 +236,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			//affiche("véhicule supprimé");
 			break;
 			
-		case "reparation":
+		case "Reparation":
 			int numVehiculeRepa = getNumeroVehiculeRepa();   
 			if(numVehiculeRepa < 0 || numVehiculeRepa > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
@@ -176,7 +248,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			//affiche("véhicule supprimé");
 			break;
 			
-		case "entretien":
+		case "Entretien":
 			int numVehiculeEntr = getNumeroVehiculeEntr();   
 			if(numVehiculeEntr < 0 || numVehiculeEntr > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
