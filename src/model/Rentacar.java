@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -133,16 +134,37 @@ public class Rentacar extends Observable{
 		notifyObservers();
 		
 	}
-	public void ajoutReservation(String idReservationLabel, String dateDebutTextField, String dateFinTextField,
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
 			String formuleCombo) {
-		
-		
+		String allClients = "";
+		String[] tabAllClients = new String[20];
 		try {
+			File clients = new File("D:\\3ti2deSess\\java\\clients.txt");
+			Scanner myReader = new Scanner(clients);
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	allClients += data + ";";
+		    	//System.out.println(data);
+		    }
+		    tabAllClients = allClients.split("\\;");
+		    for(int i = 0; i < tabAllClients.length; i++) {
+		    	if(tabAllClients[i].equals(nomClientTextField)) {
+		    		System.out.println("client fidèle");
+		    	}
+		    	else {
+		    		FileWriter myWriter = new FileWriter(clients, true);
+				    myWriter.write(nomClientTextField + "\n");
+				    myWriter.close();
+				    System.out.println("Successfully wrote to the client.");
+				}
+		    }
+		    myReader.close();
+			
 			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
 		    FileWriter myWriter = new FileWriter(reservations, true);
-		    myWriter.write(idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
+		    myWriter.write(nomClientTextField + ";" + idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
 		    myWriter.close();
-		    System.out.println("Successfully wrote to the file.");
+		    System.out.println("Successfully wrote to the reservation.");
 		} catch (IOException ioe) {
 			System.out.println("An error occurred.");
 	        ioe.printStackTrace();
