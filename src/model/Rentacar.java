@@ -4,6 +4,9 @@
 package model;
 
 import java.awt.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -129,6 +132,21 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();
 		
+	}
+	public void ajoutReservation(String idReservationLabel, String dateDebutTextField, String dateFinTextField,
+			String formuleCombo) {
+		
+		
+		try {
+			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+		    FileWriter myWriter = new FileWriter(reservations, true);
+		    myWriter.write(idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the file.");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
 	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
 		// faudra que le catalogue contienne les formules pour calculer la facture
@@ -273,6 +291,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 

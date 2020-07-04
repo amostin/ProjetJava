@@ -81,5 +81,10 @@ public class RentacarController {
 		model.reserveVehicule(numVehiculeReser);
 		
 	}
+
+	public void ajoutReservation(String idReservationLabel, String dateDebutTextField, String dateFinTextField, String formuleCombo) {
+		model.ajoutReservation(idReservationLabel, dateDebutTextField, dateFinTextField, formuleCombo);
+		
+	}
 	
 }
