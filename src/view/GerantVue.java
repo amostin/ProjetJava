@@ -274,11 +274,16 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
+		case "Modifier formule":
+			frame.setVisible(false);
+			new ModifFormule(model, controller);
+			break;
+			
 		case "Filtrer":
-
 			controller.filtre(marqueFiltre.getSelectedItem(), puisMinFiltre.getSelectedItem(), bvaFiltre.getSelectedItem(), gpsFiltre.getSelectedItem(), porteFiltre.getSelectedItem(), climFiltre.getSelectedItem(), prixFiltre.getSelectedItem(), prixKmFiltre.getSelectedItem(), amendeFiltre.getSelectedItem());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
+			break;
 		
 		case "Supprimer":
 			int numVehicule = getNumeroVehicule();   
