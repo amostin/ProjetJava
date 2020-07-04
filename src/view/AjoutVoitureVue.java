@@ -38,9 +38,15 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	private JLabel gpsAjoutLabel = new JLabel("gps");
 	private JLabel porteAjoutLabel = new JLabel("porte");
 	private JLabel climAjoutLabel = new JLabel("clim");
+	private JLabel prixAjoutLabel = new JLabel("prix");
+	private JLabel prixKmAjoutLabel = new JLabel("prixKm");
+	private JLabel amendeAjoutLabel = new JLabel("amende");
 
 	private JTextField marqueAjoutTextField = new JTextField("marque");
 	private JTextField typeAjoutTextField = new JTextField("type");
+	private JTextField prixAjoutTextField = new JTextField("10.0");
+	private JTextField prixKmAjoutTextField = new JTextField("0.5");
+	private JTextField amendeAjoutTextField = new JTextField("5.0");
 	private Integer[] puissances = {500, 600, 700, 800, 900, 1000};
 	private JComboBox<Integer> puissanceAjoutTextField = new JComboBox<>(puissances);
 	private JRadioButton bvaOui = new JRadioButton("oui");
@@ -111,6 +117,18 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		climBox.add(climOui);
 		climBox.add(climNon);
 		
+		Box prixBox = Box.createHorizontalBox();
+		prixBox.add(prixAjoutLabel);
+		prixBox.add(prixAjoutTextField);
+		
+		Box prixKmBox = Box.createHorizontalBox();
+		prixKmBox.add(prixKmAjoutLabel);
+		prixKmBox.add(prixKmAjoutTextField);
+		
+		Box amendeBox = Box.createHorizontalBox();
+		amendeBox.add(amendeAjoutLabel);
+		amendeBox.add(amendeAjoutTextField);
+		
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
 		
@@ -126,6 +144,9 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		panelBox.add(gpsBox);
 		panelBox.add(porteBox);
 		panelBox.add(climBox);
+		panelBox.add(prixBox);
+		panelBox.add(prixKmBox);
+		panelBox.add(amendeBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
