@@ -260,6 +260,24 @@ public class Voiture {
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
+	public String getPrix() {
+		return prix;
+	}
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
+	public String getPrixKm() {
+		return prixKm;
+	}
+	public void setPrixKm(String prixKm) {
+		this.prixKm = prixKm;
+	}
+	public String getAmende() {
+		return amende;
+	}
+	public void setAmende(String amende) {
+		this.amende = amende;
+	}
 	
 	
 
