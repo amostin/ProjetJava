@@ -91,7 +91,7 @@ public class ModifFormule extends RentacarVue implements ActionListener {
 		
 		case "Modifier formule":
 			
-			
+			controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
 			affiche("Formules modifiées");
 			break;
 

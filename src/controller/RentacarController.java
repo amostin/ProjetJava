@@ -63,5 +63,10 @@ public class RentacarController {
 				gpsFiltre, porteFiltre, climFiltre, prixFiltre, prixKmFiltre, amendeFiltre);
 		
 	}
+
+	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
+		model.modifFormule(jourFormuleTextField, weFormuleTextField, weekFormuleTextField);
+		
+	}
 	
 }

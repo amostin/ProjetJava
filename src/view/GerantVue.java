@@ -69,6 +69,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
+	Box formuleJourBox = Box.createHorizontalBox();
+	Box formuleWeBox = Box.createHorizontalBox();
+	Box formuleWeekBox = Box.createHorizontalBox();
+
 
 	//private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
 
@@ -88,15 +92,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		tableBox.add(table);
 		
-		Box formuleJourBox = Box.createHorizontalBox();
+		Rentacar rentacar = model;
+		updateFormules(rentacar.getFormules()[0], rentacar.getFormules()[1], rentacar.getFormules()[2]);
+		
 		formuleJourBox.add(jourFormuleLabel);
 		formuleJourBox.add(jourFormule);
 		
-		Box formuleWeBox = Box.createHorizontalBox();
 		formuleWeBox.add(weFormuleLabel);
 		formuleWeBox.add(weFormule);
 		
-		Box formuleWeekBox = Box.createHorizontalBox();
 		formuleWeekBox.add(weekFormuleLabel);
 		formuleWeekBox.add(weekFormule);
 		
@@ -251,6 +255,12 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état", "prix", "prixKm", "amende"};
 		table = new JTable(data, head);
 	}
+	
+	public void updateFormules(String jourFormuleCatalogue, String weFormuleCatalogue, String weekFormuleCatalogue){
+		jourFormule.setText(jourFormuleCatalogue);
+		weFormule.setText(weFormuleCatalogue);
+		weekFormule.setText(weekFormuleCatalogue);
+	}
 	/**
 	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
 	 */
@@ -265,6 +275,15 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		updateTable();
 		panelBox.remove(tableBox);
 		panelBox.add(tableBox);
+		
+		Rentacar rentacar = model;
+		updateFormules(rentacar.getFormules()[0], rentacar.getFormules()[1], rentacar.getFormules()[2]);
+		panelBox.remove(formuleJourBox);
+		panelBox.remove(formuleWeBox);
+		panelBox.remove(formuleWeekBox);
+		panelBox.add(formuleJourBox);
+		panelBox.add(formuleWeBox);
+		panelBox.add(formuleWeekBox);
 	}
 	
 	/**
