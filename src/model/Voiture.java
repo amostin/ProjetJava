@@ -3,12 +3,16 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * Cette classe est utile à créer des voitures
  * @author Ambroise Mostin
  *
  */
-public class Voiture {
+public class Voiture implements Comparable<Voiture>{
 
 	private String marque;
 	private String type;
@@ -35,7 +39,7 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "3";
 			this.clim = "oui";
-			this.prix = "100.0";
+			this.prix = "100";
 			this.prixKm = "5.0";
 			this.amende = "50.0";
 			this.etat = "disponible";
@@ -50,7 +54,7 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "3";
 			this.clim = "oui";
-			this.prix = "90.0";
+			this.prix = "90";
 			this.prixKm = "4.5";
 			this.amende = "45.0";
 			this.etat = "disponible";
@@ -65,7 +69,7 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "3";
 			this.clim = "non";
-			this.prix = "80.0";
+			this.prix = "80";
 			this.prixKm = "4.0";
 			this.amende = "40.0";
 			this.etat = "disponible";
@@ -80,7 +84,7 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "oui";
-			this.prix = "70.0";
+			this.prix = "70";
 			this.prixKm = "3.5";
 			this.amende = "35.0";
 			this.etat = "disponible";
@@ -95,7 +99,7 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "non";
-			this.prix = "60.0";
+			this.prix = "60";
 			this.prixKm = "3.0";
 			this.amende = "30.0";
 			this.etat = "disponible";
@@ -110,7 +114,7 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "3";
 			this.clim = "non";
-			this.prix = "50.0";
+			this.prix = "50";
 			this.prixKm = "2.5";
 			this.amende = "25.0";
 			this.etat = "disponible";
@@ -125,7 +129,7 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "oui";
-			this.prix = "40.0";
+			this.prix = "40";
 			this.prixKm = "2.0";
 			this.amende = "20.0";
 			this.etat = "disponible";
@@ -140,7 +144,7 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "non";
-			this.prix = "30.0";
+			this.prix = "30";
 			this.prixKm = "1.5";
 			this.amende = "15.0";
 			this.etat = "disponible";
@@ -155,7 +159,7 @@ public class Voiture {
 			this.gps = "oui";
 			this.porte = "5";
 			this.clim = "non";
-			this.prix = "20.0";
+			this.prix = "20";
 			this.prixKm = "1.0";
 			this.amende = "10.0";
 			this.etat = "disponible";
@@ -170,7 +174,7 @@ public class Voiture {
 			this.gps = "non";
 			this.porte = "5";
 			this.clim = "oui";
-			this.prix = "15.0";
+			this.prix = "15";
 			this.prixKm = "0.75";
 			this.amende = "7.5";
 			this.etat = "disponible";
@@ -278,6 +282,15 @@ public class Voiture {
 	public void setAmende(String amende) {
 		this.amende = amende;
 	}
+
+	@Override
+	public int compareTo(Voiture voiture) {
+		return (int)(Integer.parseInt(this.prix) - Integer.parseInt(voiture.getPrix()));
+	}
 	
+	public static ArrayList<Voiture> tri(ArrayList<Voiture> voitureParPrix){
+		Collections.sort(voitureParPrix);
+		return voitureParPrix;
+	}
 
 }

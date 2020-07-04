@@ -44,7 +44,7 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 
 	private JTextField marqueAjoutTextField = new JTextField("marque");
 	private JTextField typeAjoutTextField = new JTextField("type");
-	private JTextField prixAjoutTextField = new JTextField("10.0");
+	private JTextField prixAjoutTextField = new JTextField("10");
 	private JTextField prixKmAjoutTextField = new JTextField("0.5");
 	private JTextField amendeAjoutTextField = new JTextField("5.0");
 	private Integer[] puissances = {500, 600, 700, 800, 900, 1000};

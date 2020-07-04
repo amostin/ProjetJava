@@ -3,6 +3,8 @@
  */
 package model;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Stack;
@@ -20,6 +22,7 @@ public class Rentacar extends Observable{
 	private String[] formules = {"1 fois le prix", "2 fois le prix", "3 fois le prix"};
 	//private int[] pasFiltre = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
 	private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
+	private ArrayList<Voiture> voitureParPrix = new ArrayList<>(catalogue.values());
 	/**
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
@@ -53,6 +56,12 @@ public class Rentacar extends Observable{
 	}
 	public void setFormules(String[] formules) {
 		this.formules = formules;
+	}
+	public ArrayList<Voiture> getVoitureParPrix() {
+		return voitureParPrix;
+	}
+	public void setVoitureParPrix(ArrayList<Voiture> voitureParPrix) {
+		this.voitureParPrix = voitureParPrix;
 	}
 	/**
 	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
@@ -123,6 +132,21 @@ public class Rentacar extends Observable{
 		formules[2] = weekFormuleTextField;
 		setChanged();
 		notifyObservers();		
+	}
+	public ArrayList<Voiture> tri() {
+		ArrayList<Voiture> voitureParPrix = new ArrayList<>(catalogue.values());
+		ArrayList<Voiture> voitureTrie = Voiture.tri(voitureParPrix);
+		HashMap<String, Voiture> catalogueTrie = new HashMap<>();
+	    for(Voiture n : voitureParPrix) {
+	    	System.out.println(n.getMarque().charAt(7) + "ème " + n);
+	    	catalogueTrie.put("nomVoiture_" + n.getMarque().charAt(7), n);
+	    }
+	    setCatalogue(catalogueTrie);
+
+		return voitureTrie;
+
+		//setChanged();
+		//notifyObservers();	
 	}
 	
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
@@ -242,6 +266,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 	
 	/*

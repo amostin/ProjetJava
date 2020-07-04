@@ -6,6 +6,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -28,6 +29,8 @@ import model.Voiture;
 public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
+	
+	private JButton tri = new JButton("Trier du moins cher au plus cher");
 	
 	private JLabel jourFormuleLabel = new JLabel("Formule par jour: ");
 	private JLabel jourFormule = new JLabel("1 fois le prix");
@@ -103,6 +106,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		formuleWeekBox.add(weekFormuleLabel);
 		formuleWeekBox.add(weekFormule);
+		
+		Box triBox = Box.createHorizontalBox();
+		triBox.add(tri);
 		
 		Box filtreBox = Box.createHorizontalBox();
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
@@ -195,6 +201,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		panelBox.add(formuleJourBox);
 		panelBox.add(formuleWeBox);
 		panelBox.add(formuleWeekBox);
+		panelBox.add(triBox);
 		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
@@ -216,6 +223,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		repaVehicule.addActionListener(this);
 		entrVehicule.addActionListener(this);
 		filtrer.addActionListener(this);
+		tri.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -228,12 +236,12 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			
 			//for(int j = 0; j < catalogue.size(); j++) {
 				if(i != model.getPasFiltre()[i]) {
-					System.out.println(model.getPasFiltre()[i]+"vue if "+i);
+					//System.out.println(model.getPasFiltre()[i]+"vue if "+i);
 
 					//i++;
 				}
 				else {
-					System.out.println(model.getPasFiltre()[i]+"vue else");
+					//System.out.println(model.getPasFiltre()[i]+"vue else");
 
 					data[i][0] = i;
 					data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
@@ -248,7 +256,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][10] = catalogue.get("nomVoiture_"+i).getAmende();
 				}
 			//}
-			System.out.println(model.getPasFiltre()[i]+"vue for "+i);
+			//System.out.println(model.getPasFiltre()[i]+"vue for "+i);
 
 		}
 		
@@ -293,6 +301,13 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			
+		case "Trier du moins cher au plus cher":
+			//ArrayList<Voiture> voitureTrie = controller.tri();
+			controller.tri();
+			frame.setVisible(false);
+			new GerantVue(model, controller);
+			break;
+		
 		case "Modifier formule":
 			frame.setVisible(false);
 			new ModifFormule(model, controller);
