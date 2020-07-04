@@ -130,6 +130,11 @@ public class Rentacar extends Observable{
 		notifyObservers();
 		
 	}
+	public void ajoutReservation(String idReservationLabel, String dateDebutTextField, String dateFinTextField,
+			String formuleCombo) {
+		// TODO Auto-generated method stub
+		
+	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
 		// faudra que le catalogue contienne les formules pour calculer la facture
 		//Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
@@ -273,6 +278,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 

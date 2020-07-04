@@ -28,7 +28,7 @@ import model.Voiture;
 public class ReservationVue extends RentacarVue implements ActionListener {
 	private JFrame frame;
 	
-	private JLabel idReservationLabel = new JLabel("Identifiant de la reservation: ");
+	private JLabel idReservationLabel = new JLabel("5");
 	private JLabel dateDebutLabel = new JLabel("Date de retrait ");
 	private JLabel dateFinLabel = new JLabel("Date de restitution ");
 	private JLabel formuleLabel = new JLabel("Entrer la formule désirée ");
@@ -46,12 +46,13 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 	/**
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
-	public ReservationVue(Rentacar model, RentacarController controller) {
+	public ReservationVue(Rentacar model, RentacarController controller, String id) {
 		super(model, controller);
 
 		frame = new JFrame("Rentacar");
 		
 		Box idBox = Box.createHorizontalBox();
+		setIdReservationLabel(new JLabel(id));
 		idBox.add(idReservationLabel);
 		
 		Box dateDebutBox = Box.createHorizontalBox();
@@ -102,6 +103,7 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		switch (e.getActionCommand()) {
 		
 		case "Imprimer":
+			controller.ajoutReservation(idReservationLabel.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
 			try {
 				File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
 			    FileWriter myWriter = new FileWriter(reservations, true);
@@ -136,6 +138,15 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
 	}
+
+	public JLabel getIdReservationLabel() {
+		return idReservationLabel;
+	}
+
+	public void setIdReservationLabel(JLabel idReservationLabel) {
+		this.idReservationLabel = idReservationLabel;
+	}
+	
+	
 }
