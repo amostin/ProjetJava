@@ -210,7 +210,7 @@ public class Rentacar extends Observable{
 				pasFiltre[i] = 20;
 				System.out.println(pasFiltre[i]);
 			}
-		}
+		} 
 		
 		for(int i = 0; i < catalogue.size(); i++) {
 			

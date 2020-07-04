@@ -343,5 +343,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		frame.setVisible(false);
 		ModifierMdpVue m = new ModifierMdpVue();		
 	}
+	
 */
 }

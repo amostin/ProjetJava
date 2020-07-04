@@ -279,6 +279,5 @@ public class Voiture {
 		this.amende = amende;
 	}
 	
-	
 
 }
