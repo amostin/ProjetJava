@@ -82,8 +82,8 @@ public class RentacarController {
 		
 	}
 
-	public void ajoutReservation(String idReservationLabel, String dateDebutTextField, String dateFinTextField, String formuleCombo) {
-		model.ajoutReservation(idReservationLabel, dateDebutTextField, dateFinTextField, formuleCombo);
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String formuleCombo) {
+		model.ajoutReservation(idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 		
 	}
 	

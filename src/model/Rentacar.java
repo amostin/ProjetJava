@@ -133,14 +133,14 @@ public class Rentacar extends Observable{
 		notifyObservers();
 		
 	}
-	public void ajoutReservation(String idReservationLabel, String dateDebutTextField, String dateFinTextField,
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
 			String formuleCombo) {
 		
 		
 		try {
 			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
 		    FileWriter myWriter = new FileWriter(reservations, true);
-		    myWriter.write(idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
+		    myWriter.write(nomClientTextField + ";" + idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
 		    myWriter.close();
 		    System.out.println("Successfully wrote to the file.");
 		} catch (IOException ioe) {

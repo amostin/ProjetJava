@@ -29,10 +29,12 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 	private JFrame frame;
 	
 	private JLabel idReservationLabel = new JLabel("5");
+	private JLabel nomClientLabel = new JLabel("Nom du client ");
 	private JLabel dateDebutLabel = new JLabel("Date de retrait ");
 	private JLabel dateFinLabel = new JLabel("Date de restitution ");
 	private JLabel formuleLabel = new JLabel("Entrer la formule désirée ");
 	
+	private JTextField nomClientTextField = new JTextField("amb mos");	
 	private JTextField dateDebutTextField = new JTextField("10/9/2020");
 	private JTextField dateFinTextField = new JTextField("15/9/2020");
 	private String[] formules = {"jour", "weekend", "semaine"};
@@ -54,6 +56,10 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		Box idBox = Box.createHorizontalBox();
 		setIdReservationLabel(new JLabel(id));
 		idBox.add(idReservationLabel);
+		
+		Box nomClientBox = Box.createHorizontalBox();
+		nomClientBox.add(nomClientLabel);
+		nomClientBox.add(nomClientTextField);
 		
 		Box dateDebutBox = Box.createHorizontalBox();
 		dateDebutBox.add(dateDebutLabel);
@@ -77,6 +83,7 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		
 		Box panelBox = Box.createVerticalBox();
 		panelBox.add(idBox);
+		panelBox.add(nomClientBox);
 		panelBox.add(dateDebutBox);
 		panelBox.add(dateFinBox);
 		panelBox.add(formuleBox);
@@ -103,7 +110,7 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		switch (e.getActionCommand()) {
 		
 		case "Imprimer":
-			controller.ajoutReservation(idReservationLabel.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
+			controller.ajoutReservation(idReservationLabel.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
 			
 			
 			//controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
