@@ -107,7 +107,9 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 			
 			
 			//controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
-			affiche("le fichier à imprimer se trouve dans fichier.getAbsolutePath()");
+			//affiche("le fichier à imprimer se trouve dans fichier.getAbsolutePath()");
+			frame.setVisible(false);
+			new GerantVue(model, controller);
 			break;
 
 		case "retour":
