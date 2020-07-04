@@ -29,6 +29,13 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JFrame frame;
 	private JTable table;
 	
+	private JLabel jourFormuleLabel = new JLabel("Formule par jour: ");
+	private JLabel jourFormule = new JLabel("1 fois le prix");
+	private JLabel weFormuleLabel = new JLabel("Formule par we: ");
+	private JLabel weFormule = new JLabel("2 fois le prix");
+	private JLabel weekFormuleLabel = new JLabel("Formule par week: ");
+	private JLabel weekFormule = new JLabel("3 fois le prix");
+	
 	private JLabel filtre = new JLabel("Selectionner les caractéristiques désirées ");
 	private JComboBox<String> marqueFiltre;
 	private JComboBox<String> puisMinFiltre;
@@ -78,6 +85,18 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		headBox.add(table.getTableHeader());
 		
 		tableBox.add(table);
+		
+		Box formuleJourBox = Box.createHorizontalBox();
+		formuleJourBox.add(jourFormuleLabel);
+		formuleJourBox.add(jourFormule);
+		
+		Box formuleWeBox = Box.createHorizontalBox();
+		formuleWeBox.add(weFormuleLabel);
+		formuleWeBox.add(weFormule);
+		
+		Box formuleWeekBox = Box.createHorizontalBox();
+		formuleWeekBox.add(weekFormuleLabel);
+		formuleWeekBox.add(weekFormule);
 		
 		Box filtreBox = Box.createHorizontalBox();
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
@@ -166,6 +185,9 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
+		panelBox.add(formuleJourBox);
+		panelBox.add(formuleWeBox);
+		panelBox.add(formuleWeekBox);
 		panelBox.add(filtreBox);
 		panelBox.add(suppBox);
 		panelBox.add(repaBox);
