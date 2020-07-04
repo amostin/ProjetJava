@@ -320,7 +320,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			}
 			controller.reserveVehicule(numVehiculeReser);
 			frame.setVisible(false);
-			new GerantVue(model, controller);
+			new ReservationVue(model, controller);
 			break;
 		
 		case "Trier du moins cher au plus cher":
