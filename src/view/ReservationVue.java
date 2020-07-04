@@ -5,6 +5,9 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Observable;
 
 import javax.swing.Box;
@@ -99,9 +102,19 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		switch (e.getActionCommand()) {
 		
 		case "Imprimer":
+			try {
+				File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+			    FileWriter myWriter = new FileWriter(reservations, true);
+			    myWriter.write("idReservation localdateof(debut) localdateof(fin) formule\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the file.");
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+			}
 			
 			//controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
-			affiche("Formules modifiées");
+			affiche("le fichier à imprimer se trouve dans fichier.getAbsolutePath()");
 			break;
 
 		case "retour":
