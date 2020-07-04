@@ -68,5 +68,10 @@ public class RentacarController {
 		model.modifFormule(jourFormuleTextField, weFormuleTextField, weekFormuleTextField);
 		
 	}
+
+	public void tri() {
+		model.tri();
+		
+	}
 	
 }

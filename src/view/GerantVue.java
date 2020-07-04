@@ -301,6 +301,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		switch (e.getActionCommand()) {
 			
 		case "Trier du moins cher au plus cher":
+			controller.tri();
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;

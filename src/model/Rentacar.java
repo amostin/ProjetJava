@@ -3,6 +3,8 @@
  */
 package model;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Stack;
@@ -124,6 +126,14 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();		
 	}
+	public void tri() {
+		ArrayList<Voiture> voitureParPrix = new ArrayList<>(catalogue.values());
+		Voiture.tri(voitureParPrix);
+		  for(Voiture n : voitureParPrix)
+			   System.out.println(n);
+		setChanged();
+		notifyObservers();	
+	}
 	
 	public void filtre(Object marqueFiltre, Object puisMinFiltre, Object bvaFiltre,
 			Object gpsFiltre, Object porteFiltre, Object climFiltre, Object prixFiltre, Object prixKmFiltre, Object amendeFiltre) {
@@ -242,6 +252,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 	
 	/*
