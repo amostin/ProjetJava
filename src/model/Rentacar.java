@@ -123,7 +123,7 @@ public class Rentacar extends Observable{
 					pasFiltre[i] = i;
 				}
 				else {
-					if(marqueFiltre.equals("tout") && puisMinFiltre.equals("2000") && puisMaxFiltre.equals("tout") && bvaFiltre.equals("tout") 
+					if(marqueFiltre.equals("tout") && puisMinFiltre.equals(catalogue.get("nomVoiture_"+i).getPuissance()) && puisMaxFiltre.equals("tout") && bvaFiltre.equals("tout") 
 						&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") ) {
 						pasFiltre[i] = i;
 						break;
