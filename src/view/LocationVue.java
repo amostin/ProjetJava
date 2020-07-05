@@ -80,6 +80,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		frame.setVisible(true);
 		
 		//modifMdp.addActionListener(this);
+		imprimer.setEnabled(false);
 		imprimer.addActionListener(this);
 		retour.addActionListener(this);
 		verifIdClient.addActionListener(this);
@@ -96,6 +97,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 			
 			if(controller.verifReser(idReservationTextField.getText(), nomClientTextField.getText())) {
 				affiche("la réservation est bien pour ce véhicule et ce client");
+				imprimer.setEnabled(true);
 			}
 			else {
 				affiche("erreur client et/ou id");
