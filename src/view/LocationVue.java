@@ -113,7 +113,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 			break;
 		
 		case "Imprimer bon de Location":
-			controller.ajoutReser(idReservationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
+			controller.ajoutLocation(idReservationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;

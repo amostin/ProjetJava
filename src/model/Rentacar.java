@@ -220,7 +220,7 @@ public class Rentacar extends Observable{
 		}
 	}
 	
-	public void ajoutReser(String idReservationTextField, String nomClientTextField, String kmTextField) {
+	public void ajoutLocation(String idReservationTextField, String nomClientTextField, String kmTextField) {
 		try {
 			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
 		    FileWriter myWriter = new FileWriter(locations, true);
