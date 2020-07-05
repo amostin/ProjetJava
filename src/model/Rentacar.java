@@ -171,6 +171,43 @@ public class Rentacar extends Observable{
 		}
 	}
 	
+	public boolean verifLoc(String idLocationTextField, String nomClientTextField) {
+		String[] tabAllLocations = new String[20];
+		String[] tabUneLocation = new String[20];
+		try {
+			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
+			Scanner myReader = new Scanner(locations);
+			int i = 0;
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	tabAllLocations[i] = data;
+		    	i++;
+		    	//System.out.println(data);
+		    }
+		    //tabAllClients = allClients.split("\\;");
+		    for(int j = 0; j < tabAllLocations.length; j++) {
+		    	try {
+			    	tabUneLocation = tabAllLocations[j].split("\\;");
+				} catch (NullPointerException e) {
+					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+					System.out.println("le pointer pointe sur: " + j);
+				}
+
+		    	if(tabUneLocation[0].equals(nomClientTextField) && tabUneLocation[1].equals(idLocationTextField)) {
+		    		myReader.close();
+		    		return true;
+		    	}
+		    }
+		    myReader.close();
+		    return false;
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+	        return false;
+		}
+	}
+
+	
 	public void ajoutReser(String idReservationTextField, String nomClientTextField, String kmTextField) {
 		try {
 			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");

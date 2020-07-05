@@ -95,5 +95,9 @@ public class RentacarController {
 		model.ajoutReser(idReservationTextField, nomClientTextField, kmTextField);
 		
 	}
+
+	public boolean verifLoc(String idLocationTextField, String nomClientTextField) {
+		return model.verifLoc(idLocationTextField, nomClientTextField);
+	}
 	
 }
