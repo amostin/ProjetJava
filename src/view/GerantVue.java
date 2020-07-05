@@ -314,7 +314,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		switch (e.getActionCommand()) {
 		
 		case "Louer":
-			
+			frame.setVisible(false);
+			new LocationVue(model, controller);
 			break;
 			
 		case "Réserver":
