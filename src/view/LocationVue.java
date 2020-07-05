@@ -93,11 +93,14 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		switch (e.getActionCommand()) {
 		
 		case "Vérifier id et client":
-			/*
+			
 			if(controller.verifReser(idReservationTextField.getText(), nomClientTextField.getText())) {
 				affiche("la réservation est bien pour ce véhicule et ce client");
 			}
-			*/
+			else {
+				affiche("erreur client et/ou id");
+			}
+			
 			break;
 		
 		case "Imprimer bon de Location":
