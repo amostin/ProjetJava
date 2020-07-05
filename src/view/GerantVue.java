@@ -67,6 +67,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JTextField idVehiculeReser = new JTextField();
 	private JButton reserVehicule = new JButton("Réserver");
 	
+	private JLabel choixVehiculeLoc = new JLabel("Entrer le numero du véhicule ");
+	private JTextField idVehiculeLoc = new JTextField();
+	private JButton louerVehicule = new JButton("Louer");
+	
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
@@ -199,6 +203,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		reserBox.add(idVehiculeReser);
 		reserBox.add(reserVehicule);
 		
+		Box locBox = Box.createHorizontalBox();
+		locBox.add(choixVehiculeLoc);
+		locBox.add(idVehiculeLoc);
+		locBox.add(louerVehicule);
+		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(modifFormule);
 		buttonBox.add(ajoutVehicule);
@@ -216,6 +225,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		panelBox.add(repaBox);
 		panelBox.add(entrBox);
 		panelBox.add(reserBox);
+		panelBox.add(locBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -235,6 +245,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		filtrer.addActionListener(this);
 		tri.addActionListener(this);
 		reserVehicule.addActionListener(this);
+		louerVehicule.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -311,6 +322,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
+		
+		case "Louer":
+			
+			break;
 			
 		case "Réserver":
 			int numVehiculeReser = getNumeroVehiculeReser();   
