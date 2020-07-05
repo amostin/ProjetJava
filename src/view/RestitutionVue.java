@@ -40,7 +40,7 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
-	private JButton imprimer = new JButton("Imprimer bon de Restitution");
+	private JButton imprimer = new JButton("Imprimer bon de restitution");
 	private JButton retour = new JButton("retour");
 
 	
@@ -111,13 +111,13 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 			}
 			
 			break;
-		/*
-		case "Imprimer bon de Location":
-			controller.ajoutReser(idLocationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
+		
+		case "Imprimer bon de restitution":
+			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;
-*/
+
 		case "retour":
 			frame.setVisible(false);
 			new GerantVue(model, controller);

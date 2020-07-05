@@ -207,6 +207,18 @@ public class Rentacar extends Observable{
 		}
 	}
 
+	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String kmTextField) {
+		try {
+			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
+		    FileWriter myWriter = new FileWriter(restitutions, true);
+		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + kmTextField + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the restitution.");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
+	}
 	
 	public void ajoutReser(String idReservationTextField, String nomClientTextField, String kmTextField) {
 		try {
@@ -237,6 +249,7 @@ public class Rentacar extends Observable{
 		    for(int i = 0; i < tabAllClients.length; i++) {
 		    	if(tabAllClients[i].equals(nomClientTextField)) {
 		    		System.out.println("client fidèle");
+		    		break;
 		    	}
 		    	else {
 		    		FileWriter myWriter = new FileWriter(clients, true);
@@ -400,6 +413,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 
