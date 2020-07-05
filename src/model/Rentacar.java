@@ -170,6 +170,19 @@ public class Rentacar extends Observable{
 	        return false;
 		}
 	}
+	
+	public void ajoutReser(String idReservationTextField, String nomClientTextField) {
+		try {
+			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
+		    FileWriter myWriter = new FileWriter(locations, true);
+		    myWriter.write(nomClientTextField + ";" + idReservationTextField + ";" + "0" + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the location.");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
+	}
 
 	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
 			String formuleCombo) {
@@ -350,6 +363,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 

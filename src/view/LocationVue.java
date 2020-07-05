@@ -106,11 +106,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 			break;
 		
 		case "Imprimer bon de Location":
-			//controller.ajoutReservation(idReservationLabel.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
-			
-			
-			//controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
-			//affiche("le fichier à imprimer se trouve dans fichier.getAbsolutePath()");
+			controller.ajoutReser(idReservationTextField.getText(), nomClientTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;

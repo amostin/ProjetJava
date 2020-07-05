@@ -90,5 +90,10 @@ public class RentacarController {
 	public boolean verifReser(String idReservationTextField, String nomClientTextField) {
 		return model.verifReser(idReservationTextField, nomClientTextField);
 	}
+
+	public void ajoutReser(String idReservationTextField, String nomClientTextField) {
+		model.ajoutReser(idReservationTextField, nomClientTextField);
+		
+	}
 	
 }
