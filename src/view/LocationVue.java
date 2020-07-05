@@ -30,9 +30,11 @@ public class LocationVue extends RentacarVue implements ActionListener {
 	
 	private JLabel idReservationLabel = new JLabel("Entrer le numero pour verifier si il est réservé");
 	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a réservé");
+	private JLabel kmLabel = new JLabel("Entrer le kilométrage courant");
 
 	private JTextField idReservationTextField = new JTextField("5");
 	private JTextField nomClientTextField = new JTextField("amb mos");	
+	private JTextField kmTextField = new JTextField("0");
 	
 	private JButton verifIdClient = new JButton("Vérifier id et client");
 
@@ -57,6 +59,10 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		Box nomClientBox = Box.createHorizontalBox();
 		nomClientBox.add(nomClientLabel);
 		nomClientBox.add(nomClientTextField);
+		
+		Box kmBox = Box.createHorizontalBox();
+		kmBox.add(kmLabel);
+		kmBox.add(kmTextField);
 
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
@@ -69,6 +75,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		Box panelBox = Box.createVerticalBox();
 		panelBox.add(idBox);
 		panelBox.add(nomClientBox);
+		panelBox.add(kmBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -106,7 +113,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 			break;
 		
 		case "Imprimer bon de Location":
-			controller.ajoutReser(idReservationTextField.getText(), nomClientTextField.getText());
+			controller.ajoutReser(idReservationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;

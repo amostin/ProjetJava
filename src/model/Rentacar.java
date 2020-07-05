@@ -171,11 +171,11 @@ public class Rentacar extends Observable{
 		}
 	}
 	
-	public void ajoutReser(String idReservationTextField, String nomClientTextField) {
+	public void ajoutReser(String idReservationTextField, String nomClientTextField, String kmTextField) {
 		try {
 			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
 		    FileWriter myWriter = new FileWriter(locations, true);
-		    myWriter.write(nomClientTextField + ";" + idReservationTextField + ";" + "0" + "\n");
+		    myWriter.write(nomClientTextField + ";" + idReservationTextField + ";" + kmTextField + "\n");
 		    myWriter.close();
 		    System.out.println("Successfully wrote to the location.");
 		} catch (IOException ioe) {
