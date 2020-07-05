@@ -86,5 +86,14 @@ public class RentacarController {
 		model.ajoutReservation(idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 		
 	}
+
+	public boolean verifReser(String idReservationTextField, String nomClientTextField) {
+		return model.verifReser(idReservationTextField, nomClientTextField);
+	}
+
+	public void ajoutReser(String idReservationTextField, String nomClientTextField, String kmTextField) {
+		model.ajoutReser(idReservationTextField, nomClientTextField, kmTextField);
+		
+	}
 	
 }

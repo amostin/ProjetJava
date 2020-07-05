@@ -134,6 +134,56 @@ public class Rentacar extends Observable{
 		notifyObservers();
 		
 	}
+	
+	public boolean verifReser(String idReservationTextField, String nomClientTextField) {
+		String[] tabAllReservations = new String[20];
+		String[] tabUneReservation = new String[20];
+		try {
+			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+			Scanner myReader = new Scanner(reservations);
+			int i = 0;
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	tabAllReservations[i] = data;
+		    	i++;
+		    	//System.out.println(data);
+		    }
+		    //tabAllClients = allClients.split("\\;");
+		    for(int j = 0; j < tabAllReservations.length; j++) {
+		    	try {
+			    	tabUneReservation = tabAllReservations[j].split("\\;");
+				} catch (NullPointerException e) {
+					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+					System.out.println("le pointer pointe sur: " + j);
+				}
+
+		    	if(tabUneReservation[0].equals(nomClientTextField) && tabUneReservation[1].equals(idReservationTextField)) {
+		    		myReader.close();
+		    		return true;
+		    	}
+		    }
+		    myReader.close();
+		    return false;
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+	        return false;
+		}
+	}
+	
+	public void ajoutReser(String idReservationTextField, String nomClientTextField, String kmTextField) {
+		try {
+			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
+		    FileWriter myWriter = new FileWriter(locations, true);
+		    myWriter.write(nomClientTextField + ";" + idReservationTextField + ";" + kmTextField + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the location.");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
+	}
+
 	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
 			String formuleCombo) {
 		String allClients = "";
@@ -313,6 +363,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 
