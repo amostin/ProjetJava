@@ -33,6 +33,9 @@ public class LocationVue extends RentacarVue implements ActionListener {
 
 	private JTextField idReservationTextField = new JTextField("5");
 	private JTextField nomClientTextField = new JTextField("amb mos");	
+	
+	private JButton verifId = new JButton("Vérifier id");
+	private JButton verifClient = new JButton("Vérifier client");
 
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
@@ -51,11 +54,13 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		Box idBox = Box.createHorizontalBox();
 		idBox.add(idReservationLabel);
 		idBox.add(idReservationTextField);
+		idBox.add(verifId);
 
 		Box nomClientBox = Box.createHorizontalBox();
 		nomClientBox.add(nomClientLabel);
 		nomClientBox.add(nomClientTextField);
-		
+		nomClientBox.add(verifClient);
+
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
 		
@@ -79,6 +84,8 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		//modifMdp.addActionListener(this);
 		imprimer.addActionListener(this);
 		retour.addActionListener(this);
+		verifId.addActionListener(this);
+		verifClient.addActionListener(this);
 	}
 	
 	/**
@@ -87,6 +94,14 @@ public class LocationVue extends RentacarVue implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
+		
+		case "Vérifier id":
+			
+			break;
+			
+		case "Vérifier client":
+			
+			break;
 		
 		case "Imprimer bon de Location":
 			//controller.ajoutReservation(idReservationLabel.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
