@@ -25,36 +25,36 @@ import model.Voiture;
  * @author Moi
  *
  */
-public class LocationVue extends RentacarVue implements ActionListener {
+public class RestitutionVue extends RentacarVue implements ActionListener {
 	private JFrame frame;
 	
-	private JLabel idReservationLabel = new JLabel("Entrer le numero pour verifier si il est réservé");
-	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a réservé");
+	private JLabel idLocationLabel = new JLabel("Entrer le numero pour verifier si il est loué");
+	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a loué");
 	private JLabel kmLabel = new JLabel("Entrer le kilométrage courant");
 
-	private JTextField idReservationTextField = new JTextField("5");
+	private JTextField idLocationTextField = new JTextField("5");
 	private JTextField nomClientTextField = new JTextField("amb mos");	
-	private JTextField kmTextField = new JTextField("0");
+	private JTextField kmTextField = new JTextField("85");
 	
 	private JButton verifIdClient = new JButton("Vérifier id et client");
 
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
-	private JButton imprimer = new JButton("Imprimer bon de Location");
+	private JButton imprimer = new JButton("Imprimer bon de restitution");
 	private JButton retour = new JButton("retour");
 
 	
 	/**
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
-	public LocationVue(Rentacar model, RentacarController controller) {
+	public RestitutionVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
 
 		frame = new JFrame("Rentacar");
 		
 		Box idBox = Box.createHorizontalBox();
-		idBox.add(idReservationLabel);
-		idBox.add(idReservationTextField);
+		idBox.add(idLocationLabel);
+		idBox.add(idLocationTextField);
 
 		Box nomClientBox = Box.createHorizontalBox();
 		nomClientBox.add(nomClientLabel);
@@ -102,7 +102,7 @@ public class LocationVue extends RentacarVue implements ActionListener {
 		
 		case "Vérifier id et client":
 			
-			if(controller.verifReser(idReservationTextField.getText(), nomClientTextField.getText())) {
+			if(controller.verifLoc(idLocationTextField.getText(), nomClientTextField.getText())) {
 				affiche("la réservation est bien pour ce véhicule et ce client");
 				imprimer.setEnabled(true);
 			}
@@ -112,8 +112,8 @@ public class LocationVue extends RentacarVue implements ActionListener {
 			
 			break;
 		
-		case "Imprimer bon de Location":
-			controller.ajoutLocation(idReservationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
+		case "Imprimer bon de restitution":
+			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;
