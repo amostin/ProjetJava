@@ -67,16 +67,12 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JTextField idVehiculeReser = new JTextField();
 	private JButton reserVehicule = new JButton("Réserver");
 	
-	private JLabel choixVehiculeLoc = new JLabel("Entrer le numero du véhicule ");
-	private JTextField idVehiculeLoc = new JTextField();
-	private JButton louerVehicule = new JButton("Louer");
-	
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
 	private JButton ajoutVehicule = new JButton("Ajouter un véhicule");
 	private JButton modifMdp = new JButton("Modifier mot de passe");
 	private JButton modifFormule = new JButton("Modifier formule");
-
+	private JButton louerVehicule = new JButton("Louer");
 	
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
@@ -203,16 +199,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		reserBox.add(idVehiculeReser);
 		reserBox.add(reserVehicule);
 		
-		Box locBox = Box.createHorizontalBox();
-		locBox.add(choixVehiculeLoc);
-		locBox.add(idVehiculeLoc);
-		locBox.add(louerVehicule);
-		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(modifFormule);
 		buttonBox.add(ajoutVehicule);
 		buttonBox.add(modifMdp);
-		
+		buttonBox.add(louerVehicule);
 		
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
@@ -225,7 +216,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		panelBox.add(repaBox);
 		panelBox.add(entrBox);
 		panelBox.add(reserBox);
-		panelBox.add(locBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
