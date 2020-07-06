@@ -320,8 +320,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		switch (e.getActionCommand()) {
 		
 		case "Facture":
-			//frame.setVisible(false);
-			//new RestitutionVue(model, controller);
+			frame.setVisible(false);
+			new FactureVue(model, controller);
 			break;
 		
 		case "Restituer":
