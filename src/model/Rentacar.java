@@ -206,6 +206,42 @@ public class Rentacar extends Observable{
 	        return false;
 		}
 	}
+	
+	public boolean verifRestitution(String idRestitutionTextField, String nomClientTextField) {
+		String[] tabAllRestitutions = new String[20];
+		String[] tabUneRestitution = new String[20];
+		try {
+			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
+			Scanner myReader = new Scanner(restitutions);
+			int i = 0;
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	tabAllRestitutions[i] = data;
+		    	i++;
+		    	//System.out.println(data);
+		    }
+		    //tabAllClients = allClients.split("\\;");
+		    for(int j = 0; j < tabAllRestitutions.length; j++) {
+		    	try {
+		    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
+				} catch (NullPointerException e) {
+					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+					System.out.println("le pointer pointe sur: " + j);
+				}
+
+		    	if(tabUneRestitution[0].equals(nomClientTextField) && tabUneRestitution[1].equals(idRestitutionTextField)) {
+		    		myReader.close();
+		    		return true;
+		    	}
+		    }
+		    myReader.close();
+		    return false;
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+	        return false;
+		}
+	}
 
 	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		try {
@@ -413,6 +449,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 

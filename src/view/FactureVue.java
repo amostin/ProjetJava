@@ -108,8 +108,8 @@ public class FactureVue extends RentacarVue implements ActionListener {
 		switch (e.getActionCommand()) {
 		
 		case "Vérifier id et client":
-			/*
-			if(controller.verifLoc(idLocationTextField.getText(), nomClientTextField.getText())) {
+			
+			if(controller.verifRestitution(idRestitutionTextField.getText(), nomClientTextField.getText())) {
 				affiche("la réservation est bien pour ce véhicule et ce client");
 				imprimer.setEnabled(true);
 			}
@@ -118,7 +118,7 @@ public class FactureVue extends RentacarVue implements ActionListener {
 			}
 			
 			break;
-		
+		/*
 		case "Imprimer bon de restitution":
 			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), kmTextField.getText());
 			frame.setVisible(false);

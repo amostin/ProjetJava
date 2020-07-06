@@ -103,5 +103,9 @@ public class RentacarController {
 	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		model.ajoutRestitution(idLocationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);		
 	}
+
+	public boolean verifRestitution(String idRestitutionTextField, String nomClientTextField) {
+		return model.verifRestitution(idRestitutionTextField, nomClientTextField);
+	}
 	
 }
