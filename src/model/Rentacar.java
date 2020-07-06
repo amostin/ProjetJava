@@ -242,6 +242,21 @@ public class Rentacar extends Observable{
 	        return false;
 		}
 	}
+	
+	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
+			String dateFinTextField) {
+		try {
+			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
+		    FileWriter myWriter = new FileWriter(factures, true);
+		    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the facture.");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
+		
+	}
 
 	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		try {

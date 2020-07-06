@@ -118,13 +118,13 @@ public class FactureVue extends RentacarVue implements ActionListener {
 			}
 			
 			break;
-		/*
-		case "Imprimer bon de restitution":
-			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), kmTextField.getText());
+		
+		case "Imprimer facture":
+			controller.ajoutFacture(idRestitutionTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;
-*/
+
 		case "retour":
 			frame.setVisible(false);
 			new GerantVue(model, controller);
