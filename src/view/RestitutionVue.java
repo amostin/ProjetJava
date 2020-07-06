@@ -30,10 +30,14 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 	
 	private JLabel idLocationLabel = new JLabel("Entrer le numero pour verifier si il est loué");
 	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a loué");
+	private JLabel dateDebutLabel = new JLabel("Date de retrait ");
+	private JLabel dateFinLabel = new JLabel("Date de restitution ");
 	private JLabel kmLabel = new JLabel("Entrer le kilométrage courant");
 
 	private JTextField idLocationTextField = new JTextField("5");
-	private JTextField nomClientTextField = new JTextField("amb mos");	
+	private JTextField nomClientTextField = new JTextField("amb mos");
+	private JTextField dateDebutTextField = new JTextField("10/9/2020");
+	private JTextField dateFinTextField = new JTextField("15/9/2020");	
 	private JTextField kmTextField = new JTextField("85");
 	
 	private JButton verifIdClient = new JButton("Vérifier id et client");
@@ -60,6 +64,14 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 		nomClientBox.add(nomClientLabel);
 		nomClientBox.add(nomClientTextField);
 		
+		Box dateDebutBox = Box.createHorizontalBox();
+		dateDebutBox.add(dateDebutLabel);
+		dateDebutBox.add(dateDebutTextField);
+		
+		Box dateFinBox = Box.createHorizontalBox();
+		dateFinBox.add(dateFinLabel);
+		dateFinBox.add(dateFinTextField);
+		
 		Box kmBox = Box.createHorizontalBox();
 		kmBox.add(kmLabel);
 		kmBox.add(kmTextField);
@@ -75,6 +87,8 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 		Box panelBox = Box.createVerticalBox();
 		panelBox.add(idBox);
 		panelBox.add(nomClientBox);
+		panelBox.add(dateDebutBox);
+		panelBox.add(dateFinBox);
 		panelBox.add(kmBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
@@ -113,7 +127,7 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 			break;
 		
 		case "Imprimer bon de restitution":
-			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), kmTextField.getText());
+			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), kmTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;

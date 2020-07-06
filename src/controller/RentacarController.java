@@ -100,8 +100,8 @@ public class RentacarController {
 		return model.verifLoc(idLocationTextField, nomClientTextField);
 	}
 
-	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String kmTextField) {
-		model.ajoutRestitution(idLocationTextField, nomClientTextField, kmTextField);		
+	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+		model.ajoutRestitution(idLocationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);		
 	}
 	
 }

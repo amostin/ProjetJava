@@ -207,11 +207,11 @@ public class Rentacar extends Observable{
 		}
 	}
 
-	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String kmTextField) {
+	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		try {
 			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
 		    FileWriter myWriter = new FileWriter(restitutions, true);
-		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + kmTextField + "\n");
+		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
 		    myWriter.close();
 		    System.out.println("Successfully wrote to the restitution.");
 		} catch (IOException ioe) {
