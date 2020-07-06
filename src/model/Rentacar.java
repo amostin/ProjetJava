@@ -257,6 +257,10 @@ public class Rentacar extends Observable{
 		}
 		
 	}
+	
+	public String calculDate(String dateDebut, String dateFin) {
+		return "prendre le prix voiture, multiplier par le nombre de jour, calculer difference fin et debut, verifier si ça correspond à la restitution, faire de meme pour km (ajouter km forfaitaire sur chaque voiture, ajouter amende si il faut, puis afficher total";
+	}
 
 	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		try {
