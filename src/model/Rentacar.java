@@ -487,19 +487,11 @@ public class Rentacar extends Observable{
 		    		break;
 		    	}
 		    	else {
-		    		FileWriter myWriter = new FileWriter(clients, true);
-				    myWriter.write(nomClientTextField + "\n");
-				    myWriter.close();
-				    System.out.println("Successfully wrote to the client.");
+		    		if(i == tabAllClients.length-1) ecrire("clients", "", nomClientTextField, "", "", "");
 				}
 		    }
 		    myReader.close();
-			
-			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
-		    FileWriter myWriter = new FileWriter(reservations, true);
-		    myWriter.write(nomClientTextField + ";" + idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the reservation.");
+			ecrire("reservations", idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 		} catch (IOException ioe) {
 			System.out.println("An error occurred.");
 	        ioe.printStackTrace();
