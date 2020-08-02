@@ -7,11 +7,15 @@ import java.awt.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Cette classe est utile à créer automatiquement un catalogue au lancement de l'application
@@ -244,15 +248,141 @@ public class Rentacar extends Observable{
 	}
 	
 	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
-			String dateFinTextField) {
+			String dateFinTextField){
+		String debutReser = null;
+		String finReser = null;
+		String debutLoc = null;
+		String finRestit = null;
 		try {
 			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
 		    FileWriter myWriter = new FileWriter(factures, true);
 		    Voiture v = catalogue.get("nomVoiture_"+idRestitutionTextField);
 		    String prix = v.getPrix();
-		    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + prix + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the facture.");
+		    String[] tabAllReservations = new String[20];
+			String[] tabUneReservation = new String[20];
+			try {
+				File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+				Scanner myReader = new Scanner(reservations);
+				int i = 0;
+			    while (myReader.hasNextLine()) {
+			    	String data = myReader.nextLine();
+			    	tabAllReservations[i] = data;
+			    	i++;
+			    	//System.out.println(data);
+			    }
+			    //tabAllClients = allClients.split("\\;");
+			    for(int j = 0; j < tabAllReservations.length; j++) {
+			    	try {
+				    	tabUneReservation = tabAllReservations[j].split("\\;");
+					} catch (NullPointerException e) {
+						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+						System.out.println("le pointer pointe sur: " + j);
+					}
+
+			    	debutReser = tabUneReservation[2];
+			    	finReser = tabUneReservation[3];
+			    	System.out.println(debutReser + "\nfinreser " + finReser);
+			    	myReader.close();
+			    		//return true;
+			    }
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+		        //return false;
+			}
+			
+			String[] tabAllLocations = new String[20];
+			String[] tabUneLocation = new String[20];
+			try {
+				File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
+				Scanner myReader = new Scanner(locations);
+				int i = 0;
+			    while (myReader.hasNextLine()) {
+			    	String data = myReader.nextLine();
+			    	tabAllLocations[i] = data;
+			    	i++;
+			    	//System.out.println(data);
+			    }
+			    //tabAllClients = allClients.split("\\;");
+			    for(int j = 0; j < tabAllLocations.length; j++) {
+			    	try {
+				    	tabUneLocation = tabAllLocations[j].split("\\;");
+					} catch (NullPointerException e) {
+						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+						System.out.println("le pointer pointe sur: " + j);
+					}
+
+			    	debutLoc = tabUneLocation[2];
+			    	String finLoc = tabUneLocation[3];
+			    	System.out.println(debutLoc + "\nfinLoc " + finLoc);
+			    	myReader.close();
+			    	
+			    }
+			    myReader.close();
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+			}
+			
+			String[] tabAllRestitutions = new String[20];
+			String[] tabUneRestitution = new String[20];
+			try {
+				File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
+				Scanner myReader = new Scanner(restitutions);
+				int i = 0;
+			    while (myReader.hasNextLine()) {
+			    	String data = myReader.nextLine();
+			    	tabAllRestitutions[i] = data;
+			    	i++;
+			    	//System.out.println(data);
+			    }
+			    //tabAllClients = allClients.split("\\;");
+			    for(int j = 0; j < tabAllRestitutions.length; j++) {
+			    	try {
+			    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
+					} catch (NullPointerException e) {
+						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+						System.out.println("le pointer pointe sur: " + j);
+					}
+
+			    	String debutRestit = tabUneRestitution[2];
+			    	finRestit = tabUneRestitution[3];
+			    	System.out.println(debutRestit + "\nfinRestit " + finRestit);
+			    	myReader.close();
+			    }
+			    myReader.close();
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+			}
+			
+			if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
+				System.out.println("date ok");
+			    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			    java.util.Date firstDate = null;
+				try {
+					firstDate = sdf.parse(debutLoc);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    java.util.Date secondDate = null;
+				try {
+					secondDate = sdf.parse(finRestit);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 
+			    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+			    
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + Integer.parseInt(prix)*diff + "\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the facture.");
+			}
+			
+		    
 		} catch (IOException ioe) {
 			System.out.println("An error occurred.");
 	        ioe.printStackTrace();
