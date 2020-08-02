@@ -51,7 +51,7 @@ public class RentacarController {
 	}
 
 	public void repaVehicule(int numVehiculeRepa) {
-		model.repaVehicule(numVehiculeRepa);
+		model.changEtat(numVehiculeRepa, "En réparation");
 	}
 
 	public void entrVehicule(int numVehiculeEntr) {
