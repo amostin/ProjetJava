@@ -194,6 +194,46 @@ public class Rentacar extends Observable{
 		return nbKm;
 	}
 	
+	public long[] verifDate(String debutReser, String finReser, String finRestit) {
+		long[] diffEtDiffAmende = new long[2];
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	    java.util.Date firstDate = null;
+		try {
+			firstDate = sdf.parse(debutReser);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    java.util.Date secondDate = null;
+		try {
+			secondDate = sdf.parse(finReser);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		java.util.Date firstDateAmende = null;
+		try {
+			firstDateAmende = sdf.parse(finReser);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    java.util.Date secondDateAmende = null;
+		try {
+			secondDateAmende = sdf.parse(finRestit);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+	    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+	    diffEtDiffAmende[0] = diff;
+	    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
+	    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
+	    diffEtDiffAmende[1] = diffAmende;
+	    return diffEtDiffAmende;
+	}
+	
 	public void lire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField,
 			String dateFinTextField, String formuleCombo) {
 		String allClients = "";
@@ -339,67 +379,12 @@ public class Rentacar extends Observable{
 		}
 		
 		if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
-			System.out.println("date ok");
-		    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		    java.util.Date firstDate = null;
-			try {
-				firstDate = sdf.parse(debutLoc);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    java.util.Date secondDate = null;
-			try {
-				secondDate = sdf.parse(finRestit);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		 
-		    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-		    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-		    
-		    prixSansAmende = Integer.parseInt(prix)*diff;
+		    prixSansAmende = Integer.parseInt(prix)*verifDate(debutReser, finReser, finRestit)[0];
 		    prixAvecKm = verifKm(nbKm, prixKm);
 		    ecrire("factures", idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField, String.valueOf(prixSansAmende+prixAvecKm));
 		}
 		else {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		    java.util.Date firstDate = null;
-			try {
-				firstDate = sdf.parse(debutReser);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    java.util.Date secondDate = null;
-			try {
-				secondDate = sdf.parse(finReser);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			java.util.Date firstDateAmende = null;
-			try {
-				firstDateAmende = sdf.parse(finReser);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    java.util.Date secondDateAmende = null;
-			try {
-				secondDateAmende = sdf.parse(finRestit);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-		    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-		 
-		    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
-		    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
-		    
-		    prixAvecAmende = (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende);
+		    prixAvecAmende = (Integer.parseInt(prix)*verifDate(debutReser, finReser, finRestit)[0]+Double.parseDouble(amende)*verifDate(debutReser, finReser, finRestit)[1]);
 		    prixAvecKm = verifKm(nbKm, prixKm);
 		    ecrire("factures", idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField, String.valueOf(prixAvecAmende+prixAvecKm));
 		}
