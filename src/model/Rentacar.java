@@ -94,12 +94,20 @@ public class Rentacar extends Observable{
 		}
 	}
 	
+	public void changEtat(int numVehicule, String etat) {
+		Voiture vehiculeSupp = catalogue.get("nomVoiture_"+numVehicule);
+		vehiculeSupp.setEtat(etat);
+		setChanged();
+		notifyObservers();
+	}
+	/*
 	public void supprimeVehicule(int numVehicule) {
 		Voiture vehiculeSupp = catalogue.get("nomVoiture_"+numVehicule);
 		vehiculeSupp.setEtat("Supprimé");
 		setChanged();
 		notifyObservers();
 	}
+	*/
 	public void repaVehicule(int numVehiculeRepa) {
 		Voiture vehiculeRepa = catalogue.get("nomVoiture_"+numVehiculeRepa);
 		vehiculeRepa.setEtat("En réparation");

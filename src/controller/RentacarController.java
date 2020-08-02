@@ -47,7 +47,7 @@ public class RentacarController {
 	}
 	
 	public void supprimeVehicule(int numVehicule) {
-		model.supprimeVehicule(numVehicule);
+		model.changEtat(numVehicule, "Supprimé");
 	}
 
 	public void repaVehicule(int numVehiculeRepa) {
