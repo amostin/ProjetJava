@@ -35,9 +35,7 @@ public class Rentacar extends Observable{
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
 	public Rentacar() {
-		createNomVoitures();
-		createVoitures();
-		addVoitures(nomVoitures, voitures);
+		addVoitures();
 		this.formules = getFormules();
 	}
 	/**
@@ -72,28 +70,12 @@ public class Rentacar extends Observable{
 		this.voitureParPrix = voitureParPrix;
 	}
 	/**
-	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
-	 */
-	public String[] createNomVoitures() {
-		for(int i = 0; i<10; i++) {
-			nomVoitures[i] = new String("nomVoiture_"+i);
-		}
-		return nomVoitures;
-	}
-	/**
-	 * Cette méthode permet de créer des valeurs pour hashmap (rempli tableau voitures)
-	 */
-	public Voiture[] createVoitures() {
-		for(int i = 0; i<10; i++) {
-			voitures[i] = new Voiture(i);
-		}
-		return voitures;
-	}
-	/**
 	 * Cette méthode permet de créer un catalogue a partir des nomvoiture et des voitures
 	 */
-	public HashMap<String, Voiture> addVoitures(String[] nomVoitures, Voiture[] voitures) {
+	public HashMap<String, Voiture> addVoitures() {
 		for(int i = 0; i<10; i++) {
+			nomVoitures[i] = new String("nomVoiture_"+i);
+			voitures[i] = new Voiture(i);
 			catalogue.put(nomVoitures[i], voitures[i]);
 		}
 		return catalogue;
@@ -112,38 +94,18 @@ public class Rentacar extends Observable{
 		}
 	}
 	
-	public void supprimeVehicule(int numVehicule) {
+	public void changEtat(int numVehicule, String etat) {
 		Voiture vehiculeSupp = catalogue.get("nomVoiture_"+numVehicule);
-		vehiculeSupp.setEtat("Supprimé");
-		setChanged();
-		notifyObservers();
-	}
-	public void repaVehicule(int numVehiculeRepa) {
-		Voiture vehiculeRepa = catalogue.get("nomVoiture_"+numVehiculeRepa);
-		vehiculeRepa.setEtat("En réparation");
+		vehiculeSupp.setEtat(etat);
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void entrVehicule(int numVehiculeEntr) {
-		Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
-		vehiculeEntr.setEtat("En entretien");
-		setChanged();
-		notifyObservers();
-	}
-	public void reserveVehicule(int numVehiculeReser) {
-		Voiture vehiculeReser = catalogue.get("nomVoiture_"+numVehiculeReser);
-		vehiculeReser.setEtat("Réservé");
-		setChanged();
-		notifyObservers();
-		
-	}
-	
-	public boolean verifReser(String idReservationTextField, String nomClientTextField) {
+	public boolean verif(String nomFichier, String idReservationTextField, String nomClientTextField) {
 		String[] tabAllReservations = new String[20];
 		String[] tabUneReservation = new String[20];
 		try {
-			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+			File reservations = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
 			Scanner myReader = new Scanner(reservations);
 			int i = 0;
 		    while (myReader.hasNextLine()) {
@@ -175,314 +137,71 @@ public class Rentacar extends Observable{
 		}
 	}
 	
+	public boolean verifReser(String idReservationTextField, String nomClientTextField) {
+		return verif("reservations", idReservationTextField, nomClientTextField);
+	}
+	
 	public boolean verifLoc(String idLocationTextField, String nomClientTextField) {
-		String[] tabAllLocations = new String[20];
-		String[] tabUneLocation = new String[20];
-		try {
-			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
-			Scanner myReader = new Scanner(locations);
-			int i = 0;
-		    while (myReader.hasNextLine()) {
-		    	String data = myReader.nextLine();
-		    	tabAllLocations[i] = data;
-		    	i++;
-		    	//System.out.println(data);
-		    }
-		    //tabAllClients = allClients.split("\\;");
-		    for(int j = 0; j < tabAllLocations.length; j++) {
-		    	try {
-			    	tabUneLocation = tabAllLocations[j].split("\\;");
-				} catch (NullPointerException e) {
-					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-					System.out.println("le pointer pointe sur: " + j);
-				}
-
-		    	if(tabUneLocation[0].equals(nomClientTextField) && tabUneLocation[1].equals(idLocationTextField)) {
-		    		myReader.close();
-		    		return true;
-		    	}
-		    }
-		    myReader.close();
-		    return false;
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
-	        return false;
-		}
+		return verif("locations", idLocationTextField, nomClientTextField);
 	}
 	
 	public boolean verifRestitution(String idRestitutionTextField, String nomClientTextField) {
-		String[] tabAllRestitutions = new String[20];
-		String[] tabUneRestitution = new String[20];
-		try {
-			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
-			Scanner myReader = new Scanner(restitutions);
-			int i = 0;
-		    while (myReader.hasNextLine()) {
-		    	String data = myReader.nextLine();
-		    	tabAllRestitutions[i] = data;
-		    	i++;
-		    	//System.out.println(data);
-		    }
-		    //tabAllClients = allClients.split("\\;");
-		    for(int j = 0; j < tabAllRestitutions.length; j++) {
-		    	try {
-		    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
-				} catch (NullPointerException e) {
-					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-					System.out.println("le pointer pointe sur: " + j);
-				}
-
-		    	if(tabUneRestitution[0].equals(nomClientTextField) && tabUneRestitution[1].equals(idRestitutionTextField)) {
-		    		myReader.close();
-		    		return true;
-		    	}
-		    }
-		    myReader.close();
-		    return false;
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
-	        return false;
-		}
+		return verif("restitutions", idRestitutionTextField, nomClientTextField);
 	}
 	
-	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
-			String dateFinTextField){
-		String debutReser = null;
-		String finReser = null;
-		String debutLoc = null;
-		String finRestit = null;
-		double prixSansAmende = 0;
-		double prixAvecAmende = 0;
-		double prixAvecKm = 0;
-		double nbKm = 0;
-		
-		try {
-			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
-		    FileWriter myWriter = new FileWriter(factures, true);
-		    Voiture v = catalogue.get("nomVoiture_"+idRestitutionTextField);
-		    String prix = v.getPrix();
-		    String amende = v.getAmende();
-		    String prixKm = v.getPrixKm();
-		    String[] tabAllReservations = new String[20];
-			String[] tabUneReservation = new String[20];
-			try {
-				File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
-				Scanner myReader = new Scanner(reservations);
-				int i = 0;
-			    while (myReader.hasNextLine()) {
-			    	String data = myReader.nextLine();
-			    	tabAllReservations[i] = data;
-			    	i++;
-			    	//System.out.println(data);
-			    }
-			    //tabAllClients = allClients.split("\\;");
-			    for(int j = 0; j < tabAllReservations.length; j++) {
-			    	try {
-				    	tabUneReservation = tabAllReservations[j].split("\\;");
-					} catch (NullPointerException e) {
-						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-						System.out.println("le pointer pointe sur: " + j);
-					}
-
-			    	debutReser = tabUneReservation[2];
-			    	finReser = tabUneReservation[3];
-			    	System.out.println(debutReser + "\nfinreser " + finReser);
-			    	myReader.close();
-			    		//return true;
-			    }
-			} catch (IOException ioe) {
-				System.out.println("An error occurred.");
-		        ioe.printStackTrace();
-		        //return false;
-			}
-			
-			String[] tabAllLocations = new String[20];
-			String[] tabUneLocation = new String[20];
-			try {
-				File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
-				Scanner myReader = new Scanner(locations);
-				int i = 0;
-			    while (myReader.hasNextLine()) {
-			    	String data = myReader.nextLine();
-			    	tabAllLocations[i] = data;
-			    	i++;
-			    	//System.out.println(data);
-			    }
-			    //tabAllClients = allClients.split("\\;");
-			    for(int j = 0; j < tabAllLocations.length; j++) {
-			    	try {
-				    	tabUneLocation = tabAllLocations[j].split("\\;");
-					} catch (NullPointerException e) {
-						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-						System.out.println("le pointer pointe sur: " + j);
-					}
-
-			    	debutLoc = tabUneLocation[2];
-			    	String finLoc = tabUneLocation[3];
-			    	System.out.println(debutLoc + "\nfinLoc " + finLoc);
-			    	myReader.close();
-			    	
-			    }
-			    myReader.close();
-			} catch (IOException ioe) {
-				System.out.println("An error occurred.");
-		        ioe.printStackTrace();
-			}
-			
-			String[] tabAllRestitutions = new String[20];
-			String[] tabUneRestitution = new String[20];
-			try {
-				File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
-				Scanner myReader = new Scanner(restitutions);
-				int i = 0;
-			    while (myReader.hasNextLine()) {
-			    	String data = myReader.nextLine();
-			    	tabAllRestitutions[i] = data;
-			    	i++;
-			    	//System.out.println(data);
-			    }
-			    //tabAllClients = allClients.split("\\;");
-			    for(int j = 0; j < tabAllRestitutions.length; j++) {
-			    	try {
-			    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
-					} catch (NullPointerException e) {
-						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-						System.out.println("le pointer pointe sur: " + j);
-					}
-
-			    	String debutRestit = tabUneRestitution[2];
-			    	finRestit = tabUneRestitution[3];
-			    	nbKm = Double.parseDouble(tabUneRestitution[4]);
-			    	System.out.println(debutRestit + "\nfinRestit " + finRestit);
-			    	myReader.close();
-			    }
-			    myReader.close();
-			} catch (IOException ioe) {
-				System.out.println("An error occurred.");
-		        ioe.printStackTrace();
-			}
-			
-			if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
-				System.out.println("date ok");
-			    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			    java.util.Date firstDate = null;
-				try {
-					firstDate = sdf.parse(debutLoc);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			    java.util.Date secondDate = null;
-				try {
-					secondDate = sdf.parse(finRestit);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			 
-			    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-			    
-			    prixSansAmende = Integer.parseInt(prix)*diff;
-			    if(nbKm>100) {
-			    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
-			    }
-			    
-			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (prixSansAmende+prixAvecKm) + "\n");
-			    myWriter.close();
-			    System.out.println("Successfully wrote to the facture.");
-			}
-			else {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			    java.util.Date firstDate = null;
-				try {
-					firstDate = sdf.parse(debutReser);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			    java.util.Date secondDate = null;
-				try {
-					secondDate = sdf.parse(finReser);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				java.util.Date firstDateAmende = null;
-				try {
-					firstDateAmende = sdf.parse(finReser);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			    java.util.Date secondDateAmende = null;
-				try {
-					secondDateAmende = sdf.parse(finRestit);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-			 
-			    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
-			    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
-			    
-			    prixAvecAmende = (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende);
-			    if(nbKm>100) {
-			    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
-			    }
-			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (prixAvecAmende+prixAvecKm) + "\n");
-			    myWriter.close();
-			    System.out.println("Successfully wrote to the facture.");
-			}
-			
-		    
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
-		}
-		
+	public double verifKm(double nbKm, String prixKm) {
+	    if(nbKm>100) {
+	    	return Double.parseDouble(prixKm)*(nbKm-100);
+	    }
+		return 0.0;
 	}
 	
-	public String calculDate(String dateDebut, String dateFin) {
-		return "prendre le prix voiture, multiplier par le nombre de jour, calculer difference fin et debut, verifier si ça correspond à la restitution, faire de meme pour km (ajouter km forfaitaire sur chaque voiture, ajouter amende si il faut, puis afficher total";
-	}
-
-	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+	public long[] verifDate(String debutReser, String finReser, String finRestit) {
+		long[] diffEtDiffAmende = new long[2];
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	    java.util.Date firstDate = null;
 		try {
-			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
-		    FileWriter myWriter = new FileWriter(restitutions, true);
-		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the restitution.");
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
+			firstDate = sdf.parse(debutReser);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
-
-	public void ajoutLocation(String idReservationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+	    java.util.Date secondDate = null;
 		try {
-			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
-		    FileWriter myWriter = new FileWriter(locations, true);
-		    myWriter.write(nomClientTextField + ";" + idReservationTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the location.");
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
+			secondDate = sdf.parse(finReser);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		java.util.Date firstDateAmende = null;
+		try {
+			firstDateAmende = sdf.parse(finReser);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    java.util.Date secondDateAmende = null;
+		try {
+			secondDateAmende = sdf.parse(finRestit);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+	    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+	    diffEtDiffAmende[0] = diff;
+	    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
+	    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
+	    diffEtDiffAmende[1] = diffAmende;
+	    return diffEtDiffAmende;
 	}
-
-	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
-			String formuleCombo) {
+	
+	public void lire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField,
+			String dateFinTextField, String formuleCombo) {
 		String allClients = "";
 		String[] tabAllClients = new String[20];
 		try {
-			File clients = new File("D:\\3ti2deSess\\java\\clients.txt");
+			File clients = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
 			Scanner myReader = new Scanner(clients);
 		    while (myReader.hasNextLine()) {
 		    	String data = myReader.nextLine();
@@ -496,28 +215,117 @@ public class Rentacar extends Observable{
 		    		break;
 		    	}
 		    	else {
-		    		FileWriter myWriter = new FileWriter(clients, true);
-				    myWriter.write(nomClientTextField + "\n");
-				    myWriter.close();
-				    System.out.println("Successfully wrote to the client.");
+		    		if(i == tabAllClients.length-1) ecrire("clients", "", nomClientTextField, "", "", "");
 				}
 		    }
 		    myReader.close();
-			
-			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
-		    FileWriter myWriter = new FileWriter(reservations, true);
-		    myWriter.write(nomClientTextField + ";" + idReservationLabel + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + formuleCombo + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the reservation.");
+			ecrire("reservations", idTextField, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 		} catch (IOException ioe) {
 			System.out.println("An error occurred.");
 	        ioe.printStackTrace();
 		}
 	}
+	
+	public String lireDate(String nomFichier, int index) {
+		String[] tabAllReservations = new String[20];
+		String[] tabUneReservation = new String[20];
+		try {
+			File reservations = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+			Scanner myReader = new Scanner(reservations);
+			int i = 0;
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	tabAllReservations[i] = data;
+		    	i++;
+		    }
+		    myReader.close();
+		    for(int j = 0; j < tabAllReservations.length; j++) {
+		    	try {
+			    	tabUneReservation = tabAllReservations[j].split("\\;");
+				} catch (NullPointerException e) {
+					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+					System.out.println("le pointer pointe sur: " + j);
+				}
+		    	switch (index) {
+				case 2:
+					return tabUneReservation[2];
+				case 3:
+					return tabUneReservation[3];
+				default:
+					return tabUneReservation[4];
+				}
+		    }
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+		    ioe.printStackTrace();
+		}
+		return "An error occurred.";
+	}
+	
+	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
+			String dateFinTextField){
+		
+		String debutReser = null;
+		String finReser = null;
+		String debutLoc = null;
+		String finRestit = null;
+		
+		double prixSansAmende = 0;
+		double prixAvecAmende = 0;
+		double prixAvecKm = 0;
+		double nbKm = 0;
+		
+		Voiture v = catalogue.get("nomVoiture_"+idRestitutionTextField);
+		String prix = v.getPrix();
+		String amende = v.getAmende();
+		String prixKm = v.getPrixKm();
+		
+		debutReser = lireDate("reservations", 2);
+		finReser = lireDate("reservations", 3);
+		debutLoc = lireDate("locations", 2);
+		finRestit = lireDate("restitutions", 3);
+		nbKm = Double.parseDouble(lireDate("restitutions", 4));
+		if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
+		    prixSansAmende = Integer.parseInt(prix)*verifDate(debutReser, finReser, finRestit)[0];
+		    prixAvecKm = verifKm(nbKm, prixKm);
+		    ecrire("factures", idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField, String.valueOf(prixSansAmende+prixAvecKm));
+		}
+		else {
+		    prixAvecAmende = (Integer.parseInt(prix)*verifDate(debutReser, finReser, finRestit)[0]+Double.parseDouble(amende)*verifDate(debutReser, finReser, finRestit)[1]);
+		    prixAvecKm = verifKm(nbKm, prixKm);
+		    ecrire("factures", idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField, String.valueOf(prixAvecAmende+prixAvecKm));
+		}
+		
+	}
+	
+	public void ecrire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+		try {
+			File fichier = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+		    FileWriter myWriter = new FileWriter(fichier, true);
+		    myWriter.write(nomClientTextField + ";" + idTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the "+ fichier +".");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
+	}
+
+	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+		ecrire("restitutions", idLocationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);
+	}
+
+	public void ajoutLocation(String idReservationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+		ecrire("locations", idReservationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);
+	}
+
+
+	
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
+			String formuleCombo) {
+		lire("clients", idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
+	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
-		// faudra que le catalogue contienne les formules pour calculer la facture
-		//Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
-		//vehiculeEntr.setEtat("En entretien");
 		formules[0] = jourFormuleTextField;
 		formules[1] = weFormuleTextField;
 		formules[2] = weekFormuleTextField;
@@ -610,14 +418,14 @@ public class Rentacar extends Observable{
 											}
 											else {
 												if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-														&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
-														&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals(catalogue.get("nomVoiture_"+i).getAmende())) {
-														pasFiltre[i] = i;
-														//break;
-													}
-													else {
-														pasFiltre[i] = 25;
-													}
+													&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+													&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals(catalogue.get("nomVoiture_"+i).getAmende())) {
+													pasFiltre[i] = i;
+													//break;
+												}
+												else {
+													pasFiltre[i] = 25;
+												}
 											}
 										}
 									}
@@ -626,51 +434,7 @@ public class Rentacar extends Observable{
 						}
 					}
 				}
-			}/*
-			else {
-				for(int i = 0; i < catalogue.size(); i++) {
-					pasFiltre[i] = 25;
-				}
-			}*/
+			}
 		}
-		
-		/*
-		for(int i = 0; i < catalogue.size(); i++) {
-			if(marqueFiltre.equals("tout")) {
-				pasFiltre[i] = i;
-				System.out.println(pasFiltre[i]);
-			}
-			else {
-				pasFiltre[i] = 20;
-				System.out.println(pasFiltre[i]);
-			}
-		} 
-		
-		for(int i = 0; i < catalogue.size(); i++) {
-			
-			if(marqueFiltre.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
-				pasFiltre[i] = i;
-				System.out.println(i);
-			}
-			else pasFiltre[i] = 20;
-		}
-		*/
-		
 	}
-
-
-
-
-
-
-
-	
-	/*
-	public static void main(String[] args) {
-		Catalogue c = new Catalogue();
-		for (String i : c.catalogue.keySet()) {
-			  System.out.println("key: " + i + " value: " + c.catalogue.get(i).toString());
-			}
-	}
-	*/
 }

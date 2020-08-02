@@ -47,15 +47,15 @@ public class RentacarController {
 	}
 	
 	public void supprimeVehicule(int numVehicule) {
-		model.supprimeVehicule(numVehicule);
+		model.changEtat(numVehicule, "Supprimé");
 	}
 
 	public void repaVehicule(int numVehiculeRepa) {
-		model.repaVehicule(numVehiculeRepa);
+		model.changEtat(numVehiculeRepa, "En réparation");
 	}
 
 	public void entrVehicule(int numVehiculeEntr) {
-		model.entrVehicule(numVehiculeEntr);
+		model.changEtat(numVehiculeEntr, "En entretien");
 		
 	}
 
@@ -78,7 +78,7 @@ public class RentacarController {
 	}
 
 	public void reserveVehicule(int numVehiculeReser) {
-		model.reserveVehicule(numVehiculeReser);
+		model.changEtat(numVehiculeReser, "Réservé");
 		
 	}
 
