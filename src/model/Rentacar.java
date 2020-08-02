@@ -326,9 +326,6 @@ public class Rentacar extends Observable{
 		lire("clients", idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
-		// faudra que le catalogue contienne les formules pour calculer la facture
-		//Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
-		//vehiculeEntr.setEtat("En entretien");
 		formules[0] = jourFormuleTextField;
 		formules[1] = weFormuleTextField;
 		formules[2] = weekFormuleTextField;
@@ -421,14 +418,14 @@ public class Rentacar extends Observable{
 											}
 											else {
 												if(marqueFiltre.equals("tout") && puisMinFiltre.equals("tout") && bvaFiltre.equals("tout") 
-														&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
-														&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals(catalogue.get("nomVoiture_"+i).getAmende())) {
-														pasFiltre[i] = i;
-														//break;
-													}
-													else {
-														pasFiltre[i] = 25;
-													}
+													&& gpsFiltre.equals("tout") && porteFiltre.equals("tout") && climFiltre.equals("tout") 
+													&& prixFiltre.equals("tout") && prixKmFiltre.equals("tout") && amendeFiltre.equals(catalogue.get("nomVoiture_"+i).getAmende())) {
+													pasFiltre[i] = i;
+													//break;
+												}
+												else {
+													pasFiltre[i] = 25;
+												}
 											}
 										}
 									}
@@ -437,51 +434,7 @@ public class Rentacar extends Observable{
 						}
 					}
 				}
-			}/*
-			else {
-				for(int i = 0; i < catalogue.size(); i++) {
-					pasFiltre[i] = 25;
-				}
-			}*/
+			}
 		}
-		
-		/*
-		for(int i = 0; i < catalogue.size(); i++) {
-			if(marqueFiltre.equals("tout")) {
-				pasFiltre[i] = i;
-				System.out.println(pasFiltre[i]);
-			}
-			else {
-				pasFiltre[i] = 20;
-				System.out.println(pasFiltre[i]);
-			}
-		} 
-		
-		for(int i = 0; i < catalogue.size(); i++) {
-			
-			if(marqueFiltre.equals(catalogue.get("nomVoiture_"+i).getMarque())) {
-				pasFiltre[i] = i;
-				System.out.println(i);
-			}
-			else pasFiltre[i] = 20;
-		}
-		*/
-		
 	}
-
-
-
-
-
-
-
-	
-	/*
-	public static void main(String[] args) {
-		Catalogue c = new Catalogue();
-		for (String i : c.catalogue.keySet()) {
-			  System.out.println("key: " + i + " value: " + c.catalogue.get(i).toString());
-			}
-	}
-	*/
 }
