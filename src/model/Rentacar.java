@@ -257,6 +257,7 @@ public class Rentacar extends Observable{
 		double prixAvecAmende = 0;
 		double prixSansKm = 0;
 		double prixAvecKm = 0;
+		double nbKm = 0;
 		
 		try {
 			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
@@ -354,6 +355,7 @@ public class Rentacar extends Observable{
 
 			    	String debutRestit = tabUneRestitution[2];
 			    	finRestit = tabUneRestitution[3];
+			    	nbKm = Double.parseDouble(tabUneRestitution[4]);
 			    	System.out.println(debutRestit + "\nfinRestit " + finRestit);
 			    	myReader.close();
 			    }
@@ -385,8 +387,11 @@ public class Rentacar extends Observable{
 			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 			    
 			    prixSansAmende = Integer.parseInt(prix)*diff;
+			    if(nbKm>100) {
+			    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
+			    }
 			    
-			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + prixSansAmende + "\n");
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (prixSansAmende+prixAvecKm) + "\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the facture.");
 			}
