@@ -255,7 +255,6 @@ public class Rentacar extends Observable{
 		String finRestit = null;
 		double prixSansAmende = 0;
 		double prixAvecAmende = 0;
-		double prixSansKm = 0;
 		double prixAvecKm = 0;
 		double nbKm = 0;
 		
@@ -432,8 +431,10 @@ public class Rentacar extends Observable{
 			    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
 			    
 			    prixAvecAmende = (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende);
-			    
-			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + prixAvecAmende + "\n");
+			    if(nbKm>100) {
+			    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
+			    }
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (prixAvecAmende+prixAvecKm) + "\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the facture.");
 			}
