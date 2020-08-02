@@ -191,7 +191,7 @@ public class Rentacar extends Observable{
 	    if(nbKm>100) {
 	    	return Double.parseDouble(prixKm)*(nbKm-100);
 	    }
-		return nbKm;
+		return 0.0;
 	}
 	
 	public long[] verifDate(String debutReser, String finReser, String finRestit) {
@@ -265,10 +265,6 @@ public class Rentacar extends Observable{
 	}
 	
 	public String lireDate(String nomFichier, int index) {
-		String debutReser = null;
-		String finReser = null;
-		String debutLoc = null;
-		String finRestit = null;
 		String[] tabAllReservations = new String[20];
 		String[] tabUneReservation = new String[20];
 		try {
@@ -291,17 +287,15 @@ public class Rentacar extends Observable{
 		    	switch (index) {
 				case 2:
 					return tabUneReservation[2];
-
-				default:
+				case 3:
 					return tabUneReservation[3];
+				default:
+					return tabUneReservation[4];
 				}
-		    	
-		    		//return true;
 		    }
 		} catch (IOException ioe) {
 			System.out.println("An error occurred.");
 		    ioe.printStackTrace();
-		    
 		}
 		return "An error occurred.";
 	}
@@ -324,108 +318,11 @@ public class Rentacar extends Observable{
 		String amende = v.getAmende();
 		String prixKm = v.getPrixKm();
 		
-		/*
-		String[] tabAllReservations = new String[20];
-		String[] tabUneReservation = new String[20];
-		try {
-			File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
-			Scanner myReader = new Scanner(reservations);
-			int i = 0;
-		    while (myReader.hasNextLine()) {
-		    	String data = myReader.nextLine();
-		    	tabAllReservations[i] = data;
-		    	i++;
-		    	//System.out.println(data);
-		    }
-		    //tabAllClients = allClients.split("\\;");
-		    for(int j = 0; j < tabAllReservations.length; j++) {
-		    	try {
-			    	tabUneReservation = tabAllReservations[j].split("\\;");
-				} catch (NullPointerException e) {
-					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-					System.out.println("le pointer pointe sur: " + j);
-				}
-
-		    	debutReser = tabUneReservation[2];
-		    	finReser = tabUneReservation[3];
-		    	System.out.println(debutReser + "\nfinreser " + finReser);
-		    	myReader.close();
-		    		//return true;
-		    }
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-		    ioe.printStackTrace();
-		    //return false;
-		}
-		*/
-		String[] tabAllLocations = new String[20];
-		String[] tabUneLocation = new String[20];
-		try {
-			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
-			Scanner myReader = new Scanner(locations);
-			int i = 0;
-		    while (myReader.hasNextLine()) {
-		    	String data = myReader.nextLine();
-		    	tabAllLocations[i] = data;
-		    	i++;
-		    	//System.out.println(data);
-		    }
-		    //tabAllClients = allClients.split("\\;");
-		    for(int j = 0; j < tabAllLocations.length; j++) {
-		    	try {
-			    	tabUneLocation = tabAllLocations[j].split("\\;");
-				} catch (NullPointerException e) {
-					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-					System.out.println("le pointer pointe sur: " + j);
-				}
-
-		    	debutLoc = tabUneLocation[2];
-		    	String finLoc = tabUneLocation[3];
-		    	System.out.println(debutLoc + "\nfinLoc " + finLoc);
-		    	myReader.close();
-		    	
-		    }
-		    myReader.close();
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-		    ioe.printStackTrace();
-		}
-		
-		String[] tabAllRestitutions = new String[20];
-		String[] tabUneRestitution = new String[20];
-		try {
-			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
-			Scanner myReader = new Scanner(restitutions);
-			int i = 0;
-		    while (myReader.hasNextLine()) {
-		    	String data = myReader.nextLine();
-		    	tabAllRestitutions[i] = data;
-		    	i++;
-		    	//System.out.println(data);
-		    }
-		    //tabAllClients = allClients.split("\\;");
-		    for(int j = 0; j < tabAllRestitutions.length; j++) {
-		    	try {
-		    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
-				} catch (NullPointerException e) {
-					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
-					System.out.println("le pointer pointe sur: " + j);
-				}
-
-		    	String debutRestit = tabUneRestitution[2];
-		    	finRestit = tabUneRestitution[3];
-		    	nbKm = Double.parseDouble(tabUneRestitution[4]);
-		    	System.out.println(debutRestit + "\nfinRestit " + finRestit);
-		    	myReader.close();
-		    }
-		    myReader.close();
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-		    ioe.printStackTrace();
-		}
 		debutReser = lireDate("reservations", 2);
 		finReser = lireDate("reservations", 3);
-		
+		debutLoc = lireDate("locations", 2);
+		finRestit = lireDate("restitutions", 3);
+		nbKm = Double.parseDouble(lireDate("restitutions", 4));
 		if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
 		    prixSansAmende = Integer.parseInt(prix)*verifDate(debutReser, finReser, finRestit)[0];
 		    prixAvecKm = verifKm(nbKm, prixKm);
