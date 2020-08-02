@@ -264,12 +264,56 @@ public class Rentacar extends Observable{
 		}
 	}
 	
-	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
-			String dateFinTextField){
+	public String lireDate(String nomFichier, int index) {
 		String debutReser = null;
 		String finReser = null;
 		String debutLoc = null;
 		String finRestit = null;
+		String[] tabAllReservations = new String[20];
+		String[] tabUneReservation = new String[20];
+		try {
+			File reservations = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+			Scanner myReader = new Scanner(reservations);
+			int i = 0;
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	tabAllReservations[i] = data;
+		    	i++;
+		    }
+		    myReader.close();
+		    for(int j = 0; j < tabAllReservations.length; j++) {
+		    	try {
+			    	tabUneReservation = tabAllReservations[j].split("\\;");
+				} catch (NullPointerException e) {
+					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+					System.out.println("le pointer pointe sur: " + j);
+				}
+		    	switch (index) {
+				case 2:
+					return tabUneReservation[2];
+
+				default:
+					return tabUneReservation[3];
+				}
+		    	
+		    		//return true;
+		    }
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+		    ioe.printStackTrace();
+		    
+		}
+		return "An error occurred.";
+	}
+	
+	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
+			String dateFinTextField){
+		
+		String debutReser = null;
+		String finReser = null;
+		String debutLoc = null;
+		String finRestit = null;
+		
 		double prixSansAmende = 0;
 		double prixAvecAmende = 0;
 		double prixAvecKm = 0;
@@ -279,6 +323,8 @@ public class Rentacar extends Observable{
 		String prix = v.getPrix();
 		String amende = v.getAmende();
 		String prixKm = v.getPrixKm();
+		
+		/*
 		String[] tabAllReservations = new String[20];
 		String[] tabUneReservation = new String[20];
 		try {
@@ -311,7 +357,7 @@ public class Rentacar extends Observable{
 		    ioe.printStackTrace();
 		    //return false;
 		}
-		
+		*/
 		String[] tabAllLocations = new String[20];
 		String[] tabUneLocation = new String[20];
 		try {
@@ -377,6 +423,8 @@ public class Rentacar extends Observable{
 			System.out.println("An error occurred.");
 		    ioe.printStackTrace();
 		}
+		debutReser = lireDate("reservations", 2);
+		finReser = lireDate("reservations", 3);
 		
 		if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
 		    prixSansAmende = Integer.parseInt(prix)*verifDate(debutReser, finReser, finRestit)[0];
