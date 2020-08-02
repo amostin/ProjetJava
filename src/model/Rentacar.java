@@ -187,6 +187,8 @@ public class Rentacar extends Observable{
 		return verif("restitutions", idRestitutionTextField, nomClientTextField);
 	}
 	
+
+	
 	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
 			String dateFinTextField){
 		String debutReser = null;
@@ -408,12 +410,12 @@ public class Rentacar extends Observable{
 		ecrire("locations", idReservationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);
 	}
 
-	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
-			String formuleCombo) {
+	public void lire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField,
+			String dateFinTextField, String formuleCombo) {
 		String allClients = "";
 		String[] tabAllClients = new String[20];
 		try {
-			File clients = new File("D:\\3ti2deSess\\java\\clients.txt");
+			File clients = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
 			Scanner myReader = new Scanner(clients);
 		    while (myReader.hasNextLine()) {
 		    	String data = myReader.nextLine();
@@ -431,11 +433,16 @@ public class Rentacar extends Observable{
 				}
 		    }
 		    myReader.close();
-			ecrire("reservations", idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
+			ecrire("reservations", idTextField, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 		} catch (IOException ioe) {
 			System.out.println("An error occurred.");
 	        ioe.printStackTrace();
 		}
+	}
+	
+	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
+			String formuleCombo) {
+		lire("clients", idReservationLabel, nomClientTextField, dateDebutTextField, dateFinTextField, formuleCombo);
 	}
 	public void modifFormule(String jourFormuleTextField, String weFormuleTextField, String weekFormuleTextField) {
 		// faudra que le catalogue contienne les formules pour calculer la facture
