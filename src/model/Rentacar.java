@@ -35,9 +35,7 @@ public class Rentacar extends Observable{
 	 * Ce constructeur permet de créer un catalogue avec 10 noms de voiture et 10 voitures
 	 */
 	public Rentacar() {
-		createNomVoitures();
-		createVoitures();
-		addVoitures(nomVoitures, voitures);
+		addVoitures();
 		this.formules = getFormules();
 	}
 	/**
@@ -72,28 +70,12 @@ public class Rentacar extends Observable{
 		this.voitureParPrix = voitureParPrix;
 	}
 	/**
-	 * Cette méthode permet de créer des clés pour hashmap (rempli tableau nomVoiture)
-	 */
-	public String[] createNomVoitures() {
-		for(int i = 0; i<10; i++) {
-			nomVoitures[i] = new String("nomVoiture_"+i);
-		}
-		return nomVoitures;
-	}
-	/**
-	 * Cette méthode permet de créer des valeurs pour hashmap (rempli tableau voitures)
-	 */
-	public Voiture[] createVoitures() {
-		for(int i = 0; i<10; i++) {
-			voitures[i] = new Voiture(i);
-		}
-		return voitures;
-	}
-	/**
 	 * Cette méthode permet de créer un catalogue a partir des nomvoiture et des voitures
 	 */
-	public HashMap<String, Voiture> addVoitures(String[] nomVoitures, Voiture[] voitures) {
+	public HashMap<String, Voiture> addVoitures() {
 		for(int i = 0; i<10; i++) {
+			nomVoitures[i] = new String("nomVoiture_"+i);
+			voitures[i] = new Voiture(i);
 			catalogue.put(nomVoitures[i], voitures[i]);
 		}
 		return catalogue;
