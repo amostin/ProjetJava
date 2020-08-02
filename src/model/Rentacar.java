@@ -187,6 +187,13 @@ public class Rentacar extends Observable{
 		return verif("restitutions", idRestitutionTextField, nomClientTextField);
 	}
 	
+	public double verifKm(double nbKm, String prixKm) {
+	    if(nbKm>100) {
+	    	return Double.parseDouble(prixKm)*(nbKm-100);
+	    }
+		return nbKm;
+	}
+	
 	public void lire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField,
 			String dateFinTextField, String formuleCombo) {
 		String allClients = "";
@@ -353,9 +360,7 @@ public class Rentacar extends Observable{
 		    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 		    
 		    prixSansAmende = Integer.parseInt(prix)*diff;
-		    if(nbKm>100) {
-		    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
-		    }
+		    prixAvecKm = verifKm(nbKm, prixKm);
 		    ecrire("factures", idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField, String.valueOf(prixSansAmende+prixAvecKm));
 		}
 		else {
@@ -395,10 +400,7 @@ public class Rentacar extends Observable{
 		    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
 		    
 		    prixAvecAmende = (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende);
-		    if(nbKm>100) {
-		    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
-		    }
-
+		    prixAvecKm = verifKm(nbKm, prixKm);
 		    ecrire("factures", idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField, String.valueOf(prixAvecAmende+prixAvecKm));
 		}
 		
