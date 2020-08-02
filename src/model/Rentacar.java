@@ -248,7 +248,9 @@ public class Rentacar extends Observable{
 		try {
 			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
 		    FileWriter myWriter = new FileWriter(factures, true);
-		    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + "\n");
+		    Voiture v = catalogue.get("nomVoiture_"+idRestitutionTextField);
+		    String prix = v.getPrix();
+		    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + prix + "\n");
 		    myWriter.close();
 		    System.out.println("Successfully wrote to the facture.");
 		} catch (IOException ioe) {
