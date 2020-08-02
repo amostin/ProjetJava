@@ -253,6 +253,11 @@ public class Rentacar extends Observable{
 		String finReser = null;
 		String debutLoc = null;
 		String finRestit = null;
+		double prixSansAmende = 0;
+		double prixAvecAmende = 0;
+		double prixSansKm = 0;
+		double prixAvecKm = 0;
+		
 		try {
 			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
 		    FileWriter myWriter = new FileWriter(factures, true);
@@ -379,7 +384,9 @@ public class Rentacar extends Observable{
 			    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
 			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 			    
-			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + Integer.parseInt(prix)*diff + "\n");
+			    prixSansAmende = Integer.parseInt(prix)*diff;
+			    
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + prixSansAmende + "\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the facture.");
 			}
@@ -419,7 +426,9 @@ public class Rentacar extends Observable{
 			    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
 			    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
 			    
-			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende) + "\n");
+			    prixAvecAmende = (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende);
+			    
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + prixAvecAmende + "\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the facture.");
 			}
