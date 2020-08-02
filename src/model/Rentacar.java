@@ -258,6 +258,8 @@ public class Rentacar extends Observable{
 		    FileWriter myWriter = new FileWriter(factures, true);
 		    Voiture v = catalogue.get("nomVoiture_"+idRestitutionTextField);
 		    String prix = v.getPrix();
+		    String amende = v.getAmende();
+		    String prixKm = v.getPrixKm();
 		    String[] tabAllReservations = new String[20];
 			String[] tabUneReservation = new String[20];
 			try {
@@ -378,6 +380,46 @@ public class Rentacar extends Observable{
 			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 			    
 			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + Integer.parseInt(prix)*diff + "\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the facture.");
+			}
+			else {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			    java.util.Date firstDate = null;
+				try {
+					firstDate = sdf.parse(debutReser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    java.util.Date secondDate = null;
+				try {
+					secondDate = sdf.parse(finReser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				java.util.Date firstDateAmende = null;
+				try {
+					firstDateAmende = sdf.parse(finReser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    java.util.Date secondDateAmende = null;
+				try {
+					secondDateAmende = sdf.parse(finRestit);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+			 
+			    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
+			    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
+			    
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende) + "\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the facture.");
 			}
