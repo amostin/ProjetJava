@@ -447,34 +447,25 @@ public class Rentacar extends Observable{
 		
 	}
 	
-	public String calculDate(String dateDebut, String dateFin) {
-		return "prendre le prix voiture, multiplier par le nombre de jour, calculer difference fin et debut, verifier si ça correspond à la restitution, faire de meme pour km (ajouter km forfaitaire sur chaque voiture, ajouter amende si il faut, puis afficher total";
+	public void ecrire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+		try {
+			File fichier = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+		    FileWriter myWriter = new FileWriter(fichier, true);
+		    myWriter.write(nomClientTextField + ";" + idTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the "+ fichier +".");
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
 	}
 
 	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
-		try {
-			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
-		    FileWriter myWriter = new FileWriter(restitutions, true);
-		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the restitution.");
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
-		}
+		ecrire("restitutions", idLocationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);
 	}
 
 	public void ajoutLocation(String idReservationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
-		try {
-			File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
-		    FileWriter myWriter = new FileWriter(locations, true);
-		    myWriter.write(nomClientTextField + ";" + idReservationTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
-		    myWriter.close();
-		    System.out.println("Successfully wrote to the location.");
-		} catch (IOException ioe) {
-			System.out.println("An error occurred.");
-	        ioe.printStackTrace();
-		}
+		ecrire("locations", idReservationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);
 	}
 
 	public void ajoutReservation(String idReservationLabel, String nomClientTextField, String dateDebutTextField, String dateFinTextField,
