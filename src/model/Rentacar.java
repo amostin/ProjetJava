@@ -7,11 +7,15 @@ import java.awt.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Cette classe est utile à créer automatiquement un catalogue au lancement de l'application
@@ -206,12 +210,252 @@ public class Rentacar extends Observable{
 	        return false;
 		}
 	}
+	
+	public boolean verifRestitution(String idRestitutionTextField, String nomClientTextField) {
+		String[] tabAllRestitutions = new String[20];
+		String[] tabUneRestitution = new String[20];
+		try {
+			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
+			Scanner myReader = new Scanner(restitutions);
+			int i = 0;
+		    while (myReader.hasNextLine()) {
+		    	String data = myReader.nextLine();
+		    	tabAllRestitutions[i] = data;
+		    	i++;
+		    	//System.out.println(data);
+		    }
+		    //tabAllClients = allClients.split("\\;");
+		    for(int j = 0; j < tabAllRestitutions.length; j++) {
+		    	try {
+		    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
+				} catch (NullPointerException e) {
+					//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+					System.out.println("le pointer pointe sur: " + j);
+				}
 
-	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String kmTextField) {
+		    	if(tabUneRestitution[0].equals(nomClientTextField) && tabUneRestitution[1].equals(idRestitutionTextField)) {
+		    		myReader.close();
+		    		return true;
+		    	}
+		    }
+		    myReader.close();
+		    return false;
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+	        return false;
+		}
+	}
+	
+	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField,
+			String dateFinTextField){
+		String debutReser = null;
+		String finReser = null;
+		String debutLoc = null;
+		String finRestit = null;
+		double prixSansAmende = 0;
+		double prixAvecAmende = 0;
+		double prixAvecKm = 0;
+		double nbKm = 0;
+		
+		try {
+			File factures = new File("D:\\3ti2deSess\\java\\factures.txt");
+		    FileWriter myWriter = new FileWriter(factures, true);
+		    Voiture v = catalogue.get("nomVoiture_"+idRestitutionTextField);
+		    String prix = v.getPrix();
+		    String amende = v.getAmende();
+		    String prixKm = v.getPrixKm();
+		    String[] tabAllReservations = new String[20];
+			String[] tabUneReservation = new String[20];
+			try {
+				File reservations = new File("D:\\3ti2deSess\\java\\reservations.txt");
+				Scanner myReader = new Scanner(reservations);
+				int i = 0;
+			    while (myReader.hasNextLine()) {
+			    	String data = myReader.nextLine();
+			    	tabAllReservations[i] = data;
+			    	i++;
+			    	//System.out.println(data);
+			    }
+			    //tabAllClients = allClients.split("\\;");
+			    for(int j = 0; j < tabAllReservations.length; j++) {
+			    	try {
+				    	tabUneReservation = tabAllReservations[j].split("\\;");
+					} catch (NullPointerException e) {
+						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+						System.out.println("le pointer pointe sur: " + j);
+					}
+
+			    	debutReser = tabUneReservation[2];
+			    	finReser = tabUneReservation[3];
+			    	System.out.println(debutReser + "\nfinreser " + finReser);
+			    	myReader.close();
+			    		//return true;
+			    }
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+		        //return false;
+			}
+			
+			String[] tabAllLocations = new String[20];
+			String[] tabUneLocation = new String[20];
+			try {
+				File locations = new File("D:\\3ti2deSess\\java\\locations.txt");
+				Scanner myReader = new Scanner(locations);
+				int i = 0;
+			    while (myReader.hasNextLine()) {
+			    	String data = myReader.nextLine();
+			    	tabAllLocations[i] = data;
+			    	i++;
+			    	//System.out.println(data);
+			    }
+			    //tabAllClients = allClients.split("\\;");
+			    for(int j = 0; j < tabAllLocations.length; j++) {
+			    	try {
+				    	tabUneLocation = tabAllLocations[j].split("\\;");
+					} catch (NullPointerException e) {
+						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+						System.out.println("le pointer pointe sur: " + j);
+					}
+
+			    	debutLoc = tabUneLocation[2];
+			    	String finLoc = tabUneLocation[3];
+			    	System.out.println(debutLoc + "\nfinLoc " + finLoc);
+			    	myReader.close();
+			    	
+			    }
+			    myReader.close();
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+			}
+			
+			String[] tabAllRestitutions = new String[20];
+			String[] tabUneRestitution = new String[20];
+			try {
+				File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
+				Scanner myReader = new Scanner(restitutions);
+				int i = 0;
+			    while (myReader.hasNextLine()) {
+			    	String data = myReader.nextLine();
+			    	tabAllRestitutions[i] = data;
+			    	i++;
+			    	//System.out.println(data);
+			    }
+			    //tabAllClients = allClients.split("\\;");
+			    for(int j = 0; j < tabAllRestitutions.length; j++) {
+			    	try {
+			    		tabUneRestitution = tabAllRestitutions[j].split("\\;");
+					} catch (NullPointerException e) {
+						//ça passe mais faut vraiment que j'arrete de predefinir la taille des tableaux quand je sais pas ce qui aura dedans
+						System.out.println("le pointer pointe sur: " + j);
+					}
+
+			    	String debutRestit = tabUneRestitution[2];
+			    	finRestit = tabUneRestitution[3];
+			    	nbKm = Double.parseDouble(tabUneRestitution[4]);
+			    	System.out.println(debutRestit + "\nfinRestit " + finRestit);
+			    	myReader.close();
+			    }
+			    myReader.close();
+			} catch (IOException ioe) {
+				System.out.println("An error occurred.");
+		        ioe.printStackTrace();
+			}
+			
+			if(debutReser.equals(debutLoc) && finReser.equals(finRestit)) {
+				System.out.println("date ok");
+			    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			    java.util.Date firstDate = null;
+				try {
+					firstDate = sdf.parse(debutLoc);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    java.util.Date secondDate = null;
+				try {
+					secondDate = sdf.parse(finRestit);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 
+			    long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+			    
+			    prixSansAmende = Integer.parseInt(prix)*diff;
+			    if(nbKm>100) {
+			    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
+			    }
+			    
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (prixSansAmende+prixAvecKm) + "\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the facture.");
+			}
+			else {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			    java.util.Date firstDate = null;
+				try {
+					firstDate = sdf.parse(debutReser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    java.util.Date secondDate = null;
+				try {
+					secondDate = sdf.parse(finReser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				java.util.Date firstDateAmende = null;
+				try {
+					firstDateAmende = sdf.parse(finReser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    java.util.Date secondDateAmende = null;
+				try {
+					secondDateAmende = sdf.parse(finRestit);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+			    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+			 
+			    long diffInMilliesAmende = Math.abs(secondDateAmende.getTime() - firstDateAmende.getTime());
+			    long diffAmende = TimeUnit.DAYS.convert(diffInMilliesAmende, TimeUnit.MILLISECONDS);
+			    
+			    prixAvecAmende = (Integer.parseInt(prix)*diff+Double.parseDouble(amende)*diffAmende);
+			    if(nbKm>100) {
+			    	prixAvecKm = Double.parseDouble(prixKm)*(nbKm-100);
+			    }
+			    myWriter.write(nomClientTextField + ";" + idRestitutionTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + (prixAvecAmende+prixAvecKm) + "\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the facture.");
+			}
+			
+		    
+		} catch (IOException ioe) {
+			System.out.println("An error occurred.");
+	        ioe.printStackTrace();
+		}
+		
+	}
+	
+	public String calculDate(String dateDebut, String dateFin) {
+		return "prendre le prix voiture, multiplier par le nombre de jour, calculer difference fin et debut, verifier si ça correspond à la restitution, faire de meme pour km (ajouter km forfaitaire sur chaque voiture, ajouter amende si il faut, puis afficher total";
+	}
+
+	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		try {
 			File restitutions = new File("D:\\3ti2deSess\\java\\restitutions.txt");
 		    FileWriter myWriter = new FileWriter(restitutions, true);
-		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + kmTextField + "\n");
+		    myWriter.write(nomClientTextField + ";" + idLocationTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
 		    myWriter.close();
 		    System.out.println("Successfully wrote to the restitution.");
 		} catch (IOException ioe) {
@@ -413,6 +657,7 @@ public class Rentacar extends Observable{
 		*/
 		
 	}
+
 
 
 

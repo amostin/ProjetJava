@@ -25,40 +25,38 @@ import model.Voiture;
  * @author Moi
  *
  */
-public class RestitutionVue extends RentacarVue implements ActionListener {
+public class FactureVue extends RentacarVue implements ActionListener {
 	private JFrame frame;
 	
-	private JLabel idLocationLabel = new JLabel("Entrer le numero pour verifier si il est loué");
-	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a loué");
+	private JLabel idRestitutionLabel = new JLabel("Entrer le numero pour verifier si il est restitué");
+	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a restitué");
 	private JLabel dateDebutLabel = new JLabel("Date de retrait ");
 	private JLabel dateFinLabel = new JLabel("Date de restitution ");
-	private JLabel kmLabel = new JLabel("Entrer le kilométrage courant");
 
-	private JTextField idLocationTextField = new JTextField("5");
+	private JTextField idRestitutionTextField = new JTextField("5");
 	private JTextField nomClientTextField = new JTextField("amb mos");
 	private JTextField dateDebutTextField = new JTextField("10/9/2020");
 	private JTextField dateFinTextField = new JTextField("15/9/2020");	
-	private JTextField kmTextField = new JTextField("85");
 	
 	private JButton verifIdClient = new JButton("Vérifier id et client");
 
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
-	private JButton imprimer = new JButton("Imprimer bon de restitution");
+	private JButton imprimer = new JButton("Imprimer facture");
 	private JButton retour = new JButton("retour");
 
 	
 	/**
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
-	public RestitutionVue(Rentacar model, RentacarController controller) {
+	public FactureVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
 
 		frame = new JFrame("Rentacar");
 		
 		Box idBox = Box.createHorizontalBox();
-		idBox.add(idLocationLabel);
-		idBox.add(idLocationTextField);
+		idBox.add(idRestitutionLabel);
+		idBox.add(idRestitutionTextField);
 
 		Box nomClientBox = Box.createHorizontalBox();
 		nomClientBox.add(nomClientLabel);
@@ -72,10 +70,6 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 		dateFinBox.add(dateFinLabel);
 		dateFinBox.add(dateFinTextField);
 		
-		Box kmBox = Box.createHorizontalBox();
-		kmBox.add(kmLabel);
-		kmBox.add(kmTextField);
-
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
 		
@@ -89,7 +83,6 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 		panelBox.add(nomClientBox);
 		panelBox.add(dateDebutBox);
 		panelBox.add(dateFinBox);
-		panelBox.add(kmBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -116,7 +109,7 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 		
 		case "Vérifier id et client":
 			
-			if(controller.verifLoc(idLocationTextField.getText(), nomClientTextField.getText())) {
+			if(controller.verifRestitution(idRestitutionTextField.getText(), nomClientTextField.getText())) {
 				affiche("la réservation est bien pour ce véhicule et ce client");
 				imprimer.setEnabled(true);
 			}
@@ -126,8 +119,8 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 			
 			break;
 		
-		case "Imprimer bon de restitution":
-			controller.ajoutRestitution(idLocationTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), kmTextField.getText());
+		case "Imprimer facture":
+			controller.ajoutFacture(idRestitutionTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;

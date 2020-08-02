@@ -74,6 +74,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	private JButton modifFormule = new JButton("Modifier formule");
 	private JButton louerVehicule = new JButton("Louer");
 	private JButton restituerVehicule = new JButton("Restituer");
+	private JButton facturer = new JButton("Facture");
 
 	private Box panelBox = Box.createVerticalBox();
 	Box tableBox = Box.createHorizontalBox();
@@ -206,6 +207,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		buttonBox.add(modifMdp);
 		buttonBox.add(louerVehicule);
 		buttonBox.add(restituerVehicule);
+		buttonBox.add(facturer);
 
 		panelBox.add(headBox);
 		panelBox.add(tableBox);
@@ -239,6 +241,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		reserVehicule.addActionListener(this);
 		louerVehicule.addActionListener(this);
 		restituerVehicule.addActionListener(this);
+		facturer.addActionListener(this);
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
@@ -315,6 +318,11 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
+		
+		case "Facture":
+			frame.setVisible(false);
+			new FactureVue(model, controller);
+			break;
 		
 		case "Restituer":
 			frame.setVisible(false);

@@ -100,8 +100,16 @@ public class RentacarController {
 		return model.verifLoc(idLocationTextField, nomClientTextField);
 	}
 
-	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String kmTextField) {
-		model.ajoutRestitution(idLocationTextField, nomClientTextField, kmTextField);		
+	public void ajoutRestitution(String idLocationTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
+		model.ajoutRestitution(idLocationTextField, nomClientTextField, dateDebutTextField, dateFinTextField, kmTextField);		
+	}
+
+	public boolean verifRestitution(String idRestitutionTextField, String nomClientTextField) {
+		return model.verifRestitution(idRestitutionTextField, nomClientTextField);
+	}
+
+	public void ajoutFacture(String idRestitutionTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField) {
+		model.ajoutFacture(idRestitutionTextField, nomClientTextField, dateDebutTextField, dateFinTextField);		
 	}
 	
 }
