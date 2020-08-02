@@ -78,7 +78,7 @@ public class RentacarController {
 	}
 
 	public void reserveVehicule(int numVehiculeReser) {
-		model.reserveVehicule(numVehiculeReser);
+		model.changEtat(numVehiculeReser, "Réservé");
 		
 	}
 

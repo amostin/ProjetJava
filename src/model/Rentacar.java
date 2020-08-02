@@ -100,35 +100,6 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();
 	}
-	/*
-	public void supprimeVehicule(int numVehicule) {
-		Voiture vehiculeSupp = catalogue.get("nomVoiture_"+numVehicule);
-		vehiculeSupp.setEtat("Supprimé");
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void repaVehicule(int numVehiculeRepa) {
-		Voiture vehiculeRepa = catalogue.get("nomVoiture_"+numVehiculeRepa);
-		vehiculeRepa.setEtat("En réparation");
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void entrVehicule(int numVehiculeEntr) {
-		Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
-		vehiculeEntr.setEtat("En entretien");
-		setChanged();
-		notifyObservers();
-	}
-	*/
-	public void reserveVehicule(int numVehiculeReser) {
-		Voiture vehiculeReser = catalogue.get("nomVoiture_"+numVehiculeReser);
-		vehiculeReser.setEtat("Réservé");
-		setChanged();
-		notifyObservers();
-		
-	}
 	
 	public boolean verif(String nomFichier, String idReservationTextField, String nomClientTextField) {
 		String[] tabAllReservations = new String[20];
