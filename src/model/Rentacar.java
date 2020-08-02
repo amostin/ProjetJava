@@ -114,13 +114,14 @@ public class Rentacar extends Observable{
 		setChanged();
 		notifyObservers();
 	}
-	*/
+	
 	public void entrVehicule(int numVehiculeEntr) {
 		Voiture vehiculeEntr = catalogue.get("nomVoiture_"+numVehiculeEntr);
 		vehiculeEntr.setEtat("En entretien");
 		setChanged();
 		notifyObservers();
 	}
+	*/
 	public void reserveVehicule(int numVehiculeReser) {
 		Voiture vehiculeReser = catalogue.get("nomVoiture_"+numVehiculeReser);
 		vehiculeReser.setEtat("Réservé");
