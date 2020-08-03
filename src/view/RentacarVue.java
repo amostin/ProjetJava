@@ -17,7 +17,11 @@ public abstract class RentacarVue implements Observer{
 
 	protected Rentacar model;
 	protected RentacarController controller;
-	
+	/**
+	 * Ce constructeur permet de lier la vue au controller et au model et est appelé pour chaque vue
+	 * @param model
+	 * @param controller
+	 */
 	RentacarVue(Rentacar model, RentacarController controller) {
 		this.model = model;
 		this.controller = controller;
