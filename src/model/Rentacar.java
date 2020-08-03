@@ -285,7 +285,6 @@ public class Rentacar extends Observable{
 		    while (myReader.hasNextLine()) {
 		    	String data = myReader.nextLine();
 		    	allClients += data + ";";
-		    	//System.out.println(data);
 		    }
 		    tabAllClients = allClients.split("\\;");
 		    for(int i = 0; i < tabAllClients.length; i++) {
