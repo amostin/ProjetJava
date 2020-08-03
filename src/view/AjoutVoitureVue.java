@@ -25,7 +25,7 @@ import model.Gerant;
 import model.Voiture;
 
 /**
- * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
+ * Cette classe permet d'afficher un formulaire pour ajouter une voiture dans le catalogue
  * @author Ambroise Mostin
  */
 public class AjoutVoitureVue extends RentacarVue implements ActionListener {

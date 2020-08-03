@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire de gestion des locations
+ * @author Ambroise Mostin
  *
  */
 public class LocationVue extends RentacarVue implements ActionListener {

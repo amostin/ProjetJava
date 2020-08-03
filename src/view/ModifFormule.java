@@ -18,7 +18,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire de gestion des formules de tarif
+ * @author Ambroise Mostin
  *
  */
 public class ModifFormule extends RentacarVue implements ActionListener {

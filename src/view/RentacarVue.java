@@ -9,7 +9,8 @@ import controller.RentacarController;
 import model.Rentacar;
 
 /**
- * @author Moi
+ * Cette classe est abstraite et permet à la vue d'être en communication avec le controller et le model
+ * @author Ambroise Mostin
  *
  */
 public abstract class RentacarVue implements Observer{

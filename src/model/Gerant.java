@@ -4,7 +4,7 @@
 package model;
 
 /**
- * Cette classe sert à contenir les infos relative au gérant (surtout le mdp)
+ * Cette classe permet d'accorder l'accès à la vue via le mdp pour le gérant
  * @author Ambroise Mostin
  *
  */

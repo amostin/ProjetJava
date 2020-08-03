@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire de gestion des restitutions
+ * @author Ambroise Mostin
  *
  */
 public class RestitutionVue extends RentacarVue implements ActionListener {

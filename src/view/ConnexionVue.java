@@ -23,7 +23,7 @@ import model.Mecanicien;
 import model.Rentacar;
 
 /**
- * Classe d'affichage de la page de connexion
+ * Cette classe permet l'affichage d'un formulaire de connexion
  * @author Ambroise Mostin
  *
  */

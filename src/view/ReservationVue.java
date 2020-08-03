@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire de gestion des réservations
+ * @author Ambroise Mostin
  *
  */
 public class ReservationVue extends RentacarVue implements ActionListener {

@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Cette classe est utile à créer des voitures
+ * Cette classe permet de créer des voitures
  * @author Ambroise Mostin
  *
  */

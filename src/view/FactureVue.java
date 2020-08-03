@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire utile à imprimer la facture
+ * @author Ambroise Mostin
  *
  */
 public class FactureVue extends RentacarVue implements ActionListener {

@@ -23,8 +23,9 @@ import model.Mecanicien;
 import model.Rentacar;
 
 /**
- * Cette classe sert à afficher une vue accessible seulement par le gérant et lui permettre de changer un mot de passe
+ * Cette classe permet d'afficher un formulaire de gestion des mots de passe pour le gérant
  * @author Ambroise Mostin
+ *
  */
 public class ModifierMdpVue extends RentacarVue implements ActionListener {
 	private JFrame modifMdpFrame;

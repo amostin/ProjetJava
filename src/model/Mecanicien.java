@@ -4,8 +4,9 @@
 package model;
 
 /**
- * Cette classe sert surtout a accorder l'accès via le mdp
+ * Cette classe permet d'accorder l'accès à la vue via le mdp pour un mécanicien
  * @author Ambroise Mostin
+ *
  */
 public class Mecanicien {
 

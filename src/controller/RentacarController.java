@@ -13,8 +13,8 @@ import view.ConnexionVue;
 import view.RentacarVue;
 
 /**
- * Cette classe est utile à lier les composants model, view et controller
- * @author Moi
+ * Cette classe permet d'appeler les méthodes du model lorsqu'elle sont appelées par la vue
+ * @author Ambroise Mostin
  *
  */
 public class RentacarController {

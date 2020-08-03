@@ -23,7 +23,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher le catalogue filtré et trié, avec un formulaire de gestion pour le gérant
+ * @author Ambroise Mostin
  *
  */
 public class GerantVue extends RentacarVue implements ActionListener{

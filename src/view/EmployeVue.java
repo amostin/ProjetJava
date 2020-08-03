@@ -22,7 +22,7 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * Cette classe sert à afficher la version qui n'a accès qu'au fonctionnalités utiles à un employé
+ * Cette classe permet d'afficher l'application avec seulement les fonctionnalités utiles à un employé
  * @author Ambroise Mostin
  */
 public class EmployeVue extends RentacarVue {
