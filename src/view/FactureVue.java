@@ -102,8 +102,8 @@ public class FactureVue extends RentacarVue implements ActionListener {
 	}
 	
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "retour" est clické. 
-	 * Si c'est le bouton "Vérifier id et client" alors elle verifie le fichier de restitution
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 * Si c'est le bouton "Vérifier id et client" alors elle verifie le fichier de restitution;
 	 * Si c'est le bouton "Imprimer facture" alors elle appelle la méthode du controller
 	 * @see controller.RentacarController#verifRestitution(String, String)
 	 * @see controller.RentacarController#ajoutFacture(String, String, String, String)

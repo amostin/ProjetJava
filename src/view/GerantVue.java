@@ -317,20 +317,20 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	/**
 	 * Cette méthode permet de changer de vue si le bouton "Facture" est clické,
 	 * ou si le bouton "Restituer" est clické,
-	 * ou encore si le bouton "Louer" est clické. 
+	 * ou encore si le bouton "Louer" est clické;
 	 * Si c'est le bouton "Réserver" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
-	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
-	 * Si c'est le bouton "Trier du moins cher au plus cher" alors elle appelle le controller pour trier le catalogue puis change de vue
-	 * Si c'est le bouton "Modifier formule" alors elle change de vue
-	 * Si c'est le bouton "Filtrer" alors elle appelle le controller pour filtrer le catalogue puis change de vue
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue;
+	 * Si c'est le bouton "Trier du moins cher au plus cher" alors elle appelle le controller pour trier le catalogue puis change de vue;
+	 * Si c'est le bouton "Modifier formule" alors elle change de vue;
+	 * Si c'est le bouton "Filtrer" alors elle appelle le controller pour filtrer le catalogue puis change de vue;
 	 * Si c'est le bouton "Supprimer" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
-	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue;
 	 * Si c'est le bouton "Reparation" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
-	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue;
 	 * Si c'est le bouton "Entretien" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
-	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
-	 * Si c'est le bouton "Modifier mot de passe" alors elle change de vue.
-	 * Si c'est le bouton "Ajouter un véhicule" alors elle change de vue.
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue;
+	 * Si c'est le bouton "Modifier mot de passe" alors elle change de vue;
+	 * Si c'est le bouton "Ajouter un véhicule" alors elle change de vue;
 	 * @see FactureVue
 	 * @see RestitutionVue
 	 * @see LocationVue

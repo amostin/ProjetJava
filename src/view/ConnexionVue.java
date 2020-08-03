@@ -99,7 +99,8 @@ public class ConnexionVue extends RentacarVue implements ActionListener {
 	}
 	
 	/**
-	 * Cette méthode vérifie si le mot de passe entré correspond bien au mot de passe enregistré. Si oui, elle affiche la page du gérant; Si non elle affiche denouveau la page de connexion.
+	 * Cette méthode vérifie si le mot de passe entré correspond bien au mot de passe enregistré;
+	 *  Si oui, elle affiche la page du gérant; Si non elle affiche denouveau la page de connexion.
 	 * @param mdpShouldBe le mot de passe enregistré
 	 * @param mdpIs le mot de passe entré
 	 * @see ConnexionVue#ConnexionVue(Rentacar, RentacarController)

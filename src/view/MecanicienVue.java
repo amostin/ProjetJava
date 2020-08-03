@@ -42,19 +42,11 @@ public class MecanicienVue extends RentacarVue {
 		mecanicienTextContent.add(mecanicienMessage);
 		
 		mecanicienFrame.add(mecanicienTextContent, BorderLayout.NORTH);
-		/*
-		JPanel panelbuttons = new JPanel();
-		panelbuttons.add(modifMdp);
-		mecanicienFrame.add(panelbuttons, BorderLayout.SOUTH);
-		*/
 		mecanicienFrame.pack();
 		mecanicienFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mecanicienFrame.setSize(900, 600);
 		mecanicienFrame.setLocation(1000, 50);
 		mecanicienFrame.setVisible(true);
-		
-		//modifMdp.addActionListener(this);
-		//mecanicienFrame.pack();
 	}
 	/**
 	 * Cette méthode est utile à afficher un message (surtout pour afficher un changement)
@@ -67,11 +59,4 @@ public class MecanicienVue extends RentacarVue {
 		// TODO Auto-generated method stub
 		
 	}
-	/*
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		mecanicienFrame.setVisible(false);
-		ModifierMdpVue m = new ModifierMdpVue();		
-	}
-	*/
 }

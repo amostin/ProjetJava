@@ -164,7 +164,8 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	}
 
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "retour" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 *  Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
 	 * @see RentacarController#ajoutVoiture(String, Voiture)
 	 * @see GerantVue
 	 */

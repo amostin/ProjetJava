@@ -71,7 +71,10 @@ public class ModifierMdpVue extends RentacarVue implements ActionListener {
 		retourCo.addActionListener(this);
 	}
 	/**
-	 * Cette méthode permet de modifier le mot de passe selon le role choisi et de retourner à la page de connexion
+	 * Cette méthode permet de changer de vue si le bouton "retour à la connexion" est clické;
+	 *  Si c'est le bouton "Enregistrer" alors elle appelle la méthode modifMdp
+	 *  @see ConnexionVue
+	 *  @see ModifierMdpVue#modifMdp(String)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
@@ -96,8 +99,12 @@ public class ModifierMdpVue extends RentacarVue implements ActionListener {
 		}
 	}
 	/**
-	 * Cette méthode modifie le mot de passe du gérant mais indique que cette fonctionnalité n'est pas encoore completement fonctiennelle
+	 * Cette méthode modifie le mot de passe du gérant mais indique que cette fonctionnalité n'est pas encore completement fonctiennelle
+	 * @param type donne le role pour lequel il faut changer le mot de passe
 	 * @return true toujours car cette méthode n'est pas vraiment fonctionnelle
+	 * @see Gerant#setMdp(String)
+	 * @see Employe#setMdp(String)
+	 * @see Mecanicien#setMdp(String)
 	 */
 	public boolean modifMdp(String type) {
 		switch (type) {

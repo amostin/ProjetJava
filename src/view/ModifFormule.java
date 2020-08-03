@@ -84,7 +84,10 @@ public class ModifFormule extends RentacarVue implements ActionListener {
 	}
 	
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 *  Si c'est le bouton "Modifier formule" alors elle appelle la méthode dans le controller
+	 *  @see controller.RentacarController#modifFormule(String, String, String)
+	 *  @see GerantVue
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
