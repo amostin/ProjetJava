@@ -82,13 +82,8 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	Box formuleJourBox = Box.createHorizontalBox();
 	Box formuleWeBox = Box.createHorizontalBox();
 	Box formuleWeekBox = Box.createHorizontalBox();
-
-
-	//private int[] pasFiltre = {22, 22, 22, 22, 22, 22, 22, 22, 22, 22};
-
-
 	/**
-	 * Ce constructeur affiche la page pour un employé (catalogue)
+	 * Ce constructeur affiche la page pour le gérant (catalogue)
 	 */
 	public GerantVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
@@ -246,22 +241,25 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	}
 	/**
 	 * Cette méthode est utile à construire le tableau affichant le catalogue
+	 * @see Rentacar#getCatalogue()
+	 * @see Voiture#getAmende()
+	 * @see Voiture#getBva()
+	 * @see Voiture#getClim()
+	 * @see Voiture#getEtat()
+	 * @see Voiture#getGps()
+	 * @see Voiture#getMarque()
+	 * @see Voiture#getPorte()
+	 * @see Voiture#getPrix()
+	 * @see Voiture#getPrixKm()
+	 * @see Voiture#getType()
 	 */
 	private void updateTable() {
 		HashMap<String, Voiture> catalogue = model.getCatalogue();
 		Object [][] data = new Object[catalogue.size()][11];
 
 		for(int i=0; i<catalogue.size(); i++){
-			
-			//for(int j = 0; j < catalogue.size(); j++) {
-				if(i != model.getPasFiltre()[i]) {
-					//System.out.println(model.getPasFiltre()[i]+"vue if "+i);
-
-					//i++;
-				}
+				if(i != model.getPasFiltre()[i]) {}
 				else {
-					//System.out.println(model.getPasFiltre()[i]+"vue else");
-
 					data[i][0] = i;
 					data[i][1] = catalogue.get("nomVoiture_"+i).getMarque();
 					data[i][2] = catalogue.get("nomVoiture_"+i).getPuissance();
@@ -274,15 +272,18 @@ public class GerantVue extends RentacarVue implements ActionListener{
 					data[i][9] = catalogue.get("nomVoiture_"+i).getPrixKm();
 					data[i][10] = catalogue.get("nomVoiture_"+i).getAmende();
 				}
-			//}
-			//System.out.println(model.getPasFiltre()[i]+"vue for "+i);
-
 		}
-		
 		String[] head = {"N°", "Marque", "Puissance", "Bva", "Gps", "Porte", "Clim", "état", "prix", "prixKm", "amende"};
 		table = new JTable(data, head);
 	}
-	
+	/**
+	 * Cette méthode est appelée lors du update, quand le model effectue un changement de formule, pour changer l'affichage des formules
+	 * @param jourFormuleCatalogue le montant de la formule par jour
+	 * @param weFormuleCatalogue le montant de la formule par weekend
+	 * @param weekFormuleCatalogue le montant de la formule par semaine
+	 * @see model.Rentacar#modifFormule(String, String, String)
+	 * @see GerantVue#update(Observable, Object)
+	 */
 	public void updateFormules(String jourFormuleCatalogue, String weFormuleCatalogue, String weekFormuleCatalogue){
 		jourFormule.setText(jourFormuleCatalogue);
 		weFormule.setText(weFormuleCatalogue);
@@ -295,7 +296,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 		message.setText(msg);
 	}
 	/**
-	 * Cette méthode est utile à mettre à jour le tableau ?
+	 * Cette méthode est utile à mettre à jour le tableau et le formule quand il y a un changement dans le model
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -314,7 +315,41 @@ public class GerantVue extends RentacarVue implements ActionListener{
 	}
 	
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "Facture" est clické,
+	 * ou si le bouton "Restituer" est clické,
+	 * ou encore si le bouton "Louer" est clické. 
+	 * Si c'est le bouton "Réserver" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
+	 * Si c'est le bouton "Trier du moins cher au plus cher" alors elle appelle le controller pour trier le catalogue puis change de vue
+	 * Si c'est le bouton "Modifier formule" alors elle change de vue
+	 * Si c'est le bouton "Filtrer" alors elle appelle le controller pour filtrer le catalogue puis change de vue
+	 * Si c'est le bouton "Supprimer" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
+	 * Si c'est le bouton "Reparation" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
+	 * Si c'est le bouton "Entretien" alors elle verifie que le numero du véhicule est bien dans le catalogue, 
+	 * puis appelle le controller pour changer l'état du véhicule et enfin change de vue.
+	 * Si c'est le bouton "Modifier mot de passe" alors elle change de vue.
+	 * Si c'est le bouton "Ajouter un véhicule" alors elle change de vue.
+	 * @see FactureVue
+	 * @see RestitutionVue
+	 * @see LocationVue
+	 * @see ReservationVue
+	 * @see GerantVue
+	 * @see ModifFormule
+	 * @see ModifierMdpVue
+	 * @see AjoutVoitureVue
+	 * @see GerantVue#getNumeroVehiculeReser()
+	 * @see GerantVue#getNumeroVehicule()
+	 * @see GerantVue#getNumeroVehiculeRepa()
+	 * @see GerantVue#getNumeroVehiculeEntr()
+	 * @see Rentacar#getCatalogue()
+	 * @see RentacarController#reserveVehicule(int)
+	 * @see RentacarController#tri()
+	 * @see RentacarController#filtre(Object, Object, Object, Object, Object, Object, Object, Object, Object)
+	 * @see RentacarController#supprimeVehicule(int)
+	 * @see RentacarController#entrVehicule(int)
+	 * @see RentacarController#repaVehicule(int)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -336,7 +371,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			break;
 			
 		case "Réserver":
-			int numVehiculeReser = getNumeroVehiculeReser();   
+			int numVehiculeReser = getNumeroVehicule(idVehiculeReser);   
 			if(numVehiculeReser < 0 || numVehiculeReser > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
 				return;
@@ -347,7 +382,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			break;
 		
 		case "Trier du moins cher au plus cher":
-			//ArrayList<Voiture> voitureTrie = controller.tri();
 			controller.tri();
 			frame.setVisible(false);
 			new GerantVue(model, controller);
@@ -365,7 +399,7 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			break;
 		
 		case "Supprimer":
-			int numVehicule = getNumeroVehicule();   
+			int numVehicule = getNumeroVehicule(idVehiculeSupp);   
 			if(numVehicule < 0 || numVehicule > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
 				return;
@@ -373,11 +407,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			controller.supprimeVehicule(numVehicule);
 			frame.setVisible(false);
 			new GerantVue(model, controller);
-			//affiche("véhicule supprimé");
 			break;
 			
 		case "Reparation":
-			int numVehiculeRepa = getNumeroVehiculeRepa();   
+			int numVehiculeRepa = getNumeroVehicule(idVehiculeRepa);   
 			if(numVehiculeRepa < 0 || numVehiculeRepa > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
 				return;
@@ -385,11 +418,10 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			controller.repaVehicule(numVehiculeRepa);
 			frame.setVisible(false);
 			new GerantVue(model, controller);
-			//affiche("véhicule supprimé");
 			break;
 			
 		case "Entretien":
-			int numVehiculeEntr = getNumeroVehiculeEntr();   
+			int numVehiculeEntr = getNumeroVehicule(idVehiculeEntr);   
 			if(numVehiculeEntr < 0 || numVehiculeEntr > model.getCatalogue().size()){
 				affiche("Erreur, ceci n'est pas un numéro de véhicule valide ");
 				return;
@@ -397,7 +429,6 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			controller.entrVehicule(numVehiculeEntr);
 			frame.setVisible(false);
 			new GerantVue(model, controller);
-			//affiche("véhicule supprimé");
 			break;
 
 		case "Modifier mot de passe":
@@ -414,56 +445,20 @@ public class GerantVue extends RentacarVue implements ActionListener{
 			break;
 		}	
 	}
-	
-	public int getNumeroVehicule() {
+	/**
+	 * Cette méthode permet de changer le type JTextField en int pour pouvoir comparer lors du click sur "entretient" ou "supprimer" ou "reparation" ou "réservation"
+	 * @param idVehicule le numéro contenu dans le JTextField
+	 * @return le numéro contenu dans le JTextField
+	 * @exception NumberFormatException si il est impossible de convertir le contenu du JTextField
+	 */
+	public int getNumeroVehicule(JTextField idVehicule) {
 		int result = 0;
 		try {
-			result = Integer.valueOf(idVehiculeSupp.getText()).intValue();
+			result = Integer.valueOf(idVehicule.getText()).intValue();
 		}
 		catch (NumberFormatException e){
 			result = -1;
 		}
 		return result;
 	}
-	
-	public int getNumeroVehiculeReser() {
-		int result = 0;
-		try {
-			result = Integer.valueOf(idVehiculeReser.getText()).intValue();
-		}
-		catch (NumberFormatException e){
-			result = -1;
-		}
-		return result;
-	}
-	
-	public int getNumeroVehiculeRepa() {
-		int result = 0;
-		try {
-			result = Integer.valueOf(idVehiculeRepa.getText()).intValue();
-		}
-		catch (NumberFormatException e){
-			result = -1;
-		}
-		return result;
-	}
-	
-	public int getNumeroVehiculeEntr() {
-		int result = 0;
-		try {
-			result = Integer.valueOf(idVehiculeEntr.getText()).intValue();
-		}
-		catch (NumberFormatException e){
-			result = -1;
-		}
-		return result;
-	}
-/*
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		frame.setVisible(false);
-		ModifierMdpVue m = new ModifierMdpVue();		
-	}
-	
-*/
 }

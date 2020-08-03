@@ -96,11 +96,4 @@ public class EmployeVue extends RentacarVue {
 		// TODO Auto-generated method stub
 		
 	}
-/*
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		employeFrame.setVisible(false);
-		ModifierMdpVue m = new ModifierMdpVue();		
-	}
-*/
 }
