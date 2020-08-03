@@ -28,6 +28,7 @@ public class Voiture implements Comparable<Voiture>{
 	private static int i = 0;
 	/**
 	 * Ce constructeur permet de créer une voiture automatiquement
+	 * @param variete le numero correspond à un type de voiture
 	 */
 	public Voiture(int variete) {
 		switch (variete) {
@@ -190,6 +191,16 @@ public class Voiture implements Comparable<Voiture>{
 	}
 	/**
 	 * Ce constructeur permet de créer une voiture selon les caractéristiques choisies
+	 * @param marque marque de la voiture 
+	 * @param type type de la voiture 
+	 * @param puissance puissance de la voiture 
+	 * @param bva boite de vitesse de la voiture 
+	 * @param gps gps de la voiture 
+	 * @param porte porte de la voiture 
+	 * @param clim clim de la voiture 
+	 * @param prix prix de la voiture 
+	 * @param prixKm prixKm de la voiture 
+	 * @param amende amende de la voiture 
 	 */
 	public Voiture(String marque, String type, String puissance, String bva, String gps, String porte, String clim, String prix, String prixKm, String amende) {
 		this.marque = marque + '_' + i;
@@ -206,88 +217,181 @@ public class Voiture implements Comparable<Voiture>{
 		i++;
 	}
 	@Override
+	/**
+	 * Cette méthode permet d'afficher les caractéristiques de la voiture
+	 */
 	public String toString() {
 		return "marque=" + marque + ", type=" + type + ", puissance=" + puissance + ", bva=" + bva + ", gps="
 				+ gps + ", porte=" + porte + ", clim=" + clim + ", etat=" + etat + ", prix=" + prix + ", prixKm=" + prixKm + ", amende=" + amende;
 	}
+	/**
+	 * Cette méthode permet d'obtenir un identifant unique
+	 */
 	public static int getI() {
 		return i;
 	}
+	/**
+	 * Cette méthode permet de modifier l'identifant unique
+	 */
 	public static void setI(int i) {
 		Voiture.i = i;
 	}
+	/**
+	 * Cette méthode permet d'obtenir la marque
+	 */
 	public String getMarque() {
 		return marque;
 	}
+	/**
+	 * Cette méthode permet de modifier la marque
+	 * @param marque la marque
+	 */
 	public void setMarque(String marque) {
 		this.marque = marque;
 	}
+	/**
+	 * Cette méthode permet d'obtenir le type
+	 */
 	public String getType() {
 		return type;
 	}
+	/**
+	 * Cette méthode permet de modifier le type
+	 * @param type le type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
+	/**
+	 * Cette méthode permet d'obtenir la puissance
+	 */
 	public String getPuissance() {
 		return puissance;
 	}
+	/**
+	 * Cette méthode permet de modifier la puissance
+	 * @param puissance la puissance
+	 */
 	public void setPuissance(String puissance) {
 		this.puissance = puissance;
 	}
+	/**
+	 * Cette méthode permet d'obtenir la boite de vitesse
+	 */
 	public String getBva() {
 		return bva;
 	}
+	/**
+	 * Cette méthode permet de modifier la boite de vitesse
+	 * @param bva la boite de vitesse
+	 */
 	public void setBva(String bva) {
 		this.bva = bva;
 	}
+	/**
+	 * Cette méthode permet d'obtenir le gps
+	 */
 	public String getGps() {
 		return gps;
 	}
+	/**
+	 * Cette méthode permet de modifier le gps
+	 * @param gps le gps
+	 */
 	public void setGps(String gps) {
 		this.gps = gps;
 	}
+	/**
+	 * Cette méthode permet d'obtenir le nombre de porte
+	 */
 	public String getPorte() {
 		return porte;
 	}
+	/**
+	 * Cette méthode permet de modifier le nombre de porte
+	 * @param porte le nombre de porte
+	 */
 	public void setPorte(String porte) {
 		this.porte = porte;
 	}
+	/**
+	 * Cette méthode permet d'obtenir la clim
+	 */
 	public String getClim() {
 		return clim;
 	}
+	/**
+	 * Cette méthode permet de modifier la clim
+	 * @param clim la clim
+	 */
 	public void setClim(String clim) {
 		this.clim = clim;
 	}
+	/**
+	 * Cette méthode permet d'obtenir l'état
+	 */
 	public String getEtat() {
 		return etat;
 	}
+	/**
+	 * Cette méthode permet de modifier l'état
+	 * @param etat l'état de la voiture
+	 */
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
+	/**
+	 * Cette méthode permet d'obtenir le prix
+	 */
 	public String getPrix() {
 		return prix;
 	}
+	/**
+	 * Cette méthode permet de modifier le prix
+	 * @param prix le prix
+	 */
 	public void setPrix(String prix) {
 		this.prix = prix;
 	}
+	/**
+	 * Cette méthode permet d'obtenir le prix au km
+	 */
 	public String getPrixKm() {
 		return prixKm;
 	}
+	/**
+	 * Cette méthode permet de modifier le prix au km
+	 * @param prixKm le prix au km
+	 */
 	public void setPrixKm(String prixKm) {
 		this.prixKm = prixKm;
 	}
+	/**
+	 * Cette méthode permet d'obtenir l'amende
+	 */
 	public String getAmende() {
 		return amende;
 	}
+	/**
+	 * Cette méthode permet de modifier l'amende
+	 * @param amende le montant de l'amende
+	 */
 	public void setAmende(String amende) {
 		this.amende = amende;
 	}
 
 	@Override
+	/**
+	 * Cette méthode permet de comparer chaque voiture en fonction du prix
+	 * @param voiture la voiture avec laquelle comparer
+	 */
 	public int compareTo(Voiture voiture) {
 		return (int)(Integer.parseInt(this.prix) - Integer.parseInt(voiture.getPrix()));
 	}
-	
+	/**
+	 * Cette méthode permet de trier chaque voiture en fonction du prix
+	 * @param voitureParPrix la liste des voitures par prix
+	 */
 	public static ArrayList<Voiture> tri(ArrayList<Voiture> voitureParPrix){
 		Collections.sort(voitureParPrix);
 		return voitureParPrix;
