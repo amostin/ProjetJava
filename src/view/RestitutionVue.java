@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire de gestion des restitutions
+ * @author Ambroise Mostin
  *
  */
 public class RestitutionVue extends RentacarVue implements ActionListener {
@@ -108,7 +109,12 @@ public class RestitutionVue extends RentacarVue implements ActionListener {
 	}
 	
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 * Si c'est le bouton "Vérifier id et client" alors elle verifie le fichier de location;
+	 * Si c'est le bouton "Imprimer bon de Location" alors elle appelle la méthode du controller
+	 * @see controller.RentacarController#verifLoc(String, String)
+	 * @see controller.RentacarController#ajoutRestitution(String, String, String, String, String)
+	 * @see GerantVue
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

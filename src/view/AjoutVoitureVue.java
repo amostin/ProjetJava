@@ -25,7 +25,7 @@ import model.Gerant;
 import model.Voiture;
 
 /**
- * Cette classe sert à afficher la version avec toute les fonctionnalités disponible (employé et mécanicien inclus)
+ * Cette classe permet d'afficher un formulaire pour ajouter une voiture dans le catalogue
  * @author Ambroise Mostin
  */
 public class AjoutVoitureVue extends RentacarVue implements ActionListener {
@@ -164,7 +164,10 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	}
 
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 *  Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * @see RentacarController#ajoutVoiture(String, Voiture)
+	 * @see GerantVue
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -172,21 +175,11 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 		
 		case "Ajouter un véhicule":
 			Voiture voitureAjoutee = new Voiture(marqueAjoutTextField.getText(), typeAjoutTextField.getText(), puissanceAjoutTextField.getSelectedItem().toString(), bvaBg.getSelection().getActionCommand(), gpsBg.getSelection().getActionCommand(), porteAjoutTextField.getSelectedItem().toString(), climBg.getSelection().getActionCommand(), prixAjoutTextField.getText(), prixKmAjoutTextField.getText(), amendeAjoutTextField.getText());
-			/*
-			Rentacar c = new Rentacar(false);
-			c.addVoiture("nomVoiture_"+Voiture.getI(), voitureAjoutee);
-			*/
-			//System.out.println("nomVoiture_"+i);
 			controller.ajoutVoiture("nomVoiture_"+i, voitureAjoutee);
-			//System.out.println("nomVoiture_"+i);
 			i++;
-			//System.out.println("nomVoiture_"+i);
-			//test voir catalogue
-			//Rentacar c = new Rentacar(false);
 			for (String i : model.getCatalogue().keySet()) {
 				System.out.println("key: " + i + " value: " + model.getCatalogue().get(i).toString());
 			}
-			
 			affiche("véhicule ajouté");
 			break;
 
@@ -205,7 +198,6 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 	public void affiche(String msg){
 		message.setText(msg);
 	}
-
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

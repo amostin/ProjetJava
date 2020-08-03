@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire utile à imprimer la facture
+ * @author Ambroise Mostin
  *
  */
 public class FactureVue extends RentacarVue implements ActionListener {
@@ -101,7 +102,11 @@ public class FactureVue extends RentacarVue implements ActionListener {
 	}
 	
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 * Si c'est le bouton "Vérifier id et client" alors elle verifie le fichier de restitution;
+	 * Si c'est le bouton "Imprimer facture" alors elle appelle la méthode du controller
+	 * @see controller.RentacarController#verifRestitution(String, String)
+	 * @see controller.RentacarController#ajoutFacture(String, String, String, String)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

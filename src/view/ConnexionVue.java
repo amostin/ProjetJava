@@ -23,7 +23,7 @@ import model.Mecanicien;
 import model.Rentacar;
 
 /**
- * Classe d'affichage de la page de connexion
+ * Cette classe permet l'affichage d'un formulaire de connexion
  * @author Ambroise Mostin
  *
  */
@@ -32,13 +32,9 @@ public class ConnexionVue extends RentacarVue implements ActionListener {
 	private JFrame connexionJFrame;
 	private JPanel textContent = new JPanel();
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
-	//private JTextField pseudo = new JTextField();
 	private JTextField mdp = new JTextField();
 	private JButton connexion = new JButton("Connexion");
 	private JComboBox<String> userType;
-	//private String mdpShouldBe;
-
-	//private JTable table;
 	/**
 	 * Ce constructeur permet d'afficher la page de connexion avec le titre de la page, un message, une liste déroulante, un label, un champs de texte et un bouton.
 	 */
@@ -71,11 +67,16 @@ public class ConnexionVue extends RentacarVue implements ActionListener {
 		connexionJFrame.setVisible(true);
 		
 		connexion.addActionListener(this);
-		//rentacarJFrame.pack();
-
 	}
 	/**
 	 * Cette méthode permet d'afficher la vue correspondante au gérant, l'employé ou le mécanicien si le mdp correspond
+	 * @see Gerant#getMdp()
+	 * @see Employe#getMdp()
+	 * @see Mecanicien#getMdp()
+	 * @see GerantVue
+	 * @see EmployeVue
+	 * @see MecanicienVue
+	 * @see ConnexionVue#isMdpCorrect(String, String)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
@@ -98,9 +99,11 @@ public class ConnexionVue extends RentacarVue implements ActionListener {
 	}
 	
 	/**
-	 * Cette méthode vérifie si le mot de passe entré correspond bien au mot de passe enregistré. Si oui, elle affiche la page du gérant; Si non elle affiche denouveau la page de connexion.
+	 * Cette méthode vérifie si le mot de passe entré correspond bien au mot de passe enregistré;
+	 *  Si oui, elle affiche la page du gérant; Si non elle affiche denouveau la page de connexion.
 	 * @param mdpShouldBe le mot de passe enregistré
 	 * @param mdpIs le mot de passe entré
+	 * @see ConnexionVue#ConnexionVue(Rentacar, RentacarController)
 	 */
 	public boolean isMdpCorrect(String mdpShouldBe, String mdpIs) {
 		if(mdpShouldBe.equals(mdpIs)) {

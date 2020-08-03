@@ -4,8 +4,9 @@
 package model;
 
 /**
- * Cette classe sert surtout a accorder l'accès via le mdp
+ * Cette classe permet d'accorder l'accès à la vue via le mdp pour un mécanicien
  * @author Ambroise Mostin
+ *
  */
 public class Mecanicien {
 
@@ -21,13 +22,15 @@ public class Mecanicien {
 		this.mdp = "mec";
 	}
 	/**
-	 * Cette méthode est utile à récupérer le mdp pour le comparer à celui rentré
+	 * Cette méthode permet de récupérer le mdp pour le comparer à celui rentré
+	 * @return le mot de passe
 	 */
 	public String getMdp() {
 		return mdp;
 	}
 	/**
-	 * Cette méthode est utile à modifier le mot de passe
+	 * Cette méthode permet de modifier le mot de passe
+	 * @param mdp le mot de passe
 	 */
 	public void setMdp(String mdp) {
 		this.mdp = mdp;

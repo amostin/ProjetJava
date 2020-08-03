@@ -22,7 +22,8 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * @author Moi
+ * Cette classe permet d'afficher un formulaire de gestion des réservations
+ * @author Ambroise Mostin
  *
  */
 public class ReservationVue extends RentacarVue implements ActionListener {
@@ -97,13 +98,14 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		frame.setLocation(1000, 50);
 		frame.setVisible(true);
 		
-		//modifMdp.addActionListener(this);
 		imprimer.addActionListener(this);
 		retour.addActionListener(this);
 	}
-	
 	/**
-	 * Cette méthode permet de changer de vue si le bouton "modifier mdp" est clické. Si c'est le bouton "Ajouter un véhicule" alors elle ajoute un véhicule dans le catalogue
+	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
+	 * Si c'est le bouton "Imprimer" alors elle appelle la méthode dans le controller
+	 * @see controller.RentacarController#ajoutReservation(String, String, String, String, String)
+	 * @see GerantVue
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -111,10 +113,6 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		
 		case "Imprimer":
 			controller.ajoutReservation(idReservationLabel.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
-			
-			
-			//controller.modifFormule(jourFormuleTextField.getText(), weFormuleTextField.getText(), weFormuleTextField.getText());
-			//affiche("le fichier à imprimer se trouve dans fichier.getAbsolutePath()");
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;
