@@ -4,7 +4,7 @@
 package model;
 
 /**
- * Cette classe sert à contenir les infos relative au gérant (surtout le mdp)
+ * Cette classe permet d'accorder l'accès à la vue via le mdp pour le gérant
  * @author Ambroise Mostin
  *
  */
@@ -22,13 +22,15 @@ public class Gerant {
 		this.mdp = "mdp";
 	}
 	/**
-	 * Cette méthode est utile à récupérer le mdp pour le comparer à celui rentré
+	 * Cette méthode permet de récupérer le mdp pour le comparer à celui rentré
+	 * @return le mot de passe
 	 */
 	public String getMdp() {
 		return mdp;
 	}
 	/**
-	 * Cette méthode est utile à modifier le mot de passe
+	 * Cette méthode permet de modifier le mot de passe
+	 * @param mdp le mot de passe
 	 */
 	public void setMdp(String mdp) {
 		this.mdp = mdp;

@@ -22,42 +22,43 @@ import model.Rentacar;
 import model.Voiture;
 
 /**
- * Cette classe permet d'afficher un formulaire de gestion des réservations
+ * Cette classe permet d'afficher un formulaire utile à imprimer la facture
  * @author Ambroise Mostin
  *
  */
-public class ReservationVue extends RentacarVue implements ActionListener {
+public class FactureVue extends RentacarVue implements ActionListener {
 	private JFrame frame;
 	
-	private JLabel idReservationLabel = new JLabel("5");
-	private JLabel nomClientLabel = new JLabel("Nom du client ");
+	private JLabel idRestitutionLabel = new JLabel("Entrer le numero pour verifier si il est restitué");
+	private JLabel nomClientLabel = new JLabel("Entrer le Nom du client pour verifier si il a restitué");
 	private JLabel dateDebutLabel = new JLabel("Date de retrait ");
 	private JLabel dateFinLabel = new JLabel("Date de restitution ");
-	private JLabel formuleLabel = new JLabel("Entrer la formule désirée ");
-	
-	private JTextField nomClientTextField = new JTextField("amb mos");	
+
+	private JTextField idRestitutionTextField = new JTextField("5");
+	private JTextField nomClientTextField = new JTextField("amb mos");
 	private JTextField dateDebutTextField = new JTextField("10/9/2020");
-	private JTextField dateFinTextField = new JTextField("15/9/2020");
-	private String[] formules = {"jour", "weekend", "semaine"};
-	private JComboBox<String> formuleCombo;
+	private JTextField dateFinTextField = new JTextField("15/9/2020");	
+	
+	private JButton verifIdClient = new JButton("Vérifier id et client");
+
 	private JLabel message = new JLabel("Bienvenue chez Rentacar");
 	
-	private JButton imprimer = new JButton("Imprimer");
+	private JButton imprimer = new JButton("Imprimer facture");
 	private JButton retour = new JButton("retour");
 
 	
 	/**
 	 * Ce constructeur affiche la page pour un gérant avec la possibilité d'ajouter une voiture au catalogue
 	 */
-	public ReservationVue(Rentacar model, RentacarController controller, String id) {
+	public FactureVue(Rentacar model, RentacarController controller) {
 		super(model, controller);
 
 		frame = new JFrame("Rentacar");
 		
 		Box idBox = Box.createHorizontalBox();
-		setIdReservationLabel(new JLabel(id));
-		idBox.add(idReservationLabel);
-		
+		idBox.add(idRestitutionLabel);
+		idBox.add(idRestitutionTextField);
+
 		Box nomClientBox = Box.createHorizontalBox();
 		nomClientBox.add(nomClientLabel);
 		nomClientBox.add(nomClientTextField);
@@ -70,15 +71,11 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		dateFinBox.add(dateFinLabel);
 		dateFinBox.add(dateFinTextField);
 		
-		Box formuleBox = Box.createHorizontalBox();
-		formuleBox.add(formuleLabel);
-		formuleCombo = new JComboBox<String>(formules);
-		formuleBox.add(formuleCombo);
-		
 		Box messageBox = Box.createHorizontalBox();
 		messageBox.add(message);
 		
 		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(verifIdClient);
 		buttonBox.add(imprimer);
 		buttonBox.add(retour);
 		
@@ -87,7 +84,6 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		panelBox.add(nomClientBox);
 		panelBox.add(dateDebutBox);
 		panelBox.add(dateFinBox);
-		panelBox.add(formuleBox);
 		panelBox.add(messageBox);
 		panelBox.add(buttonBox);
 		frame.setContentPane(panelBox);
@@ -98,21 +94,38 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 		frame.setLocation(1000, 50);
 		frame.setVisible(true);
 		
+		//modifMdp.addActionListener(this);
+		imprimer.setEnabled(false);
 		imprimer.addActionListener(this);
 		retour.addActionListener(this);
+		verifIdClient.addActionListener(this);
 	}
+	
 	/**
 	 * Cette méthode permet de changer de vue si le bouton "retour" est clické;
-	 * Si c'est le bouton "Imprimer" alors elle appelle la méthode dans le controller
-	 * @see controller.RentacarController#ajoutReservation(String, String, String, String, String)
-	 * @see GerantVue
+	 * Si c'est le bouton "Vérifier id et client" alors elle verifie le fichier de restitution;
+	 * Si c'est le bouton "Imprimer facture" alors elle appelle la méthode du controller
+	 * @see controller.RentacarController#verifRestitution(String, String)
+	 * @see controller.RentacarController#ajoutFacture(String, String, String, String)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		
-		case "Imprimer":
-			controller.ajoutReservation(idReservationLabel.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText(), (String) formuleCombo.getSelectedItem());
+		case "Vérifier id et client":
+			
+			if(controller.verifRestitution(idRestitutionTextField.getText(), nomClientTextField.getText())) {
+				affiche("la réservation est bien pour ce véhicule et ce client");
+				imprimer.setEnabled(true);
+			}
+			else {
+				affiche("erreur client et/ou id");
+			}
+			
+			break;
+		
+		case "Imprimer facture":
+			controller.ajoutFacture(idRestitutionTextField.getText(), nomClientTextField.getText(), dateDebutTextField.getText(), dateFinTextField.getText());
 			frame.setVisible(false);
 			new GerantVue(model, controller);
 			break;
@@ -136,14 +149,6 @@ public class ReservationVue extends RentacarVue implements ActionListener {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-	}
-
-	public JLabel getIdReservationLabel() {
-		return idReservationLabel;
-	}
-
-	public void setIdReservationLabel(JLabel idReservationLabel) {
-		this.idReservationLabel = idReservationLabel;
 	}
 	
 	
