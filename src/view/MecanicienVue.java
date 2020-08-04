@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -44,8 +46,11 @@ public class MecanicienVue extends RentacarVue {
 		mecanicienFrame.add(mecanicienTextContent, BorderLayout.NORTH);
 		mecanicienFrame.pack();
 		mecanicienFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mecanicienFrame.setSize(900, 600);
-		mecanicienFrame.setLocation(1000, 50);
+		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = tailleEcran.height;
+		int width = tailleEcran.width;
+		mecanicienFrame.setSize((int) (width*0.75), (int) (height*0.75));
+		mecanicienFrame.setLocationRelativeTo(null);
 		mecanicienFrame.setVisible(true);
 	}
 	/**

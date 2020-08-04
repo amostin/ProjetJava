@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -62,8 +64,11 @@ public class ConnexionVue extends RentacarVue implements ActionListener {
 
 		connexionJFrame.pack();
 		connexionJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		connexionJFrame.setSize(900, 600);
-		connexionJFrame.setLocation(1000, 50);
+		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = tailleEcran.height;
+		int width = tailleEcran.width;
+		connexionJFrame.setSize((int) (width*0.75), (int) (height*0.75));
+		connexionJFrame.setLocationRelativeTo(null);
 		connexionJFrame.setVisible(true);
 		
 		connexion.addActionListener(this);

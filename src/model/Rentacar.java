@@ -146,7 +146,13 @@ public class Rentacar extends Observable{
 		String[] tabAllReservations = new String[20];
 		String[] tabUneReservation = new String[20];
 		try {
-			File reservations = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
+			//File reservations = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
+			File reservations = new File(nomFichier +".txt");
+			if (reservations.createNewFile()) {
+		        System.out.println("File created: " + reservations.getAbsolutePath());
+		      } else {
+		        System.out.println("File already exists.");
+		      }
 			Scanner myReader = new Scanner(reservations);
 			int i = 0;
 		    while (myReader.hasNextLine()) {
@@ -280,7 +286,13 @@ public class Rentacar extends Observable{
 		String allClients = "";
 		String[] tabAllClients = new String[20];
 		try {
-			File clients = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
+			//File clients = new File("D:\\3ti2deSess\\java\\"+ nomFichier +".txt");
+			File clients = new File(nomFichier +".txt");
+			if (clients.createNewFile()) {
+		        System.out.println("File created: " + clients.getAbsolutePath());
+		      } else {
+		        System.out.println("File already exists.");
+		      }
 			Scanner myReader = new Scanner(clients);
 		    while (myReader.hasNextLine()) {
 		    	String data = myReader.nextLine();
@@ -313,7 +325,13 @@ public class Rentacar extends Observable{
 		String[] tabAllReservations = new String[20];
 		String[] tabUneReservation = new String[20];
 		try {
-			File reservations = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+			//File reservations = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+			File reservations = new File(nomFichier+".txt");
+			if (reservations.createNewFile()) {
+		        System.out.println("File created: " + reservations.getAbsolutePath());
+		      } else {
+		        System.out.println("File already exists.");
+		      }
 			Scanner myReader = new Scanner(reservations);
 			int i = 0;
 		    while (myReader.hasNextLine()) {
@@ -405,7 +423,13 @@ public class Rentacar extends Observable{
 	 */
 	public void ecrire(String nomFichier, String idTextField, String nomClientTextField, String dateDebutTextField, String dateFinTextField, String kmTextField) {
 		try {
-			File fichier = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+			//File fichier = new File("D:\\3ti2deSess\\java\\"+nomFichier+".txt");
+			File fichier = new File(nomFichier+".txt");
+			if (fichier.createNewFile()) {
+		        System.out.println("File created: " + fichier.getAbsolutePath());
+		      } else {
+		        System.out.println("File already exists: " + fichier.getAbsolutePath());
+		      }
 		    FileWriter myWriter = new FileWriter(fichier, true);
 		    myWriter.write(nomClientTextField + ";" + idTextField + ";" + dateDebutTextField + ";" + dateFinTextField + ";" + kmTextField + "\n");
 		    myWriter.close();
