@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -153,8 +155,11 @@ public class AjoutVoitureVue extends RentacarVue implements ActionListener {
 
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(900, 600);
-		frame.setLocation(1000, 50);
+		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = tailleEcran.height;
+		int width = tailleEcran.width;
+		frame.setSize((int) (width*0.75), (int) (height*0.75));
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 		//modifMdp.addActionListener(this);

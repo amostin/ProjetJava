@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -63,8 +65,11 @@ public class ModifierMdpVue extends RentacarVue implements ActionListener {
 		
 		modifMdpFrame.pack();
 		modifMdpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		modifMdpFrame.setSize(900, 600);
-		modifMdpFrame.setLocation(1000, 50);
+		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = tailleEcran.height;
+		int width = tailleEcran.width;
+		modifMdpFrame.setSize((int) (width*0.75), (int) (height*0.75));
+		modifMdpFrame.setLocationRelativeTo(null);
 		modifMdpFrame.setVisible(true);
 		
 		enregistrer.addActionListener(this);
