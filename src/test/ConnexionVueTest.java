@@ -1,4 +1,4 @@
-package view;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,8 +11,9 @@ import model.Employe;
 import model.Gerant;
 import model.Mecanicien;
 import model.Rentacar;
+import view.ConnexionVue;
 
-class VueTest {
+class ConnexionVueTest {
 
 	/**
 	 * Cette méthode vérifie que le retour est faux si le mdp ne correspond pas et vrai sinon
@@ -26,7 +27,6 @@ class VueTest {
 		JTextField mdpFaux = new JTextField("fauxMdp");
 		
 		Gerant g = new Gerant();
-		//r.isMdpCorrect(g.getMdp(), mdpJuste.getText());
 		assertTrue(r.isMdpCorrect(g.getMdp(), mdpJuste.getText()));
 		assertFalse(r.isMdpCorrect(g.getMdp(), mdpFaux.getText()));
 	}
@@ -35,8 +35,6 @@ class VueTest {
 	 */
 	@Test
 	void modifMdpTest() {
-		//ModifierMdpVue m = new ModifierMdpVue();
-		//JTextField mdpJuste = new JTextField("mdp");
 		JTextField newMdp = new JTextField("newMdp");
 		
 		Gerant g = new Gerant();
