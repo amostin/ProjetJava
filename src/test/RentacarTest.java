@@ -120,7 +120,7 @@ class RentacarTest {
 		assertEquals("15/9/2020", c.lireDate("reservations", 3));
 		assertEquals("jour", c.lireDate("reservations", 4));
 		assertEquals("0", c.lireDate("locations", 4));
-		assertEquals("125", c.lireDate("restitutions", 4));
-		assertEquals("300.0", c.lireDate("factures", 4));
+		assertEquals("85", c.lireDate("restitutions", 4));
+		assertEquals("250.0", c.lireDate("factures", 4));
 	}
 }
