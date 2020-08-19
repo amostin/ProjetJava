@@ -1,6 +1,6 @@
 # ProjetJava
 
-Pour télécharger l'application veuillez suivre [le lien vers le téléchargement](https://projetjava.ambroisemostin.com/GestionLocationVoiture.jar)*
+Pour télécharger l'application veuillez suivre [le lien vers le téléchargement](https://projetjava.ambroisemostin.com/GestionLocationVoiture.jar)* ou suivre [ce manuel d'installation](https://github.com/amostin/ProjetJava/wiki/Manuel).
 
 Pour voir la documentation du projet veuillez suivre [le lien vers la documentation](https://projetjava.ambroisemostin.com)
 
